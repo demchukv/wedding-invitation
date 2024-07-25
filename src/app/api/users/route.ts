@@ -3,6 +3,7 @@ import User from "@/app/models/User";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, res: NextResponse) {
+    console.log(req.url);
     await dbConnect();
     
     try{
