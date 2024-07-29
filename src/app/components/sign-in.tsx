@@ -15,11 +15,17 @@ const SignIn = () => {
     try {
       const formData = new FormData(event.currentTarget);
       const response = await doCredentialsLogin(formData);
-      if (!!response) {
-        setError(response.error.message);
+      if (response) {
+        router.push('/');
       } else {
-        router.push('/'); // redirect to personal page
+        setError(response.error.message);
       }
+
+      // if (!!response) {
+      //   setError(response.error.message);
+      // } else {
+      //   router.push('/'); // redirect to personal page
+      // }
     } catch (e) {
       console.log('Something went wrong: ' + e);
       setError('Something went wrong: ' + e);
@@ -28,7 +34,7 @@ const SignIn = () => {
   return (
     <div>
       <div>{error}</div>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} method="post">
         <div>
           <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" />
