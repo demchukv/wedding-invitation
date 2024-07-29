@@ -5,6 +5,9 @@ import NextAuth from 'next-auth';
 // import client from '@/app/lib/db';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
+import CredentialsProvider from 'next-auth/providers/credentials';
+
+import { getUserByEmail } from '@/app/data/users';
 
 export const {
   handlers: { GET, POST },
@@ -14,7 +17,32 @@ export const {
 } = NextAuth({
   debug: true,
   // adapter: MongoDBAdapter(client),
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
+    CredentialsProvider({
+      async authorize(credentials) {
+        if (credentials === null) {
+          return null;
+        }
+        try {
+          const user = getUserByEmail(credentials?.email);
+          if (user) {
+            const isMatch = user.password === credentials?.password;
+            if (isMatch) {
+              return user;
+            } else {
+              throw new Error('Invalid credentials');
+            }
+          } else {
+            throw new Error('User not found');
+          }
+        } catch (error: any) {
+          throw new Error(error);
+        }
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,

@@ -8,7 +8,15 @@ export default async function Page({}: PageProps) {
   return (
     <main>
       <h1>Home page</h1>
-      <p>Welcome {session ? session?.user?.name : 'guest'}!</p>
+      <p>
+        Welcome{' '}
+        {session
+          ? session.user.name
+            ? session?.user?.name
+            : session?.user?.email
+          : 'guest'}
+        !
+      </p>
     </main>
   );
 }
