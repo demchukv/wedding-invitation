@@ -18,6 +18,7 @@ export async function doCredentialsLogin(formData) {
       password: formData.get('password'),
       redirect: false,
     });
+    console.log('response: ', response);
     return response;
   } catch (err) {
     throw new Error(err);

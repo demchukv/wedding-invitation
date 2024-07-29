@@ -7,7 +7,8 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-import { getUserByEmail } from '@/app/data/users';
+import User, { IUser } from '@/app/models/User';
+import bcrypt from 'bcryptjs';
 
 export const {
   handlers: { GET, POST },
@@ -15,7 +16,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  debug: true,
+  // debug: true,
   // adapter: MongoDBAdapter(client),
   session: {
     strategy: 'jwt',
@@ -27,9 +28,12 @@ export const {
           return null;
         }
         try {
-          const user = getUserByEmail(credentials?.email);
+          const user = await User.findOne({ email: credentials?.email });
           if (user) {
-            const isMatch = user.password === credentials?.password;
+            const isMatch = await bcrypt.compare(
+              credentials.password as string,
+              user.password as string,
+            );
             if (isMatch) {
               return user;
             } else {
@@ -38,7 +42,7 @@ export const {
           } else {
             throw new Error('User not found');
           }
-        } catch (error: any) {
+        } catch (error: Error | any) {
           throw new Error(error);
         }
       },
