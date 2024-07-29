@@ -26,6 +26,16 @@ export const {
         },
       },
     }),
-    GitHubProvider,
+    GitHubProvider({
+      clientId: process.env.AUTH_GITHUB_ID as string,
+      clientSecret: process.env.AUTH_GITHUB_SECRET as string,
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+        },
+      },
+    }),
   ],
 });
