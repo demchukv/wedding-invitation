@@ -12,6 +12,7 @@ import { InviteCreateSchema } from "@/schemas";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -45,7 +46,7 @@ export const InviteCreateForm = () => {
     defaultValues: {
       nameOne: "",
       nameTwo: "",
-      endDate: "",
+      endDate: new Date(),
     },
   });
 
@@ -54,20 +55,20 @@ export const InviteCreateForm = () => {
     setSuccess("");
     startTransition(() => {
       console.log(values);
-      // createInvitation(values)
-      //   .then((data) => {
-      //     if (data?.error) {
-      //       form.reset();
-      //       setError(data.error);
-      //     }
-      //     if (data?.success) {
-      //       form.reset();
-      //       setSuccess(data.success);
-      //     }
-      //   })
-      //   .catch(() => {
-      //     setError("Something went wrong");
-      //   });
+      createInvitation(values)
+        .then((data) => {
+          if (data?.error) {
+            form.reset();
+            setError(data.error);
+          }
+          if (data?.success) {
+            form.reset();
+            setSuccess(data.success);
+          }
+        })
+        .catch(() => {
+          setError("Something went wrong");
+        });
     });
   };
   return (
@@ -122,33 +123,40 @@ export const InviteCreateForm = () => {
                 name="endDate"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Select event date</FormLabel>
+                    <FormLabel>Date of Event</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "w-full justify-start text-left font-normal",
-                            !endDate && "text-muted-foreground"
-                          )}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {endDate ? (
-                            format(endDate, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                        </Button>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-full pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground"
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0">
+                      <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
-                          selected={endDate}
-                          onSelect={setEndDate}
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) => date < new Date()}
                           initialFocus
                         />
                       </PopoverContent>
                     </Popover>
+                    <FormDescription>
+                      Your date of birth is used to calculate your age.
+                    </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

@@ -88,7 +88,7 @@ export const InviteCreateSchema = z.object({
       message: "Name is required",
     })
     .min(2),
-  endDate: z.string({
+  endDate: z.date({
     message: "Date is required",
   }),
 });

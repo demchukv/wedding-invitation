@@ -20,6 +20,7 @@ export const createInvitation = async (
 
     // });
     console.log(values);
+    return { success: "Invitation created!" };
   } catch (error) {
     throw error;
   }
