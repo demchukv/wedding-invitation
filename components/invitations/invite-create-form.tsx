@@ -12,7 +12,6 @@ import { InviteCreateSchema } from "@/schemas";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -54,6 +53,7 @@ export const InviteCreateForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof InviteCreateSchema>) => {
+    console.log(values);
     setError("");
     setSuccess("");
     startTransition(() => {
@@ -73,6 +73,7 @@ export const InviteCreateForm = () => {
         });
     });
   };
+
   return (
     <CardWrapper
       headerLabel="Start create wedding invitation"
@@ -155,9 +156,6 @@ export const InviteCreateForm = () => {
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormDescription>
-                      Your date of birth is used to calculate your age.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
