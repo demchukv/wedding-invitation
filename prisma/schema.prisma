@@ -110,7 +110,7 @@ model Feedback {
   name String
   email String
   phone String
-  feedback String
+  message String
   userId String?
 
   createdAt  DateTime   @default(now())

@@ -1,4 +1,5 @@
 import { UserRole } from '@prisma/client';
+import { strict } from 'assert';
 import * as z from 'zod';
 
 export const SettingsSchema = z
@@ -91,7 +92,8 @@ export const FeedbackSchema = z.object({
   phone: z.string().regex(/^\+?3?8?0\d{2}\s?\d{3}\s?\d{4}$/, {
     message: 'Invalid phone number',
   }),
-  feedback: z.string().min(1, {
+  userId: z.optional(z.string()),
+  message: z.string().min(1, {
     message: 'Message is required',
   }),
 });
