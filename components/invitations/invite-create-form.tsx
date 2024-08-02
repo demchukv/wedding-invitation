@@ -35,15 +35,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useRouter } from "next/navigation";
 
 export const InviteCreateForm = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [endDate, setEndDate] = useState<Date>();
+
   const form = useForm<z.infer<typeof InviteCreateSchema>>({
     resolver: zodResolver(InviteCreateSchema),
     defaultValues: {
+      userId: "",
       nameOne: "",
       nameTwo: "",
       endDate: new Date(),
@@ -58,12 +61,11 @@ export const InviteCreateForm = () => {
       createInvitation(values)
         .then((data) => {
           if (data?.error) {
-            form.reset();
             setError(data.error);
           }
           if (data?.success) {
-            form.reset();
             setSuccess(data.success);
+            router.push(`/invitation/${data.id}`);
           }
         })
         .catch(() => {
@@ -162,8 +164,10 @@ export const InviteCreateForm = () => {
               />
             </>
           </div>
+
           <FormError message={error} />
           <FormSuccess message={success} />
+
           <Button type="submit" disabled={isPending} className="w-full">
             {isPending ? <BeatLoader color="white" /> : "Create Invitation"}
           </Button>
