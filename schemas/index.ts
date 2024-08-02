@@ -1,5 +1,5 @@
-import { UserRole } from "@prisma/client";
-import * as z from "zod";
+import { UserRole } from '@prisma/client';
+import * as z from 'zod';
 
 export const SettingsSchema = z
   .object({
@@ -18,8 +18,8 @@ export const SettingsSchema = z
       return true;
     },
     {
-      message: "Password is required!",
-      path: ["password"],
+      message: 'Password is required!',
+      path: ['password'],
     }
   )
   .refine(
@@ -30,18 +30,18 @@ export const SettingsSchema = z
       return true;
     },
     {
-      message: "New password is required!",
-      path: ["newPassword"],
+      message: 'New password is required!',
+      path: ['newPassword'],
     }
   );
 
 export const LoginSchema = z.object({
   email: z
     .string({
-      invalid_type_error: "Email must be a string",
+      invalid_type_error: 'Email must be a string',
     })
     .email({
-      message: "Email is required",
+      message: 'Email is required',
     }),
   password: z.string().min(1),
   code: z.optional(z.string()),
@@ -50,29 +50,48 @@ export const LoginSchema = z.object({
 export const RegisterSchema = z.object({
   email: z
     .string({
-      invalid_type_error: "Email must be a string",
+      invalid_type_error: 'Email must be a string',
     })
     .email({
-      message: "Email is required",
+      message: 'Email is required',
     }),
   password: z.string().min(6),
   name: z.string().min(1, {
-    message: "Name is required",
+    message: 'Name is required',
   }),
 });
 
 export const ResetSchema = z.object({
   email: z
     .string({
-      invalid_type_error: "Email must be a string",
+      invalid_type_error: 'Email must be a string',
     })
     .email({
-      message: "Email is required",
+      message: 'Email is required',
     }),
 });
 
 export const NewPasswordSchema = z.object({
   password: z.string().min(6, {
-    message: "Password must be at least 6 characters",
+    message: 'Password must be at least 6 characters',
+  }),
+});
+
+export const FeedbackSchema = z.object({
+  name: z.string().min(2, {
+    message: 'Name is required',
+  }),
+  email: z
+    .string({
+      invalid_type_error: 'Email must be a string',
+    })
+    .email({
+      message: 'Email is required',
+    }),
+  phone: z.string().regex(/^\+?3?8?0\d{2}\s?\d{3}\s?\d{4}$/, {
+    message: 'Invalid phone number',
+  }),
+  feedback: z.string().min(1, {
+    message: 'Message is required',
   }),
 });
