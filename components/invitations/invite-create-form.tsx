@@ -35,8 +35,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useRouter } from "next/navigation";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const InviteCreateForm = () => {
+  const currentUser = useCurrentUser();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
@@ -45,7 +47,7 @@ export const InviteCreateForm = () => {
   const form = useForm<z.infer<typeof InviteCreateSchema>>({
     resolver: zodResolver(InviteCreateSchema),
     defaultValues: {
-      userId: "",
+      userId: currentUser?.id,
       nameOne: "",
       nameTwo: "",
       endDate: new Date(),
@@ -53,11 +55,9 @@ export const InviteCreateForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof InviteCreateSchema>) => {
-    console.log(values);
     setError("");
     setSuccess("");
     startTransition(() => {
-      console.log(values);
       createInvitation(values)
         .then(data => {
           if (data?.error) {
@@ -65,7 +65,7 @@ export const InviteCreateForm = () => {
           }
           if (data?.success) {
             setSuccess(data.success);
-            router.push(`/invitation/${data.id}`);
+            router.push(`/invitations/${data.id}`);
           }
         })
         .catch(() => {

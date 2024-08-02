@@ -9,7 +9,7 @@ export const createInvitation = async (
   values: z.infer<typeof InviteCreateSchema>
 ) => {
   const user = await currentUser();
-  console.log(user);
+
   if (!user) {
     return { error: "Unauthorized" };
   }
@@ -30,8 +30,6 @@ export const createInvitation = async (
         endDate,
       },
     });
-
-    console.log(res);
 
     return { success: "Invitation created!", id: res.id };
   } catch (error) {
