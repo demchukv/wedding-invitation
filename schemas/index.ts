@@ -76,3 +76,19 @@ export const NewPasswordSchema = z.object({
     message: "Password must be at least 6 characters",
   }),
 });
+
+export const InviteCreateSchema = z.object({
+  nameOne: z
+    .string({
+      message: "Name is required",
+    })
+    .min(2),
+  nameTwo: z
+    .string({
+      message: "Name is required",
+    })
+    .min(2),
+  endDate: z.string({
+    message: "Date is required",
+  }),
+});
