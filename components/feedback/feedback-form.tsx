@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import * as z from 'zod';
-import { use, useState, useTransition } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { BeatLoader } from 'react-spinners';
+import * as z from "zod";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BeatLoader } from "react-spinners";
 
-import { addFeedback } from '@/actions/feedback/add-feedback';
-import { FeedbackSchema } from '@/schemas';
-import { useCurrentUser } from '@/hooks/use-current-user';
+import { addFeedback } from "@/actions/feedback/add-feedback";
+import { FeedbackSchema } from "@/schemas";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 import {
   Form,
@@ -18,37 +18,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from "@/components/ui/form";
 
-import CardWrapper from '@/components/auth/card-wrapper';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { FormError } from '@/components/form-error';
-import { FormSuccess } from '@/components/form-success';
+import CardWrapper from "@/components/auth/card-wrapper";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 const FeedbackForm = () => {
   const [isPending, startTransition] = useTransition();
-  const [error, setError] = useState<string | undefined>('');
-  const [success, setSuccess] = useState<string | undefined>('');
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
 
   const user = useCurrentUser();
 
   const form = useForm<z.infer<typeof FeedbackSchema>>({
     resolver: zodResolver(FeedbackSchema),
     defaultValues: {
-      name: user?.name || '',
-      email: user?.email || '',
-      phone: '',
-      message: '',
+      name: user?.name || "",
+      email: user?.email || "",
+      phone: "",
+      message: "",
     },
   });
 
   const onSubmit = (values: z.infer<typeof FeedbackSchema>) => {
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
     startTransition(() => {
       addFeedback(values)
-        .then((data) => {
+        .then(data => {
           if (data?.error) {
             form.reset();
             setError(data.error);
@@ -59,7 +60,7 @@ const FeedbackForm = () => {
           }
         })
         .catch(() => {
-          setError('Something went wrong. Please try again later.');
+          setError("Something went wrong. Please try again later.");
         });
     });
   };
@@ -129,7 +130,7 @@ const FeedbackForm = () => {
               <FormItem>
                 <FormLabel>Message</FormLabel>
                 <FormControl>
-                  <Input type="textarea" placeholder="Message" {...field} />
+                  <Textarea placeholder="Message" {...field} />
                 </FormControl>
                 <FormDescription>
                   Your message will not be shared.
@@ -139,7 +140,7 @@ const FeedbackForm = () => {
             )}
           />
           <Button type="submit" disabled={isPending} className="w-full">
-            {isPending ? <BeatLoader size={8} color="white" /> : 'Send'}
+            {isPending ? <BeatLoader size={8} color="white" /> : "Send"}
           </Button>
           <FormError message={error} />
           <FormSuccess message={success} />
