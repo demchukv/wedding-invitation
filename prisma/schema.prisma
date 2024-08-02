@@ -104,3 +104,14 @@ model TwoFactorConfirmation {
 
   @@unique([userId])
 }
+
+model Feedback {
+  id String @id @default(cuid())
+  name String
+  email String
+  phone String
+  feedback String
+  userId String?
+
+  createdAt  DateTime   @default(now())
+}
