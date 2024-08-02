@@ -103,14 +103,3 @@ enum UserRole {
   ADMIN
   USER
 }
-
-model Feedback {
-  id String @id @default(cuid())
-  name String
-  email String
-  phone String
-  message String
-  userId String?
-
-  createdAt  DateTime   @default(now())
-}
