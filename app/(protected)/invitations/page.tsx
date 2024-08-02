@@ -1,12 +1,16 @@
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
+
 const InvitationsPage = () => {
   return (
     <div>
-      <div>
-        <Link href="/invitations/create">CREATE INVITATION</Link>
+      <div className="mb-4">
+        <Button variant="outline">
+          <Link href="/invitations/create">CREATE INVITATION</Link>
+        </Button>
       </div>
-      Invitations Page
+      <p>Invitations Page</p>
     </div>
   );
 };
