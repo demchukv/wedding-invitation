@@ -59,7 +59,7 @@ export const InviteCreateForm = () => {
     startTransition(() => {
       console.log(values);
       createInvitation(values)
-        .then((data) => {
+        .then(data => {
           if (data?.error) {
             setError(data.error);
           }
@@ -76,6 +76,7 @@ export const InviteCreateForm = () => {
 
   return (
     <CardWrapper
+      headerTitle="Create Invitation"
       headerLabel="Start create wedding invitation"
       backButtonLabel=""
       backButtonHref=""
@@ -151,7 +152,7 @@ export const InviteCreateForm = () => {
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
-                          disabled={(date) => date < new Date()}
+                          disabled={date => date < new Date()}
                           initialFocus
                         />
                       </PopoverContent>

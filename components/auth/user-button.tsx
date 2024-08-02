@@ -13,9 +13,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import Link from "next/link";
+import { UserRole } from "@prisma/client";
 
 export const UserButton = () => {
   const user = useCurrentUser();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -33,6 +35,14 @@ export const UserButton = () => {
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
+        {user?.role === UserRole.ADMIN && (
+          <>
+            <DropdownMenuItem>
+              <Link href="/manage">Admin dashboard</Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
 
         <DropdownMenuItem>
           <Link href="/server">Server</Link>

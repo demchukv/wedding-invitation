@@ -3,8 +3,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuItem,
-} from '@/components/ui/navigation-menu';
-import Link from 'next/link';
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
 
 export const BaseNavbar = () => {
   return (
