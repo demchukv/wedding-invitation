@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-// import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { BaseNavbar } from "@/components/base-navbar";
@@ -24,7 +23,6 @@ export default async function RootLayout({
   const session = await auth();
   console.log("session", session);
   return (
-    // <SessionProvider session={session}>
     <AuthProvider>
       <html lang="en">
         <body className={inter.className}>
@@ -36,7 +34,6 @@ export default async function RootLayout({
           {children}
         </body>
       </html>
-      {/* // </SessionProvider> */}
     </AuthProvider>
   );
 }
