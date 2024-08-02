@@ -43,6 +43,9 @@ export const UserButton = () => {
         <DropdownMenuItem>
           <Link href="/admin">Admin</Link>
         </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
         <DropdownMenuItem>
           <Link href="/settings">Settings</Link>
         </DropdownMenuItem>
