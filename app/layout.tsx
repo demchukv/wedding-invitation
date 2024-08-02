@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 // import { SessionProvider } from "next-auth/react";
 // import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
+import { BaseNavbar } from "@/components/base-navbar";
 import { AuthProvider } from "@/components/auth-provider";
 import "./globals.css";
 
@@ -25,6 +26,7 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <Toaster />
+          <BaseNavbar />
           {children}
         </body>
       </html>
