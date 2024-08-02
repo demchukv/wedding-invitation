@@ -1,17 +1,21 @@
-import { Poppins } from "next/font/google";
+import { Poppins } from 'next/font/google';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
-const font = Poppins({ subsets: ["latin"], weight: "600" });
+const font = Poppins({ subsets: ['latin'], weight: '600' });
 
 interface HeaderProps {
   label: string;
+  headerTitle?: string;
 }
-export const Header = ({ label }: HeaderProps & { label: string }) => {
+export const Header = ({
+  label,
+  headerTitle,
+}: HeaderProps & { label: string }) => {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-      <h1 className={cn("text-3xl font-semibold", font.className)}>
-        Wedding Invitations
+      <h1 className={cn('text-3xl font-semibold', font.className)}>
+        {headerTitle || 'Wedding Invitation'}
       </h1>
       <p className="text-muted-foreground text-sm">{label}</p>
     </div>

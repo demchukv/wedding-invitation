@@ -1,5 +1,11 @@
+import FeedbackForm from '@/components/feedback/feedback-form';
+
 const FeedbackPage = () => {
-  return <div>FeedbackPage</div>;
+  return (
+    <div>
+      <FeedbackForm />
+    </div>
+  );
 };
 
 export default FeedbackPage;

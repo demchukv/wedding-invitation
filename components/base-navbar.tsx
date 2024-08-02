@@ -3,8 +3,8 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuItem,
-} from "@/components/ui/navigation-menu";
-import Link from "next/link";
+} from '@/components/ui/navigation-menu';
+import Link from 'next/link';
 
 export const BaseNavbar = () => {
   return (
@@ -23,6 +23,11 @@ export const BaseNavbar = () => {
         <NavigationMenuItem>
           <Link href="/templates" legacyBehavior passHref>
             <NavigationMenuLink>Templates</NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href="/feedback" legacyBehavior passHref>
+            <NavigationMenuLink>Feedback</NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
