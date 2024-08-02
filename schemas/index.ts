@@ -97,3 +97,19 @@ export const FeedbackSchema = z.object({
     message: 'Message is required',
   }),
 });
+
+export const InviteCreateSchema = z.object({
+  nameOne: z
+    .string({
+      message: "Name is required",
+    })
+    .min(2),
+  nameTwo: z
+    .string({
+      message: "Name is required",
+    })
+    .min(2),
+  endDate: z.date({
+    message: "Date is required",
+  }),
+});
