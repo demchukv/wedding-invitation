@@ -78,8 +78,8 @@ export const InviteCreateForm = () => {
     <CardWrapper
       headerTitle="Create Invitation"
       headerLabel="Start create wedding invitation"
-      backButtonLabel="/invitations"
-      backButtonHref="Back to invitations list"
+      backButtonLabel="Back to invitations list"
+      backButtonHref="/invitations"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
