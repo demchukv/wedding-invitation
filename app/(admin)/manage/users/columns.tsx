@@ -56,7 +56,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "image",
@@ -94,7 +104,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "emailVerified",
-    header: "Verified",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Verified
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       if (!date) {
@@ -109,7 +129,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "role",
-    header: "Role",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Role
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const role = getValue<UserTypes["role"]>();
       if (role === UserRole.ADMIN) {
@@ -121,7 +151,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created At
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       return (
@@ -133,7 +173,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated At",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Updated At
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       return (
@@ -168,7 +218,7 @@ export const columns: ColumnDef<UserTypes>[] = [
             <DropdownMenuItem>User accounts</DropdownMenuItem>
             <DropdownMenuItem>User invitations</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem color="red">Delete user</DropdownMenuItem>
+            <DropdownMenuItem>Delete user</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
