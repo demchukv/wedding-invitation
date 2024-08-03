@@ -3,10 +3,45 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { UserTypes } from "@/types/users";
 import Image from "next/image";
+import { UserRole } from "@prisma/client";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export const columns: ColumnDef<UserTypes>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={value => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "id",
     header: "ID",
@@ -45,7 +80,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "emailVerified",
@@ -65,6 +110,14 @@ export const columns: ColumnDef<UserTypes>[] = [
   {
     accessorKey: "role",
     header: "Role",
+    cell: ({ getValue }) => {
+      const role = getValue<UserTypes["role"]>();
+      if (role === UserRole.ADMIN) {
+        return <span className="text-sm text-green-800 font-bold">{role}</span>;
+      } else {
+        return <span className="text-sm text-blue-500">{role}</span>;
+      }
+    },
   },
   {
     accessorKey: "createdAt",
@@ -87,6 +140,37 @@ export const columns: ColumnDef<UserTypes>[] = [
         <span className="text-sm font-mono">
           {date.toLocaleDateString()} {date.toLocaleTimeString()}
         </span>
+      );
+    },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const user = row.original;
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(user.id)}
+            >
+              Copy user ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Edit user</DropdownMenuItem>
+            <DropdownMenuItem>User accounts</DropdownMenuItem>
+            <DropdownMenuItem>User invitations</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem color="red">Delete user</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       );
     },
   },
