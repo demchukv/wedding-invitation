@@ -9,8 +9,7 @@ export const getUserInvitationsList = async (userId: string) => {
     });
     return userInvitations;
   } catch (error) {
-    console.log(error);
-    return null;
+    return { error: "Something went wrong" + error };
   }
 };
 
@@ -23,7 +22,6 @@ export const getUserInvitationById = async (id: string) => {
     });
     return userInvitation;
   } catch (error) {
-    console.log(error);
     return null;
   }
 };
