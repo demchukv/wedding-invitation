@@ -1,8 +1,13 @@
 import Link from "next/link";
+import { InvitationType } from "@/types/invitation";
 import { Button } from "@/components/ui/button";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
-const InvitationsListItem = ({ invitation }: { invitation: any }) => {
+const InvitationsListItem = ({
+  invitation,
+}: {
+  invitation: InvitationType;
+}) => {
   return (
     <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
       <Link href={`/invitations/${invitation.id}`}>
