@@ -11,17 +11,21 @@ const InvitationsListItem = ({
   return (
     <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
       <Link href={`/invitations/${invitation.id}`}>
-        {invitation.nameOne} + {invitation.nameTwo}
+        <p>
+          {invitation.nameOne} + {invitation.nameTwo}
+        </p>
+        <p>Event date: {new Date(invitation.endDate).toLocaleDateString()}</p>
       </Link>
       <div className="flex gap-2">
-        <Button variant="default" size="sm">
+        <Button variant="custom" size="sm" title="Go to edit invitation">
           <Link href={`/invitations/${invitation.id}`}>
             <CiEdit />
           </Link>
         </Button>
         <Button
-          variant="default"
+          variant="destructive"
           size="sm"
+          title="Delete invitation and all related data"
           onClick={() => {
             alert("make delete");
           }}
