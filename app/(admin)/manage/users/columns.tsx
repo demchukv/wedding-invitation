@@ -19,6 +19,10 @@ export const columns: ColumnDef<UserTypes>[] = [
     header: "Email",
   },
   {
+    accessorKey: "emailVerified",
+    header: "Verified",
+  },
+  {
     accessorKey: "role",
     header: "Role",
   },
@@ -31,25 +35,3 @@ export const columns: ColumnDef<UserTypes>[] = [
     header: "Updated At",
   },
 ];
-
-// type Payment = {
-//   id: string;
-//   amount: number;
-//   status: "pending" | "processing" | "success" | "failed";
-//   email: string;
-// };
-
-// export const columns: ColumnDef<Payment>[] = [
-//   {
-//     accessorKey: "status",
-//     header: "Status",
-//   },
-//   {
-//     accessorKey: "email",
-//     header: "Email",
-//   },
-//   {
-//     accessorKey: "amount",
-//     header: "Amount",
-//   },
-// ];
