@@ -59,7 +59,6 @@ export const InviteCreateForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      toast.loading("Creating invitation...");
       createInvitation(values)
         .then(data => {
           if (data?.error) {

@@ -3,12 +3,15 @@ import { InvitationType } from "@/types/invitation";
 import { Button } from "@/components/ui/button";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
+import { PuffLoader } from "react-spinners";
 const InvitationsListItem = ({
   invitation,
   onDelete,
+  isPending,
 }: {
   invitation: InvitationType;
   onDelete: (id: string) => void;
+  isPending: boolean;
 }) => {
   return (
     <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
@@ -19,7 +22,12 @@ const InvitationsListItem = ({
         <p>Event date: {new Date(invitation.endDate).toLocaleDateString()}</p>
       </Link>
       <div className="flex gap-2">
-        <Button variant="custom" size="sm" title="Go to edit invitation">
+        <Button
+          variant="custom"
+          size="sm"
+          title="Go to edit invitation"
+          disabled={isPending}
+        >
           <Link href={`/invitations/${invitation.id}`}>
             <CiEdit />
           </Link>
@@ -29,8 +37,9 @@ const InvitationsListItem = ({
           size="sm"
           title="Delete invitation and all related data"
           onClick={() => onDelete(invitation.id)}
+          disabled={isPending}
         >
-          <MdDeleteOutline />
+          {isPending ? <PuffLoader size={18} /> : <MdDeleteOutline />}
         </Button>
       </div>
     </div>

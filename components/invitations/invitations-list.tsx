@@ -6,6 +6,7 @@ import InvitationsListItem from "@/components/invitations/invitations-list-item"
 import { InvitationType } from "@/types/invitation";
 import CardWrapper from "@/components/auth/card-wrapper";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export const InvitationsList = ({
   invitations,
@@ -13,6 +14,8 @@ export const InvitationsList = ({
   invitations: InvitationType[];
 }) => {
   const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
 
   const onDelete = (id: string) => {
     startTransition(() => {
@@ -23,6 +26,7 @@ export const InvitationsList = ({
           }
           if (data?.success) {
             toast.success(data.success);
+            router.refresh();
           }
         })
         .catch(error => toast.error("Something went wrong! " + error));
@@ -43,6 +47,7 @@ export const InvitationsList = ({
               <InvitationsListItem
                 invitation={invitation}
                 onDelete={onDelete}
+                isPending={isPending}
               />
             </li>
           ))}
