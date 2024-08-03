@@ -2,6 +2,7 @@
 
 import InvitationsListItem from "@/components/invitations/invitations-list-item";
 import { InvitationType } from "@/types/invitation";
+import CardWrapper from "@/components/auth/card-wrapper";
 
 export const InvitationsList = ({
   invitations,
@@ -10,16 +11,20 @@ export const InvitationsList = ({
 }) => {
   return (
     <>
-      <h1 className="text-3xl text-white drop-shadow-md">Invitations</h1>
-      <div>
-        <ul>
+      <CardWrapper
+        headerTitle="Invitations"
+        headerLabel="List your invitations"
+        backButtonHref=""
+        backButtonLabel=""
+      >
+        <ul className="space-y-4">
           {invitations.map(invitation => (
             <li key={invitation.id}>
               <InvitationsListItem invitation={invitation} />
             </li>
           ))}
         </ul>
-      </div>
+      </CardWrapper>
     </>
   );
 };

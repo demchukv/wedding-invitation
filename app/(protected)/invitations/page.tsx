@@ -15,7 +15,7 @@ const InvitationsPage = async () => {
   return (
     <div>
       <div className="mb-4">
-        <Button variant="outline">
+        <Button variant="default" className="w-full">
           <Link href="/invitations/create">CREATE INVITATION</Link>
         </Button>
       </div>
