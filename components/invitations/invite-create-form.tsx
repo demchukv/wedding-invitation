@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/popover";
 import { useRouter } from "next/navigation";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { toast } from "sonner";
 
 export const InviteCreateForm = () => {
   const currentUser = useCurrentUser();
@@ -58,6 +59,7 @@ export const InviteCreateForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
+      toast.loading("Creating invitation...");
       createInvitation(values)
         .then(data => {
           if (data?.error) {

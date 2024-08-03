@@ -5,8 +5,10 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 const InvitationsListItem = ({
   invitation,
+  onDelete,
 }: {
   invitation: InvitationType;
+  onDelete: (id: string) => void;
 }) => {
   return (
     <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
@@ -26,9 +28,7 @@ const InvitationsListItem = ({
           variant="destructive"
           size="sm"
           title="Delete invitation and all related data"
-          onClick={() => {
-            alert("make delete");
-          }}
+          onClick={() => onDelete(invitation.id)}
         >
           <MdDeleteOutline />
         </Button>
