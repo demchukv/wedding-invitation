@@ -59,6 +59,7 @@ export const columns: ColumnDef<UserTypes>[] = [
         </Button>
       );
     },
+    enableMultiSort: true,
     // cell: EditableTextCell,
   },
   {
@@ -94,6 +95,7 @@ export const columns: ColumnDef<UserTypes>[] = [
         </Button>
       );
     },
+    enableMultiSort: true,
   },
   {
     accessorKey: "emailVerified",
@@ -133,6 +135,7 @@ export const columns: ColumnDef<UserTypes>[] = [
         </Button>
       );
     },
+    enableMultiSort: true,
     cell: ({ getValue }) => {
       const role = getValue<UserTypes["role"]>();
       if (role === UserRole.ADMIN) {

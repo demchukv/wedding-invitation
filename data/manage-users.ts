@@ -15,13 +15,13 @@ export const getManageUserList = async (
 
   const sortingQuery = {};
   for (const { id, desc } of sorting) {
-    Object.assign(sortingQuery, { id: desc ? "desc" : "asc" });
+    Object.assign(sortingQuery, { [id]: desc ? "desc" : "asc" });
   }
 
   if (role !== UserRole.ADMIN) {
     return { error: "Forbidden!" };
   }
-
+  console.log(sortingQuery);
   try {
     userCount = await db.user.count();
   } catch (error) {
