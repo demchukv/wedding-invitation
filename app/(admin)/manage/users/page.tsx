@@ -65,6 +65,7 @@ export default function UsersPage() {
             data={data}
             rowCount={rowCount}
             pagination={initPagination}
+            sorting={initSorting}
             handlePaginationChange={handlePaginationChange}
             isPending={isPending}
           />

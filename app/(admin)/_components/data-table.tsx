@@ -35,6 +35,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   rowCount: number;
   pagination: PaginationState;
+  sorting: SortingState;
   handlePaginationChange: (
     newPagination: PaginationState,
     newSorting: SortingState
@@ -60,10 +61,11 @@ export function DataTable<TData, TValue>({
   data,
   rowCount,
   pagination: { pageIndex, pageSize },
+  sorting: [{ id, desc }],
   handlePaginationChange,
   isPending,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [sorting, setSorting] = React.useState<SortingState>([{ id, desc }]);
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex,
     pageSize,
@@ -87,7 +89,7 @@ export function DataTable<TData, TValue>({
     manualPagination: true,
     autoResetPageIndex: false,
   });
-  console.log(sorting);
+
   useEffect(() => {
     handlePaginationChange(pagination, sorting);
     // eslint-disable-next-line react-hooks/exhaustive-deps
