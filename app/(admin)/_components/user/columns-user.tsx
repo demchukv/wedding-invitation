@@ -128,7 +128,6 @@ export const columns: ColumnDef<UserTypes>[] = [
     id: "actions",
     cell: ({ row }) => {
       const user = row.original;
-
       return <ActionsUserMenu user={user} />;
     },
   },
