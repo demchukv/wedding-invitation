@@ -86,6 +86,7 @@ export function DataTable<TData, TValue>({
     },
     pageCount: rowCount === 0 ? 0 : Math.ceil(rowCount / pagination.pageSize),
     rowCount: rowCount,
+    manualSorting: true,
     manualPagination: true,
     autoResetPageIndex: false,
   });
