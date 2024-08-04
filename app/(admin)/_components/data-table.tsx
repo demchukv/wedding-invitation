@@ -199,7 +199,7 @@ export function DataTable<TData, TValue>({
             <SelectValue placeholder="Page size" />
           </SelectTrigger>
           <SelectContent>
-            {[1, 10, 20, 30, 40, 50].map(pageSize => (
+            {[1, 2, 10, 20, 30, 40, 50, 100].map(pageSize => (
               <SelectItem key={pageSize} value={pageSize.toString()}>
                 {pageSize}
               </SelectItem>

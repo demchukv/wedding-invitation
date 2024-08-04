@@ -18,7 +18,7 @@ export default function UsersPage() {
 
   const initPagination = {
     pageIndex: 0,
-    pageSize: 1,
+    pageSize: 2,
   };
 
   const getData = async (pagination: PaginationState) => {
