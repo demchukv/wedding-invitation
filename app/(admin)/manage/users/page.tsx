@@ -10,6 +10,7 @@ import { getManageUserList } from "@/data/manage-users";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useTransition } from "react";
+import { SortingState } from "@tanstack/react-table";
 
 export default function UsersPage() {
   const [isPending, startTransition] = useTransition();
@@ -20,10 +21,19 @@ export default function UsersPage() {
     pageIndex: 0,
     pageSize: 20,
   };
+  const initSorting = [
+    {
+      id: "createdAt",
+      desc: true,
+    },
+  ];
 
-  const getData = async (pagination: PaginationState) => {
+  const getData = async (
+    pagination: PaginationState,
+    sorting: SortingState
+  ) => {
     startTransition(() => {
-      getManageUserList(pagination).then(res => {
+      getManageUserList(pagination, sorting).then(res => {
         if (res?.success) {
           setData(res.data || []);
           setRowCount(res.rowCount || 0);
@@ -34,12 +44,15 @@ export default function UsersPage() {
       });
     });
   };
-  const handlePaginationChange = (newPagination: PaginationState) => {
-    getData(newPagination);
+  const handlePaginationChange = (
+    newPagination: PaginationState,
+    newSorting: SortingState
+  ) => {
+    getData(newPagination, newSorting);
   };
 
   useEffect(() => {
-    getData(initPagination);
+    getData(initPagination, initSorting);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

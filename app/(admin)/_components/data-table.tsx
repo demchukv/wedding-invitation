@@ -4,10 +4,12 @@ import * as React from "react";
 import { useEffect } from "react";
 import {
   ColumnDef,
+  SortingState,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -33,7 +35,10 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   rowCount: number;
   pagination: PaginationState;
-  handlePaginationChange: (newPagination: PaginationState) => void;
+  handlePaginationChange: (
+    newPagination: PaginationState,
+    newSorting: SortingState
+  ) => void;
   isPending: boolean;
 }
 
@@ -58,6 +63,7 @@ export function DataTable<TData, TValue>({
   handlePaginationChange,
   isPending,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex,
     pageSize,
@@ -70,7 +76,10 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     state: {
+      sorting,
       pagination,
     },
     pageCount: rowCount === 0 ? 0 : Math.ceil(rowCount / pagination.pageSize),
@@ -78,11 +87,11 @@ export function DataTable<TData, TValue>({
     manualPagination: true,
     autoResetPageIndex: false,
   });
-
+  console.log(sorting);
   useEffect(() => {
-    handlePaginationChange(pagination);
+    handlePaginationChange(pagination, sorting);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagination]);
+  }, [pagination, sorting]);
 
   return (
     <div>

@@ -5,6 +5,8 @@ import { UserTypes } from "@/types/users";
 import Image from "next/image";
 import { UserRole } from "@prisma/client";
 import { ActionsUserMenu } from "@/app/(admin)/_components/user/actions-user-menu";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // import { EditableTextCell } from "@/app/(admin)/_components/editable-text-cell";
 // This type is used to define the shape of our data.
@@ -46,7 +48,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     // cell: EditableTextCell,
   },
   {
@@ -71,11 +83,31 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "emailVerified",
-    header: "Verified",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Verified
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       if (!date) {
@@ -90,7 +122,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "role",
-    header: "Role",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Role
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const role = getValue<UserTypes["role"]>();
       if (role === UserRole.ADMIN) {
@@ -102,7 +144,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Created At",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created At
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       return (
@@ -114,7 +166,17 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated At",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Updated At
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       return (
