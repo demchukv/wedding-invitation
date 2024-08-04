@@ -4,17 +4,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { UserTypes } from "@/types/users";
 import Image from "next/image";
 import { UserRole } from "@prisma/client";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
+import { ActionsUserMenu } from "@/app/(admin)/_components/user/actions-user-menu";
+
 // import { EditableTextCell } from "@/app/(admin)/_components/editable-text-cell";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -139,28 +130,9 @@ export const columns: ColumnDef<UserTypes>[] = [
       const user = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.id)}
-            >
-              Copy user ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Edit user</DropdownMenuItem>
-            <DropdownMenuItem>User accounts</DropdownMenuItem>
-            <DropdownMenuItem>User invitations</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Delete user</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <>
+          <ActionsUserMenu user={user} />
+        </>
       );
     },
   },

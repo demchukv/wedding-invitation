@@ -1,6 +1,6 @@
 "use client";
 
-import { columns } from "@/app/(admin)/_components/columns-user";
+import { columns } from "@/app/(admin)/_components/user/columns-user";
 import {
   DataTable,
   PaginationState,
