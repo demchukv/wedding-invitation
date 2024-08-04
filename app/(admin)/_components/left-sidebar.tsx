@@ -15,6 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Separator } from "@/components/ui/separator";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
@@ -43,6 +44,10 @@ export function LeftSidebar() {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Link href="/manage/feedbacks">Feedbacks</Link>
+            </div>
+            <Separator className="my-4" />
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Link href="/">Home&nbsp;page</Link>
             </div>
           </div>
           <SheetFooter>

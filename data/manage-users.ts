@@ -1,11 +1,24 @@
-import { db } from "@/lib/db";
+"use server";
 
-export const getManageUserList = async () => {
+import { db } from "@/lib/db";
+import { currentRole } from "@/lib/auth";
+import { UserRole } from "@prisma/client";
+import { PaginationState } from "@/app/(admin)/_components/data-table";
+
+export const getManageUserList = async (pagination: PaginationState) => {
+  console.log(pagination);
+  const role = await currentRole();
+  let userCount = 0;
+
+  if (role !== UserRole.ADMIN) {
+    return { error: "Forbidden!" };
+  }
+
   try {
-    const userCount = await db.user.count();
+    userCount = await db.user.count();
   } catch (error) {
     console.log(error);
-    return null;
+    return { error: "Something went wrong! " + error };
   }
   try {
     const users = await db.user.findMany({
@@ -19,10 +32,13 @@ export const getManageUserList = async () => {
         createdAt: true,
         updatedAt: true,
       },
+      skip: pagination.pageIndex * pagination.pageSize || 0,
+      take: pagination.pageSize || 10,
+      orderBy: { createdAt: "desc" },
     });
-    return users;
+    return { data: users, rowCount: userCount, success: true };
   } catch (error) {
     console.log(error);
-    return null;
+    return { error: "Something went wrong! " + error };
   }
 };

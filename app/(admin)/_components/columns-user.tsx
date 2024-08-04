@@ -14,34 +14,33 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-
+// import { EditableTextCell } from "@/app/(admin)/_components/editable-text-cell";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export const columns: ColumnDef<UserTypes>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={value => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={value => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "id",
     header: "ID",
@@ -56,17 +55,8 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Name",
+    // cell: EditableTextCell,
   },
   {
     accessorKey: "image",
@@ -90,31 +80,11 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Email",
   },
   {
     accessorKey: "emailVerified",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Verified
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Verified",
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       if (!date) {
@@ -129,17 +99,7 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "role",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Role
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Role",
     cell: ({ getValue }) => {
       const role = getValue<UserTypes["role"]>();
       if (role === UserRole.ADMIN) {
@@ -151,17 +111,7 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Created At
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Created At",
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       return (
@@ -173,17 +123,7 @@ export const columns: ColumnDef<UserTypes>[] = [
   },
   {
     accessorKey: "updatedAt",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Updated At
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Updated At",
     cell: ({ getValue }) => {
       const date = getValue<Date>();
       return (

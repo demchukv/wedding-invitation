@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useEffect } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -8,7 +9,6 @@ import {
   useReactTable,
   getPaginationRowModel,
   SortingState,
-  getSortedRowModel,
   ColumnFiltersState,
   getFilteredRowModel,
   VisibilityState,
@@ -23,13 +23,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Select,
   SelectContent,
@@ -37,9 +30,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  rowCount: number;
+  pagination: PaginationState;
+  handlePaginationChange: (newPagination: PaginationState) => void;
 }
 
 export type PaginationState = {
@@ -58,79 +55,38 @@ export type PaginationInitialTableState = {
 export function DataTable<TData, TValue>({
   columns,
   data,
+  rowCount,
+  pagination: { pageIndex, pageSize },
+  handlePaginationChange,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
   const [pagination, setPagination] = React.useState<PaginationState>({
-    pageIndex: 0,
-    pageSize: 1,
+    pageIndex,
+    pageSize,
   });
+
   const table = useReactTable({
     data,
     columns,
+    columnResizeMode: "onChange",
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    onColumnFiltersChange: setColumnFilters,
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     onPaginationChange: setPagination,
     state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
       pagination,
     },
-    pageCount: -1,
-    rowCount: 3,
+    pageCount: rowCount === 0 ? 0 : Math.ceil(rowCount / pagination.pageSize),
+    rowCount: rowCount,
     manualPagination: true,
     autoResetPageIndex: false,
   });
 
+  useEffect(() => {
+    handlePaginationChange(pagination);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pagination]);
+
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={event =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter(column => column.getCanHide())
-              .map(column => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={value => column.toggleVisibility(!!value)}
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -185,7 +141,9 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.firstPage()}
+          onClick={() => {
+            table.firstPage();
+          }}
           disabled={!table.getCanPreviousPage()}
         >
           {"<<"}
@@ -193,7 +151,9 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.previousPage()}
+          onClick={() => {
+            table.previousPage();
+          }}
           disabled={!table.getCanPreviousPage()}
         >
           {"<"}
@@ -201,7 +161,9 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
+          onClick={() => {
+            table.nextPage();
+          }}
           disabled={!table.getCanNextPage()}
         >
           {">"}
@@ -209,7 +171,9 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.lastPage()}
+          onClick={() => {
+            table.lastPage();
+          }}
           disabled={!table.getCanNextPage()}
         >
           {">>"}
@@ -224,13 +188,20 @@ export function DataTable<TData, TValue>({
             <SelectValue placeholder="Page size" />
           </SelectTrigger>
           <SelectContent>
-            {[10, 20, 30, 40, 50].map(pageSize => (
+            {[1, 10, 20, 30, 40, 50].map(pageSize => (
               <SelectItem key={pageSize} value={pageSize.toString()}>
                 {pageSize}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
+        <span className="flex items-center gap-1">
+          <div>Page</div>
+          <strong>
+            {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount().toLocaleString()}
+          </strong>
+        </span>
       </div>
     </div>
   );
