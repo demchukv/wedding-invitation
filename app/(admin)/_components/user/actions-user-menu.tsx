@@ -1,10 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -80,14 +75,10 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
         <DialogContent>
-          <DialogHeader>
-            {modalType === "edit" && <EditUserForm userId={user.id} />}
-            {modalType === "accounts" && <UserAccounts userId={user.id} />}
-            {modalType === "invitations" && (
-              <UserInvitations userId={user.id} />
-            )}
-            {modalType === "delete" && <UserDeleteAlert userId={user.id} />}
-          </DialogHeader>
+          {modalType === "edit" && <EditUserForm userId={user.id} />}
+          {modalType === "accounts" && <UserAccounts userId={user.id} />}
+          {modalType === "invitations" && <UserInvitations userId={user.id} />}
+          {modalType === "delete" && <UserDeleteAlert userId={user.id} />}
         </DialogContent>
       </Dialog>
     </>

@@ -129,11 +129,7 @@ export const columns: ColumnDef<UserTypes>[] = [
     cell: ({ row }) => {
       const user = row.original;
 
-      return (
-        <>
-          <ActionsUserMenu user={user} />
-        </>
-      );
+      return <ActionsUserMenu user={user} />;
     },
   },
 ];
