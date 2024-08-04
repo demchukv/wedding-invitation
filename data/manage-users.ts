@@ -6,7 +6,6 @@ import { UserRole } from "@prisma/client";
 import { PaginationState } from "@/app/(admin)/_components/data-table";
 
 export const getManageUserList = async (pagination: PaginationState) => {
-  console.log(pagination);
   const role = await currentRole();
   let userCount = 0;
 

@@ -9,8 +9,10 @@ import { UserTypes } from "@/types/users";
 import { getManageUserList } from "@/data/manage-users";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { useTransition } from "react";
 
 export default function UsersPage() {
+  const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<UserTypes[]>([]);
   const [rowCount, setRowCount] = useState(0);
 
@@ -20,19 +22,19 @@ export default function UsersPage() {
   };
 
   const getData = async (pagination: PaginationState) => {
-    await getManageUserList(pagination).then(res => {
-      if (res?.success) {
-        console.log(res);
-        setData(res.data || []);
-        setRowCount(res.rowCount || 0);
-      }
-      if (res?.error) {
-        toast.error(res.error);
-      }
+    startTransition(() => {
+      getManageUserList(pagination).then(res => {
+        if (res?.success) {
+          setData(res.data || []);
+          setRowCount(res.rowCount || 0);
+        }
+        if (res?.error) {
+          toast.error(res.error);
+        }
+      });
     });
   };
   const handlePaginationChange = (newPagination: PaginationState) => {
-    console.log(newPagination);
     getData(newPagination);
   };
 
@@ -51,6 +53,7 @@ export default function UsersPage() {
             rowCount={rowCount}
             pagination={initPagination}
             handlePaginationChange={handlePaginationChange}
+            isPending={isPending}
           />
         </div>
       )}

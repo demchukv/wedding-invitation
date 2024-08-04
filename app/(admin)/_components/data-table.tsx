@@ -8,10 +8,6 @@ import {
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
-  SortingState,
-  ColumnFiltersState,
-  getFilteredRowModel,
-  VisibilityState,
 } from "@tanstack/react-table";
 
 import {
@@ -30,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { BeatLoader } from "react-spinners";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,6 +34,7 @@ interface DataTableProps<TData, TValue> {
   rowCount: number;
   pagination: PaginationState;
   handlePaginationChange: (newPagination: PaginationState) => void;
+  isPending: boolean;
 }
 
 export type PaginationState = {
@@ -58,6 +56,7 @@ export function DataTable<TData, TValue>({
   rowCount,
   pagination: { pageIndex, pageSize },
   handlePaginationChange,
+  isPending,
 }: DataTableProps<TData, TValue>) {
   const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex,
@@ -108,31 +107,43 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(row => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
+            {isPending ? (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
+                <TableCell colSpan={columns.length} className="h-24 ">
+                  <div className="flex items-center justify-center w-full gap-4">
+                    <BeatLoader /> <span>Loading data ...</span>
+                  </div>
                 </TableCell>
               </TableRow>
+            ) : (
+              <>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map(row => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map(cell => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className="h-24 text-center"
+                    >
+                      No results.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </>
             )}
           </TableBody>
         </Table>
@@ -200,7 +211,8 @@ export function DataTable<TData, TValue>({
           <strong>
             {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount().toLocaleString()}
-          </strong>
+          </strong>{" "}
+          (total: {rowCount} records)
         </span>
       </div>
     </div>
