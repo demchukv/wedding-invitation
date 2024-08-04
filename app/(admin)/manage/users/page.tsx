@@ -46,7 +46,7 @@ export default function UsersPage() {
   return (
     <>
       {Array.isArray(data) && (
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto">
           <DataTable
             columns={columns}
             data={data}
