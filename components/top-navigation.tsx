@@ -7,6 +7,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const TopNavigation = () => {
   const session = useCurrentUser();
+
   return (
     <div className="flex flex-row items-center justify-around w-full">
       <BaseNavbar />

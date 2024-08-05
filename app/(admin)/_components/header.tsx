@@ -33,9 +33,11 @@ import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutButton } from "@/components/auth/logout-button";
-
+import { useRouter } from "next/navigation";
 export const Header = () => {
   const user = useCurrentUser();
+  const router = useRouter();
+  console.log(router);
   return (
     <>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">

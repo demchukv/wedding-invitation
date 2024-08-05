@@ -25,8 +25,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { useSession } from "next-auth/react";
 
 export const LoginForm = () => {
+  const { update } = useSession();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams?.get("callbackUrl");
   const urlError =
@@ -58,6 +60,7 @@ export const LoginForm = () => {
           }
           if (data?.success) {
             form.reset();
+            update();
             setSuccess(data.success);
           }
           if (data?.twoFactor) {

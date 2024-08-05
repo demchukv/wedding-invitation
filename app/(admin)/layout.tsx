@@ -2,6 +2,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { currentUser } from "@/lib/auth";
 import { Aside } from "@/app/(admin)/_components/aside";
 import { Header } from "@/app/(admin)/_components/header";
+import { AuthProvider } from "@/components/auth-provider";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
@@ -17,15 +18,17 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
   }
 
   return (
-    <TooltipProvider>
-      <div className="flex min-h-screen w-full flex-col bg-muted/40">
-        <Aside />
-        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-          <Header />
-          {children}
+    <AuthProvider>
+      <TooltipProvider>
+        <div className="flex min-h-screen w-full flex-col bg-muted/40">
+          <Aside />
+          <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+            <Header />
+            {children}
+          </div>
         </div>
-      </div>
-    </TooltipProvider>
+      </TooltipProvider>
+    </AuthProvider>
   );
 };
 

@@ -118,7 +118,7 @@ export function DataTable<TData, TValue>({
   }, [pagination, sorting]);
 
   return (
-    <div>
+    <div className="max-h-full">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
