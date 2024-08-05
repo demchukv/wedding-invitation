@@ -59,7 +59,7 @@ export default function UsersPage() {
   return (
     <>
       {Array.isArray(data) && (
-        <div className="w-full pl-6 pr-6">
+        <main className="p-4 sm:px-6 sm:py-0">
           <DataTable
             columns={columns}
             data={data}
@@ -69,7 +69,7 @@ export default function UsersPage() {
             handlePaginationChange={handlePaginationChange}
             isPending={isPending}
           />
-        </div>
+        </main>
       )}
     </>
   );
