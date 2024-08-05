@@ -114,7 +114,12 @@ const FeedbackForm = () => {
               <FormItem>
                 <FormLabel>Phone</FormLabel>
                 <FormControl>
-                  <Input type="tel" placeholder="Phone" {...field} />
+                  <Input
+                    type="tel"
+                    placeholder="Phone"
+                    {...field}
+                    disabled={isPending}
+                  />
                 </FormControl>
                 <FormDescription>
                   Your phone will not be shared.

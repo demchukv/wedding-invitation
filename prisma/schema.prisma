@@ -87,6 +87,15 @@ model Feedback {
   createdAt DateTime @default(now())
 }
 
+model Review {
+  id        String      @id @default(cuid())
+  state     ReviewState
+  rating    Int
+  message   String
+  userId    String
+  createdAt DateTime    @default(now())
+}
+
 model Invite {
   id        String   @id @default(cuid())
   userId    String
@@ -102,4 +111,10 @@ model Invite {
 enum UserRole {
   ADMIN
   USER
+}
+
+enum ReviewState {
+  NEW
+  APPROVED
+  DECLINED
 }

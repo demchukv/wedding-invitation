@@ -17,6 +17,13 @@ export const getAccountByUserId = async (userId: string) => {
 
 export const getAllAccountsByUserId = async (userId: string) => {
   try {
+    const review = await db.review.findMany({
+      take: 10,
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     const accounts = await db.account.findMany({
       select: {
         userId: true,
