@@ -36,7 +36,9 @@ export const columns: ColumnDef<UserTypes>[] = [
   // },
   {
     accessorKey: "id",
-    header: "ID",
+    header: ({ column }) => {
+      return <Button variant="ghost">ID</Button>;
+    },
     cell: ({ getValue }) => {
       const id = getValue<string>();
       return (
@@ -59,12 +61,16 @@ export const columns: ColumnDef<UserTypes>[] = [
         </Button>
       );
     },
+    accessorFn: row => row.name,
     enableMultiSort: true,
     // cell: EditableTextCell,
   },
   {
     accessorKey: "image",
-    header: "Image",
+    header: ({ column }) => {
+      return <Button variant="ghost">Image</Button>;
+    },
+
     cell: ({ getValue }) => {
       const image = getValue<string>();
       if (!image) {
@@ -134,6 +140,9 @@ export const columns: ColumnDef<UserTypes>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+    meta: {
+      filterVariant: "select",
     },
     enableMultiSort: true,
     cell: ({ getValue }) => {

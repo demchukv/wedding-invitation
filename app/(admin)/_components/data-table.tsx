@@ -12,6 +12,7 @@ import {
   getSortedRowModel,
   VisibilityState,
   ColumnFiltersState,
+  RowData,
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
@@ -38,8 +39,13 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { DebouncedInput } from "@/app/(admin)/_components/debounce-input";
+import { Filter } from "@/app/(admin)/_components/table-filters";
 import { Input } from "@/components/ui/input";
 
+interface ColumnMeta<TData extends RowData, TValue> {
+  filterVariant?: "text" | "range" | "select";
+}
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -83,6 +89,7 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
 
@@ -98,6 +105,7 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    filterFns: {},
     state: {
       sorting,
       pagination,
@@ -110,6 +118,8 @@ export function DataTable<TData, TValue>({
     enableMultiSort: true,
     manualPagination: true,
     autoResetPageIndex: false,
+    debugTable: true,
+    debugHeaders: true,
   });
 
   useEffect(() => {
@@ -120,14 +130,14 @@ export function DataTable<TData, TValue>({
   return (
     <div className="max-h-full">
       <div className="flex items-center py-4">
-        <Input
+        {/* <Input
           placeholder="Filter emails..."
           value={table.getColumn("email")?.getFilterValue() as string}
           onChange={event =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        /> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -161,12 +171,21 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map(header => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                      <div className="flex flex-col justify-between h-full">
+                        <div>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                        </div>
+                        <div>
+                          {header.column.getCanFilter() ? (
+                            <Filter column={header.column} />
+                          ) : null}
+                        </div>
+                      </div>
                     </TableHead>
                   );
                 })}
