@@ -12,6 +12,8 @@ import { getUsersStatistics } from "@/data/manage-users";
 import { useState, useEffect, useTransition } from "react";
 import { toast } from "sonner";
 import { BeatLoader } from "react-spinners";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export const UsersWidget = () => {
   const [isPending, startTransition] = useTransition();
@@ -53,11 +55,9 @@ export const UsersWidget = () => {
                   {data?.totalUsersCount}
                 </span>
               </div>
+              <Separator className="my-2" />
               <div className="flex justify-between w-full">
-                <span>Total</span>
-                <span className="font-semibold font-mono">
-                  {data?.totalAdminsCount + data?.totalUsersCount}
-                </span>
+                <Link href="/manage/users">View all users</Link>
               </div>
             </>
           )}
