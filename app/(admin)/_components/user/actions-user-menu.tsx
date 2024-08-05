@@ -60,7 +60,7 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
             Edit user
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => openModal("accounts")}>
-            User accoonts
+            User accounts
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => openModal("invitations")}>
             User invitations

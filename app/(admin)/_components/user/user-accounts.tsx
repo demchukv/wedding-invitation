@@ -18,6 +18,8 @@ import {
 import { startTransition, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { UserTypes, UserAccountTypes } from "@/types/users";
+import { Trash } from "lucide-react";
+
 interface UserAccountsProps {
   userId: string;
 }
@@ -57,20 +59,24 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
               <TableHead>Type</TableHead>
               <TableHead>Created</TableHead>
               <TableHead>Updated</TableHead>
+              <TableHead>&nbsp;</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {accounts.map(account => (
               <TableRow key={account.providerAccountId}>
-                <TableCell>{account.provider}</TableCell>
+                <TableCell className="font-semibold">
+                  {account.provider}
+                </TableCell>
                 <TableCell>{account.type}</TableCell>
                 <TableCell className="text-sm">
-                  {account.createdAt.toLocaleDateString()}{" "}
-                  {account.createdAt.toLocaleTimeString()}
+                  {account.createdAt.toLocaleDateString()}
                 </TableCell>
                 <TableCell className="text-sm">
-                  {account.updatedAt.toLocaleDateString()}{" "}
-                  {account.updatedAt.toLocaleTimeString()}
+                  {account.updatedAt.toLocaleDateString()}
+                </TableCell>
+                <TableCell>
+                  <Trash className="h-4 w-4" />
                 </TableCell>
               </TableRow>
             ))}
