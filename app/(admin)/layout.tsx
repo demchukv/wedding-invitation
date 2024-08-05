@@ -1,5 +1,8 @@
 import { LeftSidebar } from "@/app/(admin)/_components/left-sidebar";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { currentUser } from "@/lib/auth";
+import { Aside } from "@/app/(admin)/_components/aside";
+import { Header } from "@/app/(admin)/_components/header";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
@@ -13,13 +16,17 @@ const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
       </div>
     );
   }
+
   return (
-    <>
-      <div className="h-full w-full flex flex-col gap-y-10 items-start justify-start">
-        <LeftSidebar />
-        {children}
+    <TooltipProvider>
+      <div className="flex min-h-screen w-full flex-col bg-muted/40">
+        <Aside />
+        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+          <Header />
+          {children}
+        </div>
       </div>
-    </>
+    </TooltipProvider>
   );
 };
 

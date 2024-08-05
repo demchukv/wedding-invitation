@@ -51,7 +51,7 @@ export const LoginForm = () => {
     setSuccess("");
     startTransition(() => {
       login(values, callbackUrl)
-        .then((data) => {
+        .then(data => {
           if (data?.error) {
             form.reset();
             setError(data.error);
@@ -71,6 +71,7 @@ export const LoginForm = () => {
   };
   return (
     <CardWrapper
+      headerTitle="Sign In"
       headerLabel="Welcome back"
       backButtonLabel="Don't have an account?"
       backButtonHref="/auth/register"

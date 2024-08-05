@@ -41,7 +41,7 @@ export const RegisterForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      register(values).then((data) => {
+      register(values).then(data => {
         setError(data.error);
         setSuccess(data.succes);
       });
@@ -49,6 +49,7 @@ export const RegisterForm = () => {
   };
   return (
     <CardWrapper
+      headerTitle="Sign Up"
       headerLabel="Create an account"
       backButtonLabel="Already have an account?"
       backButtonHref="/auth/login"
