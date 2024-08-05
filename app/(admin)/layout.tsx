@@ -3,13 +3,14 @@ import { currentUser } from "@/lib/auth";
 import { Aside } from "@/app/(admin)/_components/aside";
 import { Header } from "@/app/(admin)/_components/header";
 import { AuthProvider } from "@/components/auth-provider";
+import { UserRole } from "@prisma/client";
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 const DashboardLayout = async ({ children }: DashboardLayoutProps) => {
   const user = await currentUser();
 
-  if (!user || user.role !== "ADMIN") {
+  if (!user || user.role !== UserRole.ADMIN) {
     return (
       <div className="h-full w-full flex flex-col gap-y-10 items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-400 to-emerald-800">
         <h1 className="text-3xl font-semibold">Unauthorized!</h1>

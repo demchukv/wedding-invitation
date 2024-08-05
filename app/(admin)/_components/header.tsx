@@ -33,9 +33,37 @@ import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutButton } from "@/components/auth/logout-button";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const user = useCurrentUser();
+  const pathname = usePathname();
+
+  const breadcrumb = [];
+  if (pathname === "/manage/users") {
+    breadcrumb.push({
+      name: "Users",
+      href: "/manage/users",
+    });
+  }
+  if (pathname === "/manage/invitations") {
+    breadcrumb.push({
+      name: "Invitations",
+      href: "/manage/invitations",
+    });
+  }
+  if (pathname === "/manage/feedbacks") {
+    breadcrumb.push({
+      name: "Feedbacks",
+      href: "/manage/feedbacks",
+    });
+  }
+  if (pathname === "/manage/reviews") {
+    breadcrumb.push({
+      name: "Reviews",
+      href: "/manage/reviews",
+    });
+  }
 
   return (
     <>
@@ -98,19 +126,19 @@ export const Header = () => {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="#">Dashboard</Link>
+                <Link href="/manage">Dashboard</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link href="#">Orders</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Recent Orders</BreadcrumbPage>
-            </BreadcrumbItem>
+            {breadcrumb.map((item, index) => (
+              <>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href={item.href}>{item.name}</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
+            ))}
           </BreadcrumbList>
         </Breadcrumb>
         <div className="relative ml-auto flex-1 md:grow-0">

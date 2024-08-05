@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { useTransition } from "react";
 import { SortingState } from "@tanstack/react-table";
 
-export default function UsersPage() {
+export default function ManageUsersPage() {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<UserTypes[]>([]);
   const [rowCount, setRowCount] = useState(0);
