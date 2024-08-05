@@ -29,10 +29,10 @@ import {
   ShieldPlus,
   LayoutDashboard,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 export const Header = () => {
   const user = useCurrentUser();
@@ -138,7 +138,9 @@ export const Header = () => {
             <DropdownMenuSeparator />
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem>
+              <LogoutButton>Logout</LogoutButton>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
