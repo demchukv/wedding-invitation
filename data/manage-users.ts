@@ -21,14 +21,9 @@ export const getManageUserList = async (
   if (role !== UserRole.ADMIN) {
     return { error: "Forbidden!" };
   }
-  console.log(sortingQuery);
+
   try {
-    userCount = await db.user.count();
-  } catch (error) {
-    console.log(error);
-    return { error: "Something went wrong! " + error };
-  }
-  try {
+    const userCount = await db.user.count();
     const users = await db.user.findMany({
       select: {
         id: true,
@@ -47,6 +42,24 @@ export const getManageUserList = async (
     return { data: users, rowCount: userCount, success: true };
   } catch (error) {
     console.log(error);
+    return { error: "Something went wrong! " + error };
+  }
+};
+
+export const getUsersStatistics = async () => {
+  try {
+    const totalAdminsCount = await db.user.count({
+      where: { role: UserRole.ADMIN },
+    });
+    const totalUsersCount = await db.user.count({
+      where: { role: UserRole.USER },
+    });
+    return {
+      totalAdminsCount: totalAdminsCount,
+      totalUsersCount: totalUsersCount,
+      success: true,
+    };
+  } catch (error) {
     return { error: "Something went wrong! " + error };
   }
 };
