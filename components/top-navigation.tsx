@@ -9,7 +9,7 @@ export const TopNavigation = () => {
   const session = useCurrentUser();
 
   return (
-    <div className="flex flex-row items-center justify-around w-full">
+    <div className="flex flex-row items-center justify-around w-full py-4">
       <BaseNavbar />
       {!session ? <NewUserMenu /> : <Navbar />}
     </div>
