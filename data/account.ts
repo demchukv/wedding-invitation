@@ -30,22 +30,7 @@ export const getAllAccountsByUserId = async (userId: string) => {
         userId,
       },
     });
-    const user = await db.user.findUnique({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        emailVerified: true,
-        image: true,
-        role: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-      where: {
-        id: userId,
-      },
-    });
-    return { success: true, accounts: accounts, user: user };
+    return { success: true, accounts: accounts };
   } catch (error) {
     console.log(error);
     return { error: "Something went wrong! " + error };
