@@ -1,4 +1,3 @@
-import { LeftSidebar } from "@/app/(admin)/_components/left-sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { currentUser } from "@/lib/auth";
 import { Aside } from "@/app/(admin)/_components/aside";
