@@ -34,6 +34,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { usePathname } from "next/navigation";
+import React from "react";
 
 export const Header = () => {
   const user = useCurrentUser();
@@ -130,14 +131,14 @@ export const Header = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
             {breadcrumb.map((item, index) => (
-              <>
+              <React.Fragment key={index}>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink asChild>
                     <Link href={item.href}>{item.name}</Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
-              </>
+              </React.Fragment>
             ))}
           </BreadcrumbList>
         </Breadcrumb>

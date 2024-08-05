@@ -10,3 +10,12 @@ export type UserTypes = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type UserAccountTypes = {
+  userId: string;
+  type: string;
+  provider: string;
+  providerAccountId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
