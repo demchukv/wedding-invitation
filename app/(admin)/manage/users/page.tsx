@@ -59,7 +59,7 @@ export default function UsersPage() {
   return (
     <>
       {Array.isArray(data) && (
-        <div className="container mx-auto">
+        <div className="w-full pl-6 pr-6">
           <DataTable
             columns={columns}
             data={data}
