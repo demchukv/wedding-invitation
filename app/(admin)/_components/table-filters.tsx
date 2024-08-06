@@ -1,14 +1,16 @@
 import { DebouncedInput } from "@/app/(admin)/_components/debounce-input";
-import { Column } from "@tanstack/react-table";
+import { Column, RowData } from "@tanstack/react-table";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+interface ColumnMeta<TData extends RowData, TValue> {
+  filterVariant?: "text" | "range" | "select";
+}
 
 export const Filter = ({ column }: { column: Column<any, unknown> }) => {
   const columnFilterValue = column.getFilterValue();

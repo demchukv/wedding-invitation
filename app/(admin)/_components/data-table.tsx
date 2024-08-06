@@ -39,13 +39,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DebouncedInput } from "@/app/(admin)/_components/debounce-input";
 import { Filter } from "@/app/(admin)/_components/table-filters";
-import { Input } from "@/components/ui/input";
 
-interface ColumnMeta<TData extends RowData, TValue> {
-  filterVariant?: "text" | "range" | "select";
-}
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];

@@ -15,8 +15,11 @@ export const getManageUserList = async (
   sorting: SortingState,
   filters: ColumnFiltersState
 ) => {
-  console.log(filters);
   const role = await currentRole();
+
+  if (role !== UserRole.ADMIN) {
+    return { error: "Forbidden!" };
+  }
 
   const sortingQuery = {};
   for (const { id, desc } of sorting) {
@@ -47,10 +50,6 @@ export const getManageUserList = async (
     }
   }
   console.log(filtersQuery);
-
-  if (role !== UserRole.ADMIN) {
-    return { error: "Forbidden!" };
-  }
 
   try {
     const userCount = await db.user.count();
