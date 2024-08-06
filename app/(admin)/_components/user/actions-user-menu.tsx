@@ -11,7 +11,7 @@ import {
 import { UserTypes } from "@/types/users";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
-import { EditUserForm } from "@/app/(admin)/_components/user/edit-user-form";
+import { EditUserModal } from "@/app/(admin)/_components/user/edit-user-modal";
 import { UserAccounts } from "@/app/(admin)/_components/user/user-accounts";
 import { UserInvitations } from "@/app/(admin)/_components/user/user-invitations";
 import { UserDeleteAlert } from "@/app/(admin)/_components/user/user-delete-alert";
@@ -61,7 +61,7 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
         <DialogContent className="max-w-min">
-          {modalType === "edit" && <EditUserForm userId={user.id} />}
+          {modalType === "edit" && <EditUserModal userId={user.id} />}
           {modalType === "accounts" && <UserAccounts userId={user.id} />}
           {modalType === "invitations" && <UserInvitations userId={user.id} />}
           {modalType === "delete" && <UserDeleteAlert userId={user.id} />}

@@ -9,6 +9,7 @@ export type UserTypes = {
   role: UserRole;
   createdAt: Date;
   updatedAt: Date;
+  isTwoFactorEnabled?: boolean;
 };
 
 export type UserAccountTypes = {

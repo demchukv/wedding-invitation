@@ -21,6 +21,7 @@ import { InvitationType } from "@/types/invitation";
 import { Edit, Trash } from "lucide-react";
 import { BeatLoader } from "react-spinners";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { useSession } from "next-auth/react";
 
 interface UserAccountsProps {
   userId: string;

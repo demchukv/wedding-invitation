@@ -80,6 +80,7 @@ export const getManageUserList = async (
         role: true,
         createdAt: true,
         updatedAt: true,
+        isTwoFactorEnabled: true,
       },
       skip: pagination.pageIndex * pagination.pageSize || 0,
       take: pagination.pageSize || 10,

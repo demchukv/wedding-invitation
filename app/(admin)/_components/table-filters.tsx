@@ -50,7 +50,7 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
         onValueChange={e => column.setFilterValue(e.trim())}
         defaultValue={columnFilterValue?.toString()}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="Select..." />
         </SelectTrigger>
         <SelectContent>

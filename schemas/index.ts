@@ -1,4 +1,5 @@
 import { UserRole } from "@prisma/client";
+import { MdPassword } from "react-icons/md";
 import * as z from "zod";
 
 export const SettingsSchema = z
@@ -34,6 +35,17 @@ export const SettingsSchema = z
       path: ["newPassword"],
     }
   );
+
+export const UpdateUserSchema = z.object({
+  id: z.string(),
+  name: z.optional(z.string()),
+  email: z.optional(z.string().email()),
+  password: z.optional(z.string().min(6)),
+  newPassword: z.optional(z.string().min(6)),
+  isTwoFactorEnabled: z.optional(z.boolean()),
+  role: z.enum([UserRole.USER, UserRole.ADMIN]),
+  emailVerified: z.optional(z.date()),
+});
 
 export const LoginSchema = z.object({
   email: z
