@@ -8,10 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface ColumnMeta<TData extends RowData, TValue> {
-  filterVariant?: "text" | "range" | "select";
-}
-
 export const Filter = ({ column }: { column: Column<any, unknown> }) => {
   const columnFilterValue = column.getFilterValue();
   const { filterVariant } = column.columnDef.meta ?? {};

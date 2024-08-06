@@ -41,6 +41,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Filter } from "@/app/(admin)/_components/table-filters";
 
+declare module "@tanstack/react-table" {
+  //allows us to define custom properties for our columns
+  interface ColumnMeta<TData extends RowData, TValue> {
+    filterVariant?: "text" | "range" | "select";
+  }
+}
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
