@@ -9,6 +9,7 @@ import {
   ColumnFiltersState,
   SortingState,
 } from "@tanstack/react-table";
+import { formatDate } from "date-fns";
 
 export const getManageUserList = async (
   pagination: PaginationState,
@@ -41,7 +42,20 @@ export const getManageUserList = async (
       id === "updatedAt"
     ) {
       // for date objects
-      continue;
+      const dateObj = value as Date;
+      const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+      const date = ("0" + dateObj.getDate()).slice(-2);
+      const year = dateObj.getFullYear();
+      const offset = -dateObj.getTimezoneOffset() / 60;
+      const dateString = year + "/" + month + "/" + date;
+      const minDate = new Date(dateString + " 00:00:00.0" + offset);
+      const maxDate = new Date(dateString + " 23:59:59.0" + offset);
+      minDate.setTime(minDate.getTime() + offset * 60 * 60 * 1000);
+      maxDate.setTime(maxDate.getTime() + offset * 60 * 60 * 1000);
+
+      Object.assign(filtersQuery, {
+        [id]: { gte: minDate, lte: maxDate },
+      });
     } else {
       // for string
       Object.assign(filtersQuery, {
@@ -49,7 +63,6 @@ export const getManageUserList = async (
       });
     }
   }
-  console.log(filtersQuery);
 
   try {
     const userCount = await db.user.count();

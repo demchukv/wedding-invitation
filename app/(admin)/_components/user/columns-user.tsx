@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 declare module "@tanstack/react-table" {
   //allows us to define custom properties for our columns
   interface ColumnMeta<TData extends RowData, TValue> {
-    filterVariant?: "text" | "range" | "select";
+    filterVariant?: "text" | "range" | "select" | "date";
   }
 }
 // import { EditableTextCell } from "@/app/(admin)/_components/editable-text-cell";
@@ -132,6 +132,9 @@ export const columns: ColumnDef<UserTypes>[] = [
         </span>
       );
     },
+    meta: {
+      filterVariant: "date",
+    },
   },
   {
     accessorKey: "role",
@@ -180,6 +183,9 @@ export const columns: ColumnDef<UserTypes>[] = [
         </span>
       );
     },
+    meta: {
+      filterVariant: "date",
+    },
   },
   {
     accessorKey: "updatedAt",
@@ -201,6 +207,9 @@ export const columns: ColumnDef<UserTypes>[] = [
           {date.toLocaleDateString()} {date.toLocaleTimeString()}
         </span>
       );
+    },
+    meta: {
+      filterVariant: "date",
     },
   },
   {
