@@ -3,12 +3,17 @@
 import { db } from "@/lib/db";
 import { currentRole } from "@/lib/auth";
 import { UserRole } from "@prisma/client";
-import { PaginationState } from "@/app/(admin)/_components/data-table";
-import { SortingState } from "@tanstack/react-table";
+
+import {
+  PaginationState,
+  ColumnFiltersState,
+  SortingState,
+} from "@tanstack/react-table";
 
 export const getManageUserList = async (
   pagination: PaginationState,
-  sorting: SortingState
+  sorting: SortingState,
+  filters: ColumnFiltersState
 ) => {
   const role = await currentRole();
   let userCount = 0;

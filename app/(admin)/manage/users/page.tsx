@@ -10,7 +10,7 @@ import { getManageUserList } from "@/data/manage-users";
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useTransition } from "react";
-import { SortingState } from "@tanstack/react-table";
+import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 
 export default function ManageUsersPage() {
   const [isPending, startTransition] = useTransition();
@@ -27,13 +27,15 @@ export default function ManageUsersPage() {
       desc: true,
     },
   ];
+  const initFiltering = [] as ColumnFiltersState;
 
   const getData = async (
     pagination: PaginationState,
-    sorting: SortingState
+    sorting: SortingState,
+    filters: ColumnFiltersState
   ) => {
     startTransition(() => {
-      getManageUserList(pagination, sorting).then(res => {
+      getManageUserList(pagination, sorting, filters).then(res => {
         if (res?.success) {
           setData(res.data || []);
           setRowCount(res.rowCount || 0);
@@ -46,13 +48,14 @@ export default function ManageUsersPage() {
   };
   const handlePaginationChange = (
     newPagination: PaginationState,
-    newSorting: SortingState
+    newSorting: SortingState,
+    columnFilters: ColumnFiltersState
   ) => {
-    getData(newPagination, newSorting);
+    getData(newPagination, newSorting, columnFilters);
   };
 
   useEffect(() => {
-    getData(initPagination, initSorting);
+    getData(initPagination, initSorting, initFiltering);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
