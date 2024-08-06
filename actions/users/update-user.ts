@@ -27,7 +27,7 @@ export const updateUser = async (values: z.infer<typeof UpdateUserSchema>) => {
     values.emailVerified = new Date();
   }
 
-  if (values.newPassword) {
+  if (values.newPassword && values.newPassword.length > 0) {
     const hashedPassword = await bcrypt.hash(values.newPassword, 10);
     values.password = hashedPassword;
     values.newPassword = undefined;

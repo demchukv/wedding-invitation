@@ -42,7 +42,7 @@ export const EditUserForm = ({ user }: { user: UserTypes }) => {
       email: user?.email || undefined,
       emailVerified: user?.emailVerified || undefined,
       password: undefined,
-      newPassword: undefined,
+      newPassword: undefined || "",
       role: user?.role || UserRole.USER,
       isTwoFactorEnabled: user?.isTwoFactorEnabled || false,
     },
