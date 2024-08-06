@@ -10,6 +10,7 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 import { formatDate } from "date-fns";
+import { equal } from "assert";
 
 export const getManageUserList = async (
   pagination: PaginationState,
@@ -35,7 +36,9 @@ export const getManageUserList = async (
       });
     } else if (id === "image") {
       // for ignored fields
-      continue;
+      Object.assign(filtersQuery, {
+        [id]: value === "false" ? { equals: null } : { not: null },
+      });
     } else if (
       id === "emailVerified" ||
       id === "createdAt" ||

@@ -52,7 +52,7 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
         defaultValue={columnFilterValue?.toString()}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a role" />
+          <SelectValue placeholder="Select..." />
         </SelectTrigger>
         {/* See faceted column filters example for dynamic select options */}
         <SelectContent>

@@ -95,6 +95,13 @@ export const columns: ColumnDef<UserTypes>[] = [
         );
       }
     },
+    meta: {
+      filterVariant: "select",
+      selectValues: [
+        { label: "Yes", value: "true" },
+        { label: "No", value: "false" },
+      ],
+    },
   },
   {
     accessorKey: "email",

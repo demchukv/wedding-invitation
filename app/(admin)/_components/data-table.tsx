@@ -115,8 +115,8 @@ export function DataTable<TData, TValue>({
     manualPagination: true,
     manualFiltering: true,
     autoResetPageIndex: false,
-    debugTable: true,
-    debugHeaders: true,
+    debugTable: false,
+    debugHeaders: false,
   });
 
   useEffect(() => {
