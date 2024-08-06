@@ -15,13 +15,38 @@ export const getManageUserList = async (
   sorting: SortingState,
   filters: ColumnFiltersState
 ) => {
+  console.log(filters);
   const role = await currentRole();
-  let userCount = 0;
 
   const sortingQuery = {};
   for (const { id, desc } of sorting) {
     Object.assign(sortingQuery, { [id]: desc ? "desc" : "asc" });
   }
+  const filtersQuery = {};
+  for (const { id, value } of filters) {
+    if (id === "role") {
+      // for enums
+      Object.assign(filtersQuery, {
+        [id]: { equals: value },
+      });
+    } else if (id === "image") {
+      // for ignored fields
+      continue;
+    } else if (
+      id === "emailVerified" ||
+      id === "createdAt" ||
+      id === "updatedAt"
+    ) {
+      // for date objects
+      continue;
+    } else {
+      // for string
+      Object.assign(filtersQuery, {
+        [id]: { contains: value, mode: "insensitive" },
+      });
+    }
+  }
+  console.log(filtersQuery);
 
   if (role !== UserRole.ADMIN) {
     return { error: "Forbidden!" };
@@ -30,6 +55,7 @@ export const getManageUserList = async (
   try {
     const userCount = await db.user.count();
     const users = await db.user.findMany({
+      where: { ...filtersQuery },
       select: {
         id: true,
         name: true,
