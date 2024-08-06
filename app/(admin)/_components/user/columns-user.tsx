@@ -61,7 +61,6 @@ export const columns: ColumnDef<UserTypes>[] = [
         </Button>
       );
     },
-    accessorFn: row => row.name,
     enableMultiSort: true,
     // cell: EditableTextCell,
   },
