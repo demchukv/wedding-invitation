@@ -40,6 +40,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Filter } from "@/app/(admin)/_components/table-filters";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -118,6 +119,15 @@ export function DataTable<TData, TValue>({
     debugTable: false,
     debugHeaders: false,
   });
+
+  const reloadTable = () => {
+    table.resetSorting();
+    table.resetColumnFilters();
+    table.resetPageSize();
+    table.setPageSize(20);
+    table.resetPageIndex();
+    table.setPageIndex(0);
+  };
 
   useEffect(() => {
     handlePaginationChange(pagination, sorting, columnFilters);
@@ -224,6 +234,14 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-center space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => reloadTable()}
+          className="mr-10"
+        >
+          <ReloadIcon className="w-4 h-4" />
+        </Button>
         <Button
           variant="outline"
           size="sm"
