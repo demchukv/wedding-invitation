@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { startTransition, useState, useEffect } from "react";
+import { useTransition, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { UserAccountTypes } from "@/types/users";
 import { Trash } from "lucide-react";
@@ -28,7 +28,7 @@ interface UserAccountsProps {
 export const UserAccounts = ({ userId }: UserAccountsProps) => {
   const [accounts, setAccounts] = useState<UserAccountTypes[]>([]);
   const user = useCurrentUser();
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const getData = async (userId: string) => {
     startTransition(() => {

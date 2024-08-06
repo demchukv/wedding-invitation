@@ -1,6 +1,11 @@
-import { db } from "@/lib/db";
+"use server";
 
-export const getUserInvitationsList = async (userId: string) => {
+import { db } from "@/lib/db";
+import { InvitationType } from "@/types/invitation";
+
+export const getUserInvitationsList = async (
+  userId: string
+): Promise<InvitationType[] | { error: string }> => {
   try {
     const userInvitations = await db.invite.findMany({
       where: {
@@ -8,12 +13,14 @@ export const getUserInvitationsList = async (userId: string) => {
       },
     });
     return userInvitations;
-  } catch (error) {
-    return { error: "Something went wrong" + error };
+  } catch (err) {
+    return { error: "Something went wrong" + err };
   }
 };
 
-export const getUserInvitationById = async (id: string) => {
+export const getUserInvitationById = async (
+  id: string
+): Promise<InvitationType | null> => {
   try {
     const userInvitation = await db.invite.findUnique({
       where: {

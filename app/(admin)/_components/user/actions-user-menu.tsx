@@ -21,22 +21,8 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
   const [modalType, setModalType] = useState("");
 
   const openModal = (action: string) => {
-    if (action === "edit") {
-      setModalType("edit");
-      setOpen(true);
-    }
-    if (action === "accounts") {
-      setModalType("accounts");
-      setOpen(true);
-    }
-    if (action === "invitations") {
-      setModalType("invitations");
-      setOpen(true);
-    }
-    if (action === "delete") {
-      setModalType("delete");
-      setOpen(true);
-    }
+    setModalType(action);
+    setOpen(true);
   };
 
   return (
@@ -74,7 +60,7 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
 
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
-        <DialogContent>
+        <DialogContent className="max-w-min">
           {modalType === "edit" && <EditUserForm userId={user.id} />}
           {modalType === "accounts" && <UserAccounts userId={user.id} />}
           {modalType === "invitations" && <UserInvitations userId={user.id} />}
