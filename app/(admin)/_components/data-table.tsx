@@ -177,7 +177,7 @@ export function DataTable<TData, TValue>({
                                 header.getContext()
                               )}
                         </div>
-                        <div>
+                        <div className="mb-1">
                           {header.column.getCanFilter() ? (
                             <Filter column={header.column} />
                           ) : null}

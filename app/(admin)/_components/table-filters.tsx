@@ -18,6 +18,7 @@ import { Calendar } from "@/components/ui/calendar";
 export const Filter = ({ column }: { column: Column<any, unknown> }) => {
   const columnFilterValue = column.getFilterValue();
   const { filterVariant } = column.columnDef.meta ?? {};
+  const { selectValues } = column.columnDef.meta ?? {};
 
   return filterVariant === "range" ? (
     <div>
@@ -45,20 +46,25 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
       <div className="h-1" />
     </div>
   ) : filterVariant === "select" ? (
-    <Select
-      onValueChange={e => column.setFilterValue(e.trim())}
-      defaultValue={columnFilterValue?.toString()}
-    >
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a role" />
-      </SelectTrigger>
-      {/* See faceted column filters example for dynamic select options */}
-      <SelectContent>
-        <SelectItem value=" ">All</SelectItem>
-        <SelectItem value="ADMIN">ADMIN</SelectItem>
-        <SelectItem value="USER">USER</SelectItem>
-      </SelectContent>
-    </Select>
+    <>
+      <Select
+        onValueChange={e => column.setFilterValue(e.trim())}
+        defaultValue={columnFilterValue?.toString()}
+      >
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a role" />
+        </SelectTrigger>
+        {/* See faceted column filters example for dynamic select options */}
+        <SelectContent>
+          <SelectItem value=" ">All</SelectItem>
+          {selectValues?.map((val: { label: string; value: string }) => (
+            <SelectItem key={val.value} value={val.value}>
+              {val.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </>
   ) : filterVariant === "date" ? (
     <>
       <Popover>
@@ -87,7 +93,7 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
     </>
   ) : (
     <DebouncedInput
-      className="w-36 border shadow rounded"
+      className="w-36 border  rounded"
       onChange={value => column.setFilterValue(value)}
       placeholder={`Search...`}
       type="text"
