@@ -1,6 +1,6 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, RowData } from "@tanstack/react-table";
 import { UserTypes } from "@/types/users";
 import Image from "next/image";
 import { UserRole } from "@prisma/client";
@@ -8,6 +8,12 @@ import { ActionsUserMenu } from "@/app/(admin)/_components/user/actions-user-men
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+declare module "@tanstack/react-table" {
+  //allows us to define custom properties for our columns
+  interface ColumnMeta<TData extends RowData, TValue> {
+    filterVariant?: "text" | "range" | "select";
+  }
+}
 // import { EditableTextCell } from "@/app/(admin)/_components/editable-text-cell";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
