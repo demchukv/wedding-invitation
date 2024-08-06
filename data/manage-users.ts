@@ -35,7 +35,7 @@ export const getManageUserList = async (
         [id]: { equals: value },
       });
     } else if (id === "image") {
-      // for ignored fields
+      // for custom algoritms
       Object.assign(filtersQuery, {
         [id]: value === "false" ? { equals: null } : { not: null },
       });

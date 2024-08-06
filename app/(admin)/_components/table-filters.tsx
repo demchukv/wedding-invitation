@@ -23,7 +23,6 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
   return filterVariant === "range" ? (
     <div>
       <div className="flex space-x-2">
-        {/* See faceted column filters example for min max values functionality */}
         <DebouncedInput
           type="number"
           value={(columnFilterValue as [number, number])?.[0] ?? ""}
@@ -54,7 +53,6 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select..." />
         </SelectTrigger>
-        {/* See faceted column filters example for dynamic select options */}
         <SelectContent>
           <SelectItem value=" ">All</SelectItem>
           {selectValues?.map((val: { label: string; value: string }) => (
@@ -99,6 +97,5 @@ export const Filter = ({ column }: { column: Column<any, unknown> }) => {
       type="text"
       value={(columnFilterValue ?? "") as string}
     />
-    // See faceted column filters example for datalist search suggestions
   );
 };

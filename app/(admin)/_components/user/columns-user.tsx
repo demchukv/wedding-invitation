@@ -10,16 +10,12 @@ import { Button } from "@/components/ui/button";
 import { enumToArray } from "@/lib/enum-helpers";
 
 declare module "@tanstack/react-table" {
-  //allows us to define custom properties for our columns
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: "text" | "range" | "select" | "date";
     selectValues?: { label: string; value: string }[];
   }
 }
 
-// import { EditableTextCell } from "@/app/(admin)/_components/editable-text-cell";
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
 export const columns: ColumnDef<UserTypes>[] = [
   // {
   //   id: "select",
