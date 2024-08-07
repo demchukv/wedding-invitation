@@ -22,7 +22,9 @@ import { InvitationType } from "@/types/invitation";
 import { Edit, Trash } from "lucide-react";
 import { BeatLoader } from "react-spinners";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { deleteInvitation } from "@/actions/invitations/manage/delete-invitation";
 
 interface UserAccountsProps {
   userId: string;
@@ -31,6 +33,20 @@ export const UserInvitations = ({ userId }: UserAccountsProps) => {
   const [data, setData] = useState<InvitationType[]>([]);
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
+
+  const onClickDelete = async (inviteId: string) => {
+    startTransition(() => {
+      deleteInvitation(userId, inviteId).then(res => {
+        if (res.success) {
+          toast.success("Invitation deleted successfully");
+          getData(userId);
+        }
+        if (res.error) {
+          toast.error(res.error);
+        }
+      });
+    });
+  };
 
   const getData = async (userId: string) => {
     startTransition(() => {
@@ -104,10 +120,22 @@ export const UserInvitations = ({ userId }: UserAccountsProps) => {
                       {invite.updatedAt.toLocaleDateString()}
                     </TableCell>
                     <TableCell>
-                      <Edit className="h-4 w-4" />
+                      <Button variant="custom" size="sm">
+                        <Link href={`/invitations/${invite.id}`}>
+                          <Edit className="h-4 w-4" />
+                        </Link>
+                      </Button>
                     </TableCell>
                     <TableCell>
-                      <Trash className="h-4 w-4" />
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => {
+                          onClickDelete(invite.id);
+                        }}
+                      >
+                        <Trash className="h-4 w-4" />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

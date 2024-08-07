@@ -23,7 +23,7 @@ import { Trash } from "lucide-react";
 import { BeatLoader } from "react-spinners";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Button } from "@/components/ui/button";
-import { deleteAccount } from "@/actions/users/delete-account";
+import { deleteAccount } from "@/actions/users/manage/delete-account";
 
 interface UserAccountsProps {
   userId: string;
@@ -33,7 +33,7 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
 
-  const onclickDelete = async (providerAccountId: string) => {
+  const onClickDelete = async (providerAccountId: string) => {
     startTransition(() => {
       deleteAccount(userId, providerAccountId).then(res => {
         if (res.success) {
@@ -116,7 +116,7 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
                       <Button
                         variant="destructive"
                         size="sm"
-                        onClick={() => onclickDelete(account.providerAccountId)}
+                        onClick={() => onClickDelete(account.providerAccountId)}
                       >
                         <Trash className="h-4 w-4" />
                       </Button>

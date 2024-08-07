@@ -26,7 +26,7 @@ import { BeatLoader } from "react-spinners";
 import { useTransition, useState } from "react";
 import { useForm } from "react-hook-form";
 import { UpdateUserSchema } from "@/schemas";
-import { updateUser } from "@/actions/users/update-user";
+import { updateUser } from "@/actions/users/manage/update-user";
 import { UserTypes } from "@/types/users";
 
 export const EditUserForm = ({ user }: { user: UserTypes }) => {
