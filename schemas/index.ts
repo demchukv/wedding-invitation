@@ -108,6 +108,14 @@ export const FeedbackSchema = z.object({
   }),
 });
 
+export const ReviewSchema = z.object({
+  userId: z.string(),
+  message: z.string().min(1, {
+    message: "Message is required",
+  }),
+  rating: z.number()
+});
+
 export const InviteCreateSchema = z.object({
   userId: z.string().min(1),
   nameOne: z
