@@ -40,7 +40,7 @@ export const Social = () => {
       >
         <FaGithub className="w-5 h-5" />
       </Button>
-      <Button
+      {/* <Button
         variant="outline"
         size="lg"
         className="w-full"
@@ -59,7 +59,7 @@ export const Social = () => {
         }}
       >
         <FaInstagram className="w-5 h-5" />
-      </Button>
+      </Button> */}
     </div>
   );
 };
