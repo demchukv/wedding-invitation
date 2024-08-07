@@ -3,6 +3,7 @@
 import { getUserInvitationsList } from "@/data/user-invitations";
 
 import {
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -49,69 +50,71 @@ export const UserInvitations = ({ userId }: UserAccountsProps) => {
 
   return (
     <>
-      <DialogHeader>
-        <DialogTitle>{user?.name}</DialogTitle>
-        <DialogDescription>List of user invitations</DialogDescription>
-      </DialogHeader>
-      <div className="mt-2">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name one</TableHead>
-              <TableHead>Name two</TableHead>
-              <TableHead>Event date</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead>&nbsp;</TableHead>
-              <TableHead>&nbsp;</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {isPending && (
+      <DialogContent className="max-w-min">
+        <DialogHeader>
+          <DialogTitle>{user?.name}</DialogTitle>
+          <DialogDescription>List of user invitations</DialogDescription>
+        </DialogHeader>
+        <div className="mt-2">
+          <Table>
+            <TableHeader>
               <TableRow>
-                <TableCell colSpan={5} className="text-center">
-                  <BeatLoader className="mr-4" />
-                  Loading...
-                </TableCell>
+                <TableHead>Name one</TableHead>
+                <TableHead>Name two</TableHead>
+                <TableHead>Event date</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>&nbsp;</TableHead>
+                <TableHead>&nbsp;</TableHead>
               </TableRow>
-            )}
-            {!isPending && data.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={5} className="text-center">
-                  No invitations
-                </TableCell>
-              </TableRow>
-            )}
-            {!isPending &&
-              data.length > 0 &&
-              data.map(invite => (
-                <TableRow key={invite.id}>
-                  <TableCell className="font-semibold">
-                    {invite.nameOne}
-                  </TableCell>
-                  <TableCell className="font-semibold">
-                    {invite.nameTwo}
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {invite.endDate.toLocaleDateString()}
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {invite.createdAt.toLocaleDateString()}
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {invite.updatedAt.toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>
-                    <Edit className="h-4 w-4" />
-                  </TableCell>
-                  <TableCell>
-                    <Trash className="h-4 w-4" />
+            </TableHeader>
+            <TableBody>
+              {isPending && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center">
+                    <BeatLoader className="mr-4" />
+                    Loading...
                   </TableCell>
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </div>
+              )}
+              {!isPending && data.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center">
+                    No invitations
+                  </TableCell>
+                </TableRow>
+              )}
+              {!isPending &&
+                data.length > 0 &&
+                data.map(invite => (
+                  <TableRow key={invite.id}>
+                    <TableCell className="font-semibold">
+                      {invite.nameOne}
+                    </TableCell>
+                    <TableCell className="font-semibold">
+                      {invite.nameTwo}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {invite.endDate.toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {invite.createdAt.toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {invite.updatedAt.toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <Edit className="h-4 w-4" />
+                    </TableCell>
+                    <TableCell>
+                      <Trash className="h-4 w-4" />
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
+      </DialogContent>
     </>
   );
 };

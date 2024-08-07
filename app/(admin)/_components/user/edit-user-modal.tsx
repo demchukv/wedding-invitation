@@ -1,4 +1,5 @@
 import {
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -36,16 +37,18 @@ export const EditUserModal = ({ userId }: EditUserFormProps) => {
 
   return (
     <>
-      <DialogHeader>
-        <DialogTitle>{user?.name}</DialogTitle>
-        <DialogDescription>Edit user information</DialogDescription>
-      </DialogHeader>
+      <DialogContent className="max-w-min">
+        <DialogHeader>
+          <DialogTitle>{user?.name}</DialogTitle>
+          <DialogDescription>Edit user information</DialogDescription>
+        </DialogHeader>
 
-      <div className="mt-2 min-w-[400px]">
-        {isPending && <BeatLoader />}
-        {!isPending && user && <EditUserForm user={user} />}
-        <FormError message={error} />
-      </div>
+        <div className="mt-2 min-w-[400px]">
+          {isPending && <BeatLoader />}
+          {!isPending && user && <EditUserForm user={user} />}
+          <FormError message={error} />
+        </div>
+      </DialogContent>
     </>
   );
 };

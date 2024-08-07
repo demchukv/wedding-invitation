@@ -30,9 +30,9 @@ export const updateUser = async (values: z.infer<typeof UpdateUserSchema>) => {
   if (values.newPassword && values.newPassword.length > 0) {
     const hashedPassword = await bcrypt.hash(values.newPassword, 10);
     values.password = hashedPassword;
-    values.newPassword = undefined;
   }
-  console.log({ ...values });
+  values.newPassword = undefined;
+
   await db.user.update({
     where: { id: dbUser.id },
     data: {

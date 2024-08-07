@@ -1,4 +1,5 @@
 import {
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -10,16 +11,18 @@ interface EditUserFormProps {
 export const UserDeleteAlert = ({ userId }: EditUserFormProps) => {
   return (
     <>
-      <DialogHeader>
-        <DialogTitle>Delete User</DialogTitle>
-        <DialogDescription>
-          This action cannot be undone. This will permanently delete your
-          account and remove your data from our servers.
-        </DialogDescription>
-      </DialogHeader>
-      <div className="mt-6 flex items-center justify-end gap-x-6">
-        FORM - {userId}
-      </div>
+      <DialogContent className="max-w-min">
+        <DialogHeader>
+          <DialogTitle>Delete User</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="mt-6 flex items-center justify-end gap-x-6">
+          FORM - {userId}
+        </div>
+      </DialogContent>
     </>
   );
 };

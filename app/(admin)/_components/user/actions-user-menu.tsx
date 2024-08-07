@@ -60,12 +60,11 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
 
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
-        <DialogContent className="max-w-min">
-          {modalType === "edit" && <EditUserModal userId={user.id} />}
-          {modalType === "accounts" && <UserAccounts userId={user.id} />}
-          {modalType === "invitations" && <UserInvitations userId={user.id} />}
-          {modalType === "delete" && <UserDeleteAlert userId={user.id} />}
-        </DialogContent>
+
+        {modalType === "edit" && <EditUserModal userId={user.id} />}
+        {modalType === "accounts" && <UserAccounts userId={user.id} />}
+        {modalType === "invitations" && <UserInvitations userId={user.id} />}
+        {modalType === "delete" && <UserDeleteAlert userId={user.id} />}
       </Dialog>
     </>
   );

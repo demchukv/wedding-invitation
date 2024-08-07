@@ -3,6 +3,7 @@
 import { getAllAccountsByUserId } from "@/data/account";
 
 import {
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -49,59 +50,61 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
 
   return (
     <>
-      <DialogHeader>
-        <DialogTitle>{user?.name}</DialogTitle>
-        <DialogDescription>List of linked accounts</DialogDescription>
-      </DialogHeader>
-      <div className="mt-2">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Provider</TableHead>
-              <TableHead>Type</TableHead>
-              <TableHead>Created</TableHead>
-              <TableHead>Updated</TableHead>
-              <TableHead>&nbsp;</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {isPending && (
+      <DialogContent className="max-w-min">
+        <DialogHeader>
+          <DialogTitle>{user?.name}</DialogTitle>
+          <DialogDescription>List of linked accounts</DialogDescription>
+        </DialogHeader>
+        <div className="mt-2">
+          <Table>
+            <TableHeader>
               <TableRow>
-                <TableCell colSpan={5} className="text-center">
-                  <BeatLoader className="mr-4" />
-                  Loading...
-                </TableCell>
+                <TableHead>Provider</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Created</TableHead>
+                <TableHead>Updated</TableHead>
+                <TableHead>&nbsp;</TableHead>
               </TableRow>
-            )}
-            {!isPending && accounts.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={5} className="text-center">
-                  No linked accounts
-                </TableCell>
-              </TableRow>
-            )}
-            {!isPending &&
-              accounts.length > 0 &&
-              accounts.map(account => (
-                <TableRow key={account.providerAccountId}>
-                  <TableCell className="font-semibold">
-                    {account.provider}
-                  </TableCell>
-                  <TableCell>{account.type}</TableCell>
-                  <TableCell className="text-sm">
-                    {account.createdAt.toLocaleDateString()}
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {account.updatedAt.toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>
-                    <Trash className="h-4 w-4" />
+            </TableHeader>
+            <TableBody>
+              {isPending && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center">
+                    <BeatLoader className="mr-4" />
+                    Loading...
                   </TableCell>
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </div>
+              )}
+              {!isPending && accounts.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center">
+                    No linked accounts
+                  </TableCell>
+                </TableRow>
+              )}
+              {!isPending &&
+                accounts.length > 0 &&
+                accounts.map(account => (
+                  <TableRow key={account.providerAccountId}>
+                    <TableCell className="font-semibold">
+                      {account.provider}
+                    </TableCell>
+                    <TableCell>{account.type}</TableCell>
+                    <TableCell className="text-sm">
+                      {account.createdAt.toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {account.updatedAt.toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      <Trash className="h-4 w-4" />
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
+      </DialogContent>
     </>
   );
 };
