@@ -34,11 +34,17 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
+import { Dialog } from "@/components/ui/dialog";
+import { EditUserModal } from "@/app/(admin)/_components/user/edit-user-modal";
 
 export const Header = () => {
+  const [open, setOpen] = useState(false);
   const user = useCurrentUser();
   const pathname = usePathname();
+  if (!user) {
+    return null;
+  }
 
   const breadcrumb = [];
   if (pathname === "/manage/users") {
@@ -166,7 +172,9 @@ export const Header = () => {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setOpen(true)}>
+              Settings
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <LogoutButton>Logout</LogoutButton>
@@ -174,6 +182,9 @@ export const Header = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
+      <Dialog open={open} modal={true} onOpenChange={setOpen}>
+        <EditUserModal userId={user.id} />
+      </Dialog>
     </>
   );
 };
