@@ -71,6 +71,12 @@ export const Header = () => {
       href: "/manage/reviews",
     });
   }
+  if (pathname === "/manage/settings") {
+    breadcrumb.push({
+      name: "Settings",
+      href: "/manage/settings",
+    });
+  }
 
   return (
     <>
