@@ -3,9 +3,12 @@ import { Inter } from "next/font/google";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/components/auth-provider";
-import "./globals.css";
+import { cn } from "@/lib/utils";
+import "@/app/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const fontInter = Inter({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +25,12 @@ export default async function RootLayout({
   return (
     <AuthProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body
+          className={cn(
+            "min-h-screen bg-background antialiased",
+            fontInter.className
+          )}
+        >
           <Toaster />
           {children}
         </body>
