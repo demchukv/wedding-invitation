@@ -1,11 +1,18 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { currentRole } from "@/lib/auth";
+import { UserRole } from "@prisma/client";
 
 export const deleteAccount = async (
   userId: string,
   providerAccountId: string
 ) => {
+  const userRole = await currentRole();
+  if (!userRole || userRole !== UserRole.ADMIN) {
+    return { error: "Forbidden!" };
+  }
+
   if (!userId || !providerAccountId) {
     return { error: "Missing userId or providerAccountId" };
   }

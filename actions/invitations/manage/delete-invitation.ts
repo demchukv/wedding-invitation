@@ -1,8 +1,14 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { currentRole } from "@/lib/auth";
+import { UserRole } from "@prisma/client";
 
 export const deleteInvitation = async (userId: string, inviteId: string) => {
+  const userRole = await currentRole();
+  if (!userRole || userRole !== UserRole.ADMIN) {
+    return { error: "Forbidden!" };
+  }
   if (!userId || !inviteId) {
     return { error: "Missing userId or inviteId" };
   }

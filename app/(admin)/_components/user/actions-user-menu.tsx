@@ -64,7 +64,9 @@ export const ActionsUserMenu = ({ user }: { user: UserTypes }) => {
         {modalType === "edit" && <EditUserModal userId={user.id} />}
         {modalType === "accounts" && <UserAccounts userId={user.id} />}
         {modalType === "invitations" && <UserInvitations userId={user.id} />}
-        {modalType === "delete" && <UserDeleteAlert userId={user.id} />}
+        {modalType === "delete" && (
+          <UserDeleteAlert userId={user.id} setOpen={setOpen} />
+        )}
       </Dialog>
     </>
   );
