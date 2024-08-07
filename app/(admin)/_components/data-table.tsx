@@ -122,6 +122,7 @@ export function DataTable<TData, TValue>({
 
   const reloadTable = () => {
     table.resetSorting();
+    table.setSorting([{ id: "createdAt", desc: true }]);
     table.resetColumnFilters();
     table.resetPageSize();
     table.setPageSize(20);
