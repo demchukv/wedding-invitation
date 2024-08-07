@@ -1,9 +1,6 @@
 "use client";
 
 import { ColumnDef, RowData } from "@tanstack/react-table";
-import Image from "next/image";
-import { UserRole } from "@prisma/client";
-import { ActionsUserMenu } from "@/app/(admin)/_components/user/actions-user-menu";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ReviewType } from "@/types/review";
@@ -11,7 +8,7 @@ import { ActionsReviewMenu } from "./action-reviews-menu";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
-    filterVariant?: "text" | "range" | "select";
+    filterVariant?: "text" | "range" | "select" | "date";
   }
 }
 
