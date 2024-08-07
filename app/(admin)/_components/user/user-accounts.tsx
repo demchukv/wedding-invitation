@@ -22,6 +22,8 @@ import { UserAccountTypes } from "@/types/users";
 import { Trash } from "lucide-react";
 import { BeatLoader } from "react-spinners";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Button } from "@/components/ui/button";
+import { deleteAccount } from "@/actions/users/delete-account";
 
 interface UserAccountsProps {
   userId: string;
@@ -30,6 +32,20 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
   const [accounts, setAccounts] = useState<UserAccountTypes[]>([]);
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
+
+  const onclickDelete = async (providerAccountId: string) => {
+    startTransition(() => {
+      deleteAccount(userId, providerAccountId).then(res => {
+        if (res.success) {
+          toast.success("Account deleted successfully");
+          getData(userId);
+        }
+        if (res.error) {
+          toast.error(res.error);
+        }
+      });
+    });
+  };
 
   const getData = async (userId: string) => {
     startTransition(() => {
@@ -86,7 +102,7 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
                 accounts.length > 0 &&
                 accounts.map(account => (
                   <TableRow key={account.providerAccountId}>
-                    <TableCell className="font-semibold">
+                    <TableCell className="font-semibold text-lg">
                       {account.provider}
                     </TableCell>
                     <TableCell>{account.type}</TableCell>
@@ -97,7 +113,13 @@ export const UserAccounts = ({ userId }: UserAccountsProps) => {
                       {account.updatedAt.toLocaleDateString()}
                     </TableCell>
                     <TableCell>
-                      <Trash className="h-4 w-4" />
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => onclickDelete(account.providerAccountId)}
+                      >
+                        <Trash className="h-4 w-4" />
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
