@@ -89,11 +89,11 @@ model Feedback {
 
 model Review {
   id        String      @id @default(cuid())
-  state     ReviewState @default(NEW)
   rating    Int
   message   String
   userId    String
   createdAt DateTime    @default(now())
+  state     ReviewState @default(NEW)
 }
 
 model Invite {
@@ -104,8 +104,7 @@ model Invite {
   endDate   DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum UserRole {
