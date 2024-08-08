@@ -24,18 +24,19 @@ export const getManageReviewList = async (
     }
     const filtersQuery = {};
     for (const { id, value } of filters) {
-      if (id === "role") {
+      if (id === "state") {
         // for enums
         Object.assign(filtersQuery, {
           [id]: { equals: value },
         });
-      } else if (id === "image") {
+      } else if (id === "rating") {
+        Object.assign(filtersQuery, {
+          [id]: Number(value) ,
+        });
         // for ignored fields
         continue;
       } else if (
-        id === "emailVerified" ||
-        id === "createdAt" ||
-        id === "updatedAt"
+        id === "createdAt"
       ) {
         // for date objects
         continue;

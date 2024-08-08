@@ -5,10 +5,13 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ReviewType } from "@/types/review";
 import { ActionsReviewMenu } from "./action-reviews-menu";
+import { ReviewState } from "@prisma/client";
+import { enumToArray } from "@/lib/enum-helpers";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: "text" | "range" | "select" | "date";
+    selectValues?: { label: string; value: string }[];
   }
 }
 
@@ -91,6 +94,9 @@ export const columns: ColumnDef<ReviewType>[] = [
         </span>
       );
     },
+    meta: {
+      filterVariant: "date",
+    },
   },
   {
     accessorKey: "state",
@@ -112,6 +118,10 @@ export const columns: ColumnDef<ReviewType>[] = [
       } else {
         return <p>{state}</p>;
       }
+    },
+    meta: {
+      filterVariant: "select",
+      selectValues: enumToArray(ReviewState),
     },
   },
   {
