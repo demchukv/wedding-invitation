@@ -5,7 +5,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
@@ -42,6 +41,7 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
   const user = useCurrentUser();
   const pathname = usePathname();
+
   if (!user) {
     return null;
   }

@@ -1,5 +1,6 @@
 import { AuthProvider } from "@/components/auth-provider";
 import { TopNavigation } from "@/components/top-navigation";
+
 interface ProtectedLayoutProps {
   children: React.ReactNode;
 }
