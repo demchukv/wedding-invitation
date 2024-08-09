@@ -84,6 +84,7 @@ model Feedback {
   phone     String
   message   String
   userId    String?
+  state     FeedbackState @default(NEW)
   createdAt DateTime @default(now())
 }
 
@@ -116,4 +117,9 @@ enum ReviewState {
   NEW
   APPROVED
   DECLINED
+}
+
+enum FeedbackState {
+  NEW
+  CHECKED
 }

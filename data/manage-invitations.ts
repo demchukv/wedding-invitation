@@ -1,13 +1,16 @@
 "use server";
 
 import { db } from "@/lib/db";
-
-import { PaginationState } from "@/app/(admin)/_components/data-table";
 import { currentRole } from "@/lib/auth";
 import { UserRole } from "@prisma/client";
-import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 
-export const getManageReviewList = async (
+import {
+  PaginationState,
+  ColumnFiltersState,
+  SortingState,
+} from "@tanstack/react-table";
+
+export const getManageInvitationsList = async (
   pagination: PaginationState,
   sorting: SortingState,
   filters: ColumnFiltersState
@@ -24,16 +27,17 @@ export const getManageReviewList = async (
   }
   const filtersQuery = {};
   for (const { id, value } of filters) {
-    if (id === "state") {
+    if (id === "role") {
       // for enums
       Object.assign(filtersQuery, {
         [id]: { equals: value },
       });
-    } else if (id === "rating") {
+    } else if (id === "image") {
+      // for custom algoritms
       Object.assign(filtersQuery, {
-        [id]: Number(value),
+        [id]: value === "false" ? { equals: null } : { not: null },
       });
-    } else if (id === "createdAt") {
+    } else if (id === "endDate" || id === "createdAt" || id === "updatedAt") {
       // for date objects
       const dateObj = value as Date;
       const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
@@ -56,24 +60,31 @@ export const getManageReviewList = async (
       });
     }
   }
-
+  console.log(filtersQuery);
   try {
-    const reviewCount = await db.review.count();
-    const reviews = await db.review.findMany({
+    const invitationsCount = await db.user.count();
+    const invitations = await db.invite.findMany({
       where: { ...filtersQuery },
       select: {
         id: true,
         userId: true,
-        message: true,
-        rating: true,
+        nameOne: true,
+        nameTwo: true,
+        endDate: true,
         createdAt: true,
-        state: true,
+        updatedAt: true,
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
       },
       skip: pagination.pageIndex * pagination.pageSize || 0,
       take: pagination.pageSize || 10,
       orderBy: sortingQuery,
     });
-    return { data: reviews, rowCount: reviewCount, success: true };
+    return { data: invitations, rowCount: invitationsCount, success: true };
   } catch (error) {
     console.log(error);
     return { error: "Something went wrong! " + error };

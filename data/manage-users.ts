@@ -9,8 +9,6 @@ import {
   ColumnFiltersState,
   SortingState,
 } from "@tanstack/react-table";
-import { formatDate } from "date-fns";
-import { equal } from "assert";
 
 export const getManageUserList = async (
   pagination: PaginationState,
@@ -86,6 +84,7 @@ export const getManageUserList = async (
       take: pagination.pageSize || 10,
       orderBy: sortingQuery,
     });
+
     return { data: users, rowCount: userCount, success: true };
   } catch (error) {
     console.log(error);
