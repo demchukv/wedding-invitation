@@ -84,6 +84,7 @@ export const getManageUserList = async (
       take: pagination.pageSize || 10,
       orderBy: sortingQuery,
     });
+
     return { data: users, rowCount: userCount, success: true };
   } catch (error) {
     console.log(error);
