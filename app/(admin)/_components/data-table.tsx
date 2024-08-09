@@ -12,7 +12,6 @@ import {
   getSortedRowModel,
   VisibilityState,
   ColumnFiltersState,
-  RowData,
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
