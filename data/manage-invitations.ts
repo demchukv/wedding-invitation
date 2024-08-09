@@ -73,6 +73,12 @@ export const getManageInvitationsList = async (
         endDate: true,
         createdAt: true,
         updatedAt: true,
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
       },
       skip: pagination.pageIndex * pagination.pageSize || 0,
       take: pagination.pageSize || 10,

@@ -41,10 +41,15 @@ export const ActionsUserMenu = ({
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(invitation.id)}
+            onClick={() => navigator.clipboard.writeText(invitation.userId)}
           >
             Copy user ID
           </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Edit invitation</DropdownMenuItem>
+          <DropdownMenuItem>Preview invitation</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Delete invitation</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => openModal("edit")}>
             Edit user
@@ -65,13 +70,15 @@ export const ActionsUserMenu = ({
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         {/* <DialogTrigger>Open</DialogTrigger> */}
 
-        {modalType === "edit" && <EditUserModal userId={invitation.id} />}
-        {modalType === "accounts" && <UserAccounts userId={invitation.id} />}
+        {modalType === "edit" && <EditUserModal userId={invitation.userId} />}
+        {modalType === "accounts" && (
+          <UserAccounts userId={invitation.userId} />
+        )}
         {modalType === "invitations" && (
-          <UserInvitations userId={invitation.id} />
+          <UserInvitations userId={invitation.userId} />
         )}
         {modalType === "delete" && (
-          <UserDeleteAlert userId={invitation.id} setOpen={setOpen} />
+          <UserDeleteAlert userId={invitation.userId} setOpen={setOpen} />
         )}
       </Dialog>
     </>
