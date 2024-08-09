@@ -13,17 +13,13 @@ import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { ReviewDeleteAlert } from "./review-delete-alert";
 import { EditReviewForm } from "./edit-review-form";
-import { ApproveReview } from "./approve-review";
+import { EditReviewModal } from "./edit-review-modal";
 
 export const ActionsReviewMenu = ({ review }: { review: ReviewType }) => {
   const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState("");
 
   const openModal = (action: string) => {
-    if (action === "approve") {
-      setModalType("approve");
-      setOpen(true);
-    }
     if (action === "edit") {
       setModalType("edit");
       setOpen(true);
@@ -45,16 +41,10 @@ export const ActionsReviewMenu = ({ review }: { review: ReviewType }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem
-            onClick={() => openModal("approve")}
-          >
-            Approve review
-          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => openModal("edit")}>
             Edit review
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => openModal("delete")}>
             Delete review
           </DropdownMenuItem>
@@ -63,8 +53,7 @@ export const ActionsReviewMenu = ({ review }: { review: ReviewType }) => {
 
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         <DialogContent>
-          {modalType === "approve" && <ApproveReview id={review.id} />}
-          {modalType === "edit" && <EditReviewForm id={review.id} />}
+          {modalType === "edit" && <EditReviewModal id={review.id} />}
           {modalType === "delete" && <ReviewDeleteAlert id={review.id} />}
         </DialogContent>
       </Dialog>

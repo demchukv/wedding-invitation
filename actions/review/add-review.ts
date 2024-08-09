@@ -18,11 +18,12 @@ export const addReview = async (values: z.infer<typeof ReviewSchema>) => {
         return {error: "Invalid fields"}
     }
 
-    const {userId, message, rating} = validateFields.data
+    const {userId, name, message, rating} = validateFields.data
 
     await db.review.create({
         data: {
             userId,
+            name,
             message,
             rating,
         }
