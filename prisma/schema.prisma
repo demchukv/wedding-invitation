@@ -78,14 +78,14 @@ model TwoFactorConfirmation {
 }
 
 model Feedback {
-  id        String   @id @default(cuid())
+  id        String        @id @default(cuid())
   name      String
   email     String
   phone     String
   message   String
   userId    String?
   state     FeedbackState @default(NEW)
-  createdAt DateTime @default(now())
+  createdAt DateTime      @default(now())
 }
 
 model Review {
@@ -98,14 +98,37 @@ model Review {
 }
 
 model Invite {
-  id        String   @id @default(cuid())
-  userId    String
-  nameOne   String
-  nameTwo   String
-  endDate   DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String         @id @default(cuid())
+  userId       String
+  nameOne      String
+  nameTwo      String
+  endDate      DateTime
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  InviteWidget InviteWidget[]
+}
+
+model InviteWidget {
+  id          String   @id @default(cuid())
+  inviteId    String
+  widgetId    String
+  widgetData  Json
+  widgetOrder Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  invite      Invite   @relation(fields: [inviteId], references: [id], onDelete: Cascade)
+}
+
+model Widget {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  widgetData  Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([name])
 }
 
 enum UserRole {

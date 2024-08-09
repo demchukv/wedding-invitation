@@ -1,0 +1,36 @@
+export const wl = [
+  {
+    id: "text-widget-1-0-0",
+    name: "TextWidget",
+    version: "1.0.0",
+    description: "Simple widget for render text",
+    widgetData: {
+      text: "example text message",
+      tAlign: "center",
+      tValign: "center",
+      fSize: "20px",
+      fColor: "black",
+      fStyle: "normal",
+      fWeight: "normal",
+      fFamily: "Arial",
+      bColor: "transparent",
+    },
+  },
+  {
+    id: "image-widget-1-0-0",
+    name: "ImageWidget",
+    version: "1.0.0",
+    description: "Simple widget for upload and render single image",
+    widgetData: {
+      imgSrc: "/path/to/image.png",
+      tAlign: "center",
+      tValign: "center",
+      fSize: "20px",
+      fColor: "black",
+      fStyle: "normal",
+      fWeight: "normal",
+      fFamily: "Arial",
+      bColor: "transparent",
+    },
+  },
+];

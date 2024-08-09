@@ -18,33 +18,15 @@ import { InvitationType } from "@/types/invitation";
 import { BeatLoader } from "react-spinners";
 import dynamic from "next/dynamic";
 
+const EditInvitation = dynamic(() =>
+  import("@/app/(protected)/_components/invitation/edit-invitation").then(
+    mod => mod.EditInvitation
+  )
+);
 const InvitePage = ({ params }: { params: { id: string } }) => {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<InvitationType | null>();
   const id = params.id;
-
-  const widgets = [
-    {
-      name: "EditInvitation",
-      path: "@/app/(protected)/_components/invitation/edit-invitation",
-    },
-  ];
-  const loaded: Array<any> = [];
-
-  for (const widget of widgets) {
-    loaded[widget.name] = dynamic(
-      () => import(widget.path).then(mod => mod[widget.name]),
-      {
-        ssr: false,
-      }
-    );
-  }
-  console.log(loaded);
-  // const EditInvitation = dynamic(() =>
-  //     import("@/app/(protected)/_components/invitation/edit-invitation").then(
-  //       mod => mod.EditInvitation
-  //     )
-  //   );
 
   const getInvitation = async (id: string) => {
     startTransition(() => {
@@ -64,7 +46,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
       {isPending && <BeatLoader />}
       {!isPending && !data && <div>Invitation not found</div>}
       {!isPending && data && (
-        <Tabs defaultValue="account" className="w-[400px]">
+        <Tabs defaultValue="account" className="w-[600px]">
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="account">Edit</TabsTrigger>
             <TabsTrigger value="password">Guests</TabsTrigger>
@@ -78,7 +60,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
                 <CardDescription>Tabs for edit invitation</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                {/* <EditInvitation data={data} /> */}
+                <EditInvitation data={data} />
               </CardContent>
               <CardFooter>
                 <Button>Save changes</Button>
