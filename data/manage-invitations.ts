@@ -10,7 +10,7 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 
-export const getManageUserList = async (
+export const getManageInvitationsList = async (
   pagination: PaginationState,
   sorting: SortingState,
   filters: ColumnFiltersState
@@ -37,11 +37,7 @@ export const getManageUserList = async (
       Object.assign(filtersQuery, {
         [id]: value === "false" ? { equals: null } : { not: null },
       });
-    } else if (
-      id === "emailVerified" ||
-      id === "createdAt" ||
-      id === "updatedAt"
-    ) {
+    } else if (id === "endDate" || id === "createdAt" || id === "updatedAt") {
       // for date objects
       const dateObj = value as Date;
       const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
@@ -64,47 +60,27 @@ export const getManageUserList = async (
       });
     }
   }
-
+  console.log(filtersQuery);
   try {
-    const userCount = await db.user.count();
-    const users = await db.user.findMany({
+    const invitationsCount = await db.user.count();
+    const invitations = await db.invite.findMany({
       where: { ...filtersQuery },
       select: {
         id: true,
-        name: true,
-        email: true,
-        emailVerified: true,
-        image: true,
-        role: true,
+        userId: true,
+        nameOne: true,
+        nameTwo: true,
+        endDate: true,
         createdAt: true,
         updatedAt: true,
-        isTwoFactorEnabled: true,
       },
       skip: pagination.pageIndex * pagination.pageSize || 0,
       take: pagination.pageSize || 10,
       orderBy: sortingQuery,
     });
-    return { data: users, rowCount: userCount, success: true };
+    return { data: invitations, rowCount: invitationsCount, success: true };
   } catch (error) {
     console.log(error);
-    return { error: "Something went wrong! " + error };
-  }
-};
-
-export const getUsersStatistics = async () => {
-  try {
-    const totalAdminsCount = await db.user.count({
-      where: { role: UserRole.ADMIN },
-    });
-    const totalUsersCount = await db.user.count({
-      where: { role: UserRole.USER },
-    });
-    return {
-      totalAdminsCount: totalAdminsCount,
-      totalUsersCount: totalUsersCount,
-      success: true,
-    };
-  } catch (error) {
     return { error: "Something went wrong! " + error };
   }
 };
