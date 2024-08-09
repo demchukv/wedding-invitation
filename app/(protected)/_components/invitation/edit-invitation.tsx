@@ -1,33 +1,41 @@
 import { InvitationType } from "@/types/invitation";
-import dynamic from "next/dynamic";
 import { wl } from "@/app/(protected)/_components/widgets/widgets-list";
 import { Button } from "@/components/ui/button";
-// import { DynamicComponents } from "@/app/(protected)/_components/dynamic-components";
+import { useRef } from "react";
+import { Widgets } from "@/app/(protected)/_components/widgets/";
+import dynamic from "next/dynamic";
+import React from "react";
 
 interface EditInvitationProps {
   data: InvitationType;
 }
 
-const widgetComponents = [];
+export const EditInvitation = ({ data }: EditInvitationProps) => {
+  const ref = useRef<HTMLDivElement>(null);
 
-wl.map(w => {
-  console.log(w.name);
-  widgetComponents.push(
-    dynamic(
+  const createDynamicComponent = (
+    component: React.ComponentType<any>,
+    props: any
+  ) => {
+    const dynamicComponent = React.createElement(component, props);
+    return dynamicComponent;
+  };
+
+  const widgetComponents: any = {};
+
+  wl.map(w => {
+    widgetComponents[w.name] = dynamic(
       () =>
         import(`@/app/(protected)/_components/widgets/${w.name}`).then(
           mod => mod[w.name]
         ),
       {
-        loading: () => <p>Loading...</p>,
         ssr: false,
       }
-    )
-  );
-});
+    );
+  });
 
-export const EditInvitation = ({ data }: EditInvitationProps) => {
-  const onClickWidgetButton = (name: string, idx: number) => {
+  const onClickWidgetButton = (name: string) => {
     console.log(name);
   };
 
@@ -39,15 +47,15 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
             <Button
               variant="custom"
               type="button"
-              onClick={() => onClickWidgetButton(w.name, idx)}
+              onClick={() => onClickWidgetButton(w.name)}
             >
               {w.name}
             </Button>
           </div>
         ))}
       </div>
-      <div className="col-span-2" id="invitationArea">
-        {/* <Widgets.TextWidget data={data} /> */}
+      <div className="col-span-2" id="invitationArea" ref={ref}>
+        <Widgets.TextWidget data={data} />
       </div>
     </div>
   );

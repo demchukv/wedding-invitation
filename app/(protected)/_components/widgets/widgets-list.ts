@@ -2,6 +2,7 @@ export const wl = [
   {
     id: "text-widget-1-0-0",
     name: "TextWidget",
+    path: "@/app/(protected)/_components/widgets/text-widget.tsx",
     version: "1.0.0",
     description: "Simple widget for render text",
     widgetData: {
@@ -19,6 +20,7 @@ export const wl = [
   {
     id: "image-widget-1-0-0",
     name: "ImageWidget",
+    path: "@/app/(protected)/_components/widgets/image-widget.tsx",
     version: "1.0.0",
     description: "Simple widget for upload and render single image",
     widgetData: {
