@@ -1,4 +1,5 @@
 import { InvitationType } from "@/types/invitation";
+import { wldb } from "@/app/(protected)/_components/widgets/widgets-list-db";
 import { wl } from "@/app/(protected)/_components/widgets/widgets-list";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
@@ -21,8 +22,21 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     return dynamicComponent;
   };
 
-  const widgetComponents: any = {};
+  const WidgetDbComponents: any = [];
+  wldb.map(w => {
+    WidgetDbComponents[w.name] = dynamic(
+      () =>
+        import(`@/app/(protected)/_components/widgets/${w.name}`).then(
+          mod => mod[w.name]
+        ),
+      {
+        ssr: false,
+      }
+    );
+  });
+  console.log(WidgetDbComponents);
 
+  const widgetComponents: any = {};
   wl.map(w => {
     widgetComponents[w.name] = dynamic(
       () =>
@@ -42,7 +56,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   return (
     <div className="grid w-full grid-cols-3 gap-2">
       <div>
-        {wl.map((w, idx) => (
+        {wl.map(w => (
           <div key={w.id}>
             <Button
               variant="custom"
@@ -54,8 +68,16 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
           </div>
         ))}
       </div>
+
       <div className="col-span-2" id="invitationArea" ref={ref}>
-        <Widgets.TextWidget data={data} />
+        {wldb.map(w => (
+          <div key={w.id}>
+            {console.log(w)}
+            <Widgets.TextWidget data={data} />
+          </div>
+        ))}
+
+        {/* <Widgets.TextWidget data={data} /> */}
       </div>
     </div>
   );
