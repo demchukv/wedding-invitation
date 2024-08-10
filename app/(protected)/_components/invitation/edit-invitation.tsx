@@ -72,7 +72,13 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
       <div className="col-span-2" id="invitationArea" ref={ref}>
         {savedWidgets.map(widget => {
           const WidgetComponent = WidgetDbComponents[widget.name];
-          return <WidgetComponent key={widget.id} data={data} />;
+          return (
+            <WidgetComponent
+              key={widget.id}
+              data={data}
+              widgetData={widget.widgetData}
+            />
+          );
         })}
       </div>
     </div>
