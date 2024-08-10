@@ -2,7 +2,8 @@ export const wldb = [
   {
     id: "asdfhakslh",
     name: "TextWidget",
-    path: "@/app/(protected)/_components/widgets/text-widget.tsx",
+    file: "text-widget",
+    path: "@/app/(protected)/_components/widgets/text-widget",
     version: "1.0.0",
     order: 1,
     description: "Simple widget for render text",
@@ -21,7 +22,8 @@ export const wldb = [
   {
     id: "o3274jesfds",
     name: "ImageWidget",
-    path: "@/app/(protected)/_components/widgets/image-widget.tsx",
+    file: "image-widget",
+    path: "@/app/(protected)/_components/widgets/image-widget",
     version: "1.0.0",
     order: 2,
     description: "Simple widget for upload and render single image",
@@ -40,7 +42,8 @@ export const wldb = [
   {
     id: "lbgnmglbn",
     name: "TextWidget",
-    path: "@/app/(protected)/_components/widgets/text-widget.tsx",
+    file: "text-widget",
+    path: "@/app/(protected)/_components/widgets/text-widget",
     version: "1.0.0",
     order: 3,
     description: "Simple widget for render text",

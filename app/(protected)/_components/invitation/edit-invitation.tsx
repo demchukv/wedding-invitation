@@ -26,7 +26,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   wldb.map(w => {
     WidgetDbComponents[w.name] = dynamic(
       () =>
-        import(`@/app/(protected)/_components/widgets/${w.name}`).then(
+        import(`@/app/(protected)/_components/widgets/${w.file}`).then(
           mod => mod[w.name]
         ),
       {
@@ -34,13 +34,12 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
       }
     );
   });
-  console.log(WidgetDbComponents);
 
   const widgetComponents: any = {};
   wl.map(w => {
     widgetComponents[w.name] = dynamic(
       () =>
-        import(`@/app/(protected)/_components/widgets/${w.name}`).then(
+        import(`@/app/(protected)/_components/widgets/${w.file}`).then(
           mod => mod[w.name]
         ),
       {
@@ -70,11 +69,10 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
       </div>
 
       <div className="col-span-2" id="invitationArea" ref={ref}>
-        {wldb.map(w => (
-          <div key={w.id}>
-            <Widgets.TextWidget data={data} />
-          </div>
-        ))}
+        {wldb.map(widget => {
+          const WidgetComponent = WidgetDbComponents[widget.name];
+          return <WidgetComponent key={widget.id} data={data} />;
+        })}
 
         {/* <Widgets.TextWidget data={data} /> */}
       </div>
