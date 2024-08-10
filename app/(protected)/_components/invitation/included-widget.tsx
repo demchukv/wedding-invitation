@@ -11,9 +11,10 @@ export const IncludedWidget = ({
   WidgetDbComponents,
   savedWidgets,
 }: IncludedWidgetProps) => {
+  console.log(WidgetDbComponents);
   return (
     <>
-      {savedWidgets.map((widget: any) => {
+      {/* {savedWidgets.map((widget: any) => {
         const WidgetComponent = WidgetDbComponents[widget.name];
         return (
           <WidgetComponent
@@ -22,7 +23,7 @@ export const IncludedWidget = ({
             widgetData={widget.widgetData}
           />
         );
-      })}
+      })} */}
     </>
   );
 };

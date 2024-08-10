@@ -1,31 +1,19 @@
 import { InvitationType } from "@/types/invitation";
 import { wldb as savedWidgets } from "@/app/(protected)/_components/widgets/widgets-list-db";
 import { wl as enabledWidgets } from "@/app/(protected)/_components/widgets/widgets-list";
-import { Button } from "@/components/ui/button";
-// import { Widgets } from "@/app/(protected)/_components/widgets/";
 import dynamic from "next/dynamic";
-import React from "react";
 
 import { IncludedWidget } from "@/app/(protected)/_components/invitation/included-widget";
 import { EnabledWidgets } from "@/app/(protected)/_components/invitation/enabled-widgets";
+import { useEffect, useState } from "react";
 
 interface EditInvitationProps {
   data: InvitationType;
 }
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
-  const WidgetDbComponents: any = [];
-  savedWidgets.map(w => {
-    WidgetDbComponents[w.name] = dynamic(
-      () =>
-        import(`@/app/(protected)/_components/widgets/${w.file}`).then(
-          mod => mod[w.name]
-        ),
-      {
-        ssr: false,
-      }
-    );
-  });
+  const [savedWidgets, setSavedWidgets] = useState<any[]>([]);
+  const [WidgetDbComponents, setWidgetDbComponents] = useState<any[]>([]);
 
   const enabledWidgetComponents: any = [];
   enabledWidgets.map(w => {
@@ -40,19 +28,30 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     );
   });
 
-  const addWidget = (id: string, name: string) => {
-    const WidgetComponent = enabledWidgetComponents[name];
-    return <WidgetComponent key={id} data={data} />;
+  const onClickWidgetButton = (w: object) => {
+    setSavedWidgets(prev => [...prev, w]);
+    console.log(savedWidgets);
   };
 
-  const onClickWidgetButton = (w: object) => {
-    console.log(w);
-    Object.assign(savedWidgets, { w });
-    console.log(savedWidgets);
-    // const newWidget = addWidget(id, name);
-    // console.log(newWidget);
-    // ref.current?.append(newWidget);
-  };
+  useEffect(() => {
+    const getSavedWidgets = () => {
+      for (let i = 0; i < savedWidgets.length; i++) {
+        WidgetDbComponents[savedWidgets[i].name] = dynamic(
+          () =>
+            import(
+              `@/app/(protected)/_components/widgets/${savedWidgets[i].file}`
+            ).then(mod => mod[savedWidgets[i].name]),
+          {
+            ssr: false,
+          }
+        );
+      }
+      setWidgetDbComponents(WidgetDbComponents);
+    };
+
+    getSavedWidgets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="grid w-full grid-cols-3 gap-2">
