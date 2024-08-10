@@ -72,7 +72,6 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
       <div className="col-span-2" id="invitationArea" ref={ref}>
         {wldb.map(w => (
           <div key={w.id}>
-            {console.log(w)}
             <Widgets.TextWidget data={data} />
           </div>
         ))}
