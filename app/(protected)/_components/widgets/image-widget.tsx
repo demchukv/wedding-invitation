@@ -5,7 +5,7 @@ interface ImageWidgetProps {
 }
 export const ImageWidget = ({ data }: ImageWidgetProps) => {
   return (
-    <div>
+    <div className="py-2 border-b-2">
       <div>Container for image</div>
     </div>
   );
