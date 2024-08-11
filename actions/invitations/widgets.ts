@@ -1,5 +1,6 @@
 "use server";
 
+import { Prisma } from "@prisma/client";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/auth";
 import { InviteWidgetType } from "@/types/invitation";
@@ -16,7 +17,23 @@ export const updateInviteWidgets = async (
   try {
     await db.inviteWidget.deleteMany({ where: { inviteId } });
     if (widgets.length > 0) {
-      await db.inviteWidget.createMany({ data: widgets });
+      for (const widget of widgets) {
+        await db.inviteWidget.create({
+          data: {
+            id: widget.id,
+            inviteId: widget.inviteId,
+            widgetId: widget.widgetId,
+            order: widget.order,
+            name: widget.name,
+            displayName: widget.displayName,
+            file: widget.file,
+            version: widget.version,
+            description: widget.description,
+            widgetData: widget.widgetData as Prisma.JsonObject,
+          },
+        });
+      }
+      //   await db.inviteWidget.createMany({ data: widgets});
     }
     return { success: "Widgets updated!" };
   } catch (error) {
