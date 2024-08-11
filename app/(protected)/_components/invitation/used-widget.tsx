@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { InvitationType } from "@/types/invitation";
-import { ArrowBigDown, ArrowBigUp, Settings, SquareX } from "lucide-react";
 import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
+import { WidgetButtons } from "@/app/(protected)/_components/invitation/widget-buttons";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -51,47 +50,11 @@ export const UsedWidget = ({
                   />
                 </div>
                 <div className="bg-slate-100 p-2 flex flex-col justify-between gap-2">
-                  <Button
-                    title="Settings"
-                    className="hover:bg-yellow-200"
-                    size="sm"
-                    variant="link"
-                  >
-                    <Settings />
-                  </Button>
-                  <Button
-                    title="Move up"
-                    className="hover:bg-green-200"
-                    size="sm"
-                    variant="link"
-                    onClick={() => {
-                      changePosition(widget.id, "up");
-                    }}
-                  >
-                    <ArrowBigUp />
-                  </Button>
-                  <Button
-                    title="Move down"
-                    className="hover:bg-green-200"
-                    size="sm"
-                    variant="link"
-                    onClick={() => {
-                      changePosition(widget.id, "down");
-                    }}
-                  >
-                    <ArrowBigDown />
-                  </Button>
-                  <Button
-                    title="Remove"
-                    className="hover:bg-red-200"
-                    size="sm"
-                    variant="link"
-                    onClick={() => {
-                      removeWidget(widget.id);
-                    }}
-                  >
-                    <SquareX />
-                  </Button>
+                  <WidgetButtons
+                    widget={widget}
+                    removeWidget={removeWidget}
+                    changePosition={changePosition}
+                  />
                 </div>
               </div>
             );
