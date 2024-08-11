@@ -18,10 +18,8 @@ export const updateInviteWidgets = async (
     if (widgets.length > 0) {
       await db.inviteWidget.createMany({ data: widgets });
     }
-    console.log("inviteId", inviteId, "widgets", widgets);
     return { success: "Widgets updated!" };
   } catch (error) {
     return { error: "Failed to update widgets: " + error };
   }
-  //TODO: check if widgets exist or not and update them or insert them
 };
