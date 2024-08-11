@@ -33,7 +33,7 @@ export const UserDeleteAlert = ({ userId, setOpen }: EditUserFormProps) => {
 
   return (
     <>
-      <DialogContent className="max-w-min">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete User</DialogTitle>
           <DialogDescription>
