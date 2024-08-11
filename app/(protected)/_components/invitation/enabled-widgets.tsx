@@ -9,6 +9,7 @@ export const EnabledWidgets = ({
 }: EnabledWidgetsProps) => {
   return (
     <>
+      <h2 className="mb-4">Select template</h2>
       {enabledWidgets.map(w => (
         <div key={w.id}>
           <Button

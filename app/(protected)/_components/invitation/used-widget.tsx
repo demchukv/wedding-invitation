@@ -17,6 +17,7 @@ export const UsedWidget = ({
   changePosition,
 }: UsedWidgetProps) => {
   const UsedWidgetComponents: any = {};
+
   for (let i = 0; i < usedWidgets.length; i++) {
     UsedWidgetComponents[usedWidgets[i].id] = dynamic(
       () =>
