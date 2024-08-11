@@ -4,6 +4,8 @@ import { wldb } from "@/app/(protected)/_components/widgets/widgets-list-db";
 
 import { EnabledWidgets } from "@/app/(protected)/_components/invitation/enabled-widgets";
 import { UsedWidget } from "@/app/(protected)/_components/invitation/used-widget";
+import { useTransition } from "react";
+import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
@@ -13,14 +15,17 @@ interface EditInvitationProps {
 }
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
+  const [isPending, startTransition] = useTransition();
+  const [firstRender, setFirstRender] = useState(true);
   const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
     data?.InviteWidget || []
   );
 
   const onClickWidgetButton = (w: InviteWidgetType) => {
-    w = { ...w, id: nanoid() };
-    // console.log(w);
-    setUsedWidgets(prev => [...prev, w]);
+    setUsedWidgets(prev => [
+      ...prev,
+      { ...w, id: nanoid(), inviteId: data.id },
+    ]);
   };
 
   const removeWidget = (id: String) => {
@@ -32,11 +37,30 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     //TODO: add sorting logic
   };
 
-  //TODO: add useEffect to save changes to DB after change usedWidgets
-  useEffect(() => {}, [usedWidgets]);
+  const updateWidgets = (usedWidgets: InviteWidgetType[]) => {
+    startTransition(() => {
+      updateInviteWidgets(data.id, usedWidgets).then(res => {
+        if (res?.error) {
+          console.log(res.error);
+        }
+        if (res?.success) {
+          console.log(res.success);
+        }
+      });
+    });
+  };
+
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false);
+    } else {
+      updateWidgets(usedWidgets);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [usedWidgets]);
 
   return (
-    <div className="grid w-full grid-cols-4 gap-2">
+    <div className="grid w-full grid-cols-4 gap-6">
       <div>
         <EnabledWidgets onClickWidgetButton={onClickWidgetButton} />
       </div>

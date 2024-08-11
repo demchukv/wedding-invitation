@@ -31,7 +31,9 @@ export const UsedWidget = ({
 
   return (
     <>
-      {usedWidgets.length === 0 && <p>Add widgets</p>}
+      {usedWidgets.length === 0 && (
+        <p>Add widgets from left panel for start editing your invitation</p>
+      )}
 
       {usedWidgets.length > 0 && (
         <>
