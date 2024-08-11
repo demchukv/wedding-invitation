@@ -1,32 +1,32 @@
-'use server'
+"use server";
 
-import * as z from 'zod'
-import { db } from '@/lib/db'
-import {ReviewSchema} from '@/schemas'
+import * as z from "zod";
+import { db } from "@/lib/db";
+import { ReviewSchema } from "@/schemas";
 
-import { currentUser } from '@/lib/auth'
+import { currentUser } from "@/lib/auth";
 
 export const addReview = async (values: z.infer<typeof ReviewSchema>) => {
-    const user = await currentUser()
+  const user = await currentUser();
 
-    if (user) {
-        values.userId = user.id
-    }
+  if (user) {
+    values.userId = user.id;
+  }
 
-    const validateFields = ReviewSchema.safeParse(values)
-    if (!validateFields.success) {
-        return {error: "Invalid fields"}
-    }
+  const validateFields = ReviewSchema.safeParse(values);
+  if (!validateFields.success) {
+    return { error: "Invalid fields" };
+  }
 
-    const {userId, message, rating} = validateFields.data
+  const { userId, message, rating } = validateFields.data;
 
-    await db.review.create({
-        data: {
-            userId,
-            message,
-            rating,
-        }
-    })
+  await db.review.create({
+    data: {
+      userId,
+      message,
+      rating,
+    },
+  });
 
-    return {success: "Review sent!"}
-}
+  return { success: "Review sent!" };
+};

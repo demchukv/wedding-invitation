@@ -1,29 +1,39 @@
 import { InvitationType } from "@/types/invitation";
+import dynamic from "next/dynamic";
 import React from "react";
 
 interface IncludedWidgetProps {
   data: InvitationType;
-  savedWidgets: any;
-  WidgetDbComponents: any;
+  usedWidgets: any;
 }
-export const IncludedWidget = ({
-  data,
-  WidgetDbComponents,
-  savedWidgets,
-}: IncludedWidgetProps) => {
-  console.log(WidgetDbComponents);
+export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
+  const UsedWidgetComponents: any = {};
+  for (let i = 0; i < usedWidgets.length; i++) {
+    UsedWidgetComponents[usedWidgets[i].id] = dynamic(
+      () =>
+        import(
+          `@/app/(protected)/_components/widgets/${usedWidgets[i].file}`
+        ).then(mod => mod[usedWidgets[i].name]),
+      {
+        ssr: false,
+      }
+    );
+  }
+
   return (
     <>
-      {/* {savedWidgets.map((widget: any) => {
-        const WidgetComponent = WidgetDbComponents[widget.name];
-        return (
-          <WidgetComponent
-            key={widget.id}
-            data={data}
-            widgetData={widget.widgetData}
-          />
-        );
-      })} */}
+      <>
+        {usedWidgets.map((widget: any) => {
+          const WidgetComponent = UsedWidgetComponents[widget.id];
+          return (
+            <WidgetComponent
+              key={widget.id}
+              data={data}
+              widgetData={widget.widgetData}
+            />
+          );
+        })}
+      </>
     </>
   );
 };

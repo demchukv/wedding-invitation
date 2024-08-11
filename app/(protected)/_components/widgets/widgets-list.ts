@@ -1,4 +1,4 @@
-export const wl = [
+export const enabledWidgets = [
   {
     id: "text-widget-1-0-0",
     name: "TextWidget",
