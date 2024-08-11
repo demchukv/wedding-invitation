@@ -2,7 +2,7 @@ import { InvitationType } from "@/types/invitation";
 import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
 import { WidgetButtons } from "@/app/(protected)/_components/invitation/widget-buttons";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { ComponentType } from "react";
 
 interface UsedWidgetProps {
   data: InvitationType;
@@ -10,6 +10,7 @@ interface UsedWidgetProps {
   removeWidget: (id: string) => void;
   changePosition: (id: string, direction: "up" | "down") => void;
 }
+
 export const UsedWidget = ({
   data,
   usedWidgets,

@@ -1,3 +1,5 @@
+import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
+
 export type InvitationType = {
   id: string;
   userId: string;
@@ -6,4 +8,5 @@ export type InvitationType = {
   endDate: Date;
   createdAt: Date;
   updatedAt: Date;
+  InviteWidget?: WidgetType[];
 };

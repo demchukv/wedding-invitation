@@ -14,13 +14,16 @@ interface EditInvitationProps {
 }
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
-  const [usedWidgets, setUsedWidgets] = useState<WidgetType[]>(wldb);
+  const [usedWidgets, setUsedWidgets] = useState<WidgetType[]>(
+    data?.InviteWidget || []
+  );
 
   const onClickWidgetButton = (w: WidgetType) => {
     w = { ...w, id: nanoid() };
     // console.log(w);
     setUsedWidgets(prev => [...prev, w]);
   };
+
   const removeWidget = (id: string) => {
     setUsedWidgets(prev => prev.filter(w => w.id !== id));
   };
