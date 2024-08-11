@@ -29,11 +29,19 @@ export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
           {usedWidgets.map((widget: any) => {
             const WidgetComponent = UsedWidgetComponents[widget.id];
             return (
-              <WidgetComponent
+              <div
                 key={widget.id}
-                data={data}
-                widgetData={widget.widgetData}
-              />
+                className="w-full flex flex-row justify-between"
+              >
+                <div>
+                  <WidgetComponent
+                    key={widget.id}
+                    data={data}
+                    widgetData={widget.widgetData}
+                  />
+                </div>
+                <div className="bg-slate-100 p-2">Icon</div>
+              </div>
             );
           })}
         </>

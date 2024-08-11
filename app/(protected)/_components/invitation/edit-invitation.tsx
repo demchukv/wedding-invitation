@@ -16,7 +16,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
 
   const onClickWidgetButton = (w: object) => {
     w = { ...w, id: nanoid() };
-    console.log(w);
+    // console.log(w);
     setUsedWidgets(prev => [...prev, w]);
   };
 
