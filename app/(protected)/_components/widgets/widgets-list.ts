@@ -1,6 +1,7 @@
 export type WidgetType = {
   id: string;
   name: string;
+  displayName: string;
   file: string;
   version: string;
   description: string;
@@ -11,6 +12,7 @@ export const enabledWidgets = [
   {
     id: "text-widget-1-0-0",
     name: "TextWidget",
+    displayName: "Text",
     file: "text-widget",
     version: "1.0.0",
     description: "Simple widget for render text",
@@ -29,6 +31,7 @@ export const enabledWidgets = [
   {
     id: "image-widget-1-0-0",
     name: "ImageWidget",
+    displayName: "Image",
     file: "image-widget",
     version: "1.0.0",
     description: "Simple widget for upload and render single image",

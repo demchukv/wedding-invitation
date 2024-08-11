@@ -8,8 +8,13 @@ import React from "react";
 interface IncludedWidgetProps {
   data: InvitationType;
   usedWidgets: WidgetType[];
+  removeWidget: (id: string) => void;
 }
-export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
+export const IncludedWidget = ({
+  data,
+  usedWidgets,
+  removeWidget,
+}: IncludedWidgetProps) => {
   const UsedWidgetComponents: any = {};
   for (let i = 0; i < usedWidgets.length; i++) {
     UsedWidgetComponents[usedWidgets[i].id] = dynamic(
@@ -29,7 +34,7 @@ export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
 
       {usedWidgets.length > 0 && (
         <>
-          {usedWidgets.map((widget: any) => {
+          {usedWidgets.map((widget: WidgetType) => {
             const WidgetComponent = UsedWidgetComponents[widget.id];
             return (
               <div
@@ -53,7 +58,14 @@ export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
                   <Button size="sm" variant="link">
                     <ArrowBigDown />
                   </Button>
-                  <Button size="sm" variant="link">
+                  <Button
+                    className="hover:bg-red-200"
+                    size="sm"
+                    variant="link"
+                    onClick={() => {
+                      removeWidget(widget.id);
+                    }}
+                  >
                     <SquareX />
                   </Button>
                 </div>

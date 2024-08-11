@@ -20,6 +20,9 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     // console.log(w);
     setUsedWidgets(prev => [...prev, w]);
   };
+  const removeWidget = (id: string) => {
+    setUsedWidgets(prev => prev.filter(w => w.id !== id));
+  };
 
   return (
     <div className="grid w-full grid-cols-3 gap-2">
@@ -29,7 +32,11 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
 
       <div className="col-span-2" id="invitationArea">
         <>
-          <IncludedWidget data={data} usedWidgets={usedWidgets} />
+          <IncludedWidget
+            data={data}
+            usedWidgets={usedWidgets}
+            removeWidget={removeWidget}
+          />
         </>
       </div>
     </div>

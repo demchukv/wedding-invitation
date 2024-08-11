@@ -17,7 +17,7 @@ export const EnabledWidgets = ({
             type="button"
             onClick={() => onClickWidgetButton(w)}
           >
-            {w.name}
+            {w.displayName}
           </Button>
         </div>
       ))}
