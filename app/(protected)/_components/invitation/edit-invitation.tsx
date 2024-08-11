@@ -1,19 +1,20 @@
 import { InvitationType } from "@/types/invitation";
 import { wldb } from "@/app/(protected)/_components/widgets/widgets-list-db";
+//TODO: get list of widgets from db for this invitation
 
 import { EnabledWidgets } from "@/app/(protected)/_components/invitation/enabled-widgets";
-import { IncludedWidget } from "@/app/(protected)/_components/invitation/included-widget";
+import { UsedWidget } from "@/app/(protected)/_components/invitation/used-widget";
 import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
 
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface EditInvitationProps {
   data: InvitationType;
 }
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
-  const [usedWidgets, setUsedWidgets] = useState<any[]>(wldb);
+  const [usedWidgets, setUsedWidgets] = useState<WidgetType[]>(wldb);
 
   const onClickWidgetButton = (w: WidgetType) => {
     w = { ...w, id: nanoid() };
@@ -29,15 +30,18 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     //TODO: add sorting logic
   };
 
+  //TODO: add useEffect to save changes to DB after change usedWidgets
+  useEffect(() => {}, [usedWidgets]);
+
   return (
-    <div className="grid w-full grid-cols-3 gap-2">
+    <div className="grid w-full grid-cols-4 gap-2">
       <div>
         <EnabledWidgets onClickWidgetButton={onClickWidgetButton} />
       </div>
 
-      <div className="col-span-2" id="invitationArea">
+      <div className="col-span-3" id="invitationArea">
         <>
-          <IncludedWidget
+          <UsedWidget
             data={data}
             usedWidgets={usedWidgets}
             removeWidget={removeWidget}
