@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { InvitationType } from "@/types/invitation";
+import { ArrowBigDown, ArrowBigUp, Settings, SquareX } from "lucide-react";
 import dynamic from "next/dynamic";
 import React from "react";
 
@@ -31,7 +33,7 @@ export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
             return (
               <div
                 key={widget.id}
-                className="w-full flex flex-row justify-between"
+                className="w-full flex flex-row justify-between  border-b-2"
               >
                 <div>
                   <WidgetComponent
@@ -40,7 +42,20 @@ export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
                     widgetData={widget.widgetData}
                   />
                 </div>
-                <div className="bg-slate-100 p-2">Icon</div>
+                <div className="bg-slate-100 p-2 flex flex-col justify-between gap-2">
+                  <Button size="sm" variant="link">
+                    <Settings />
+                  </Button>
+                  <Button size="sm" variant="link">
+                    <ArrowBigUp />
+                  </Button>
+                  <Button size="sm" variant="link">
+                    <ArrowBigDown />
+                  </Button>
+                  <Button size="sm" variant="link">
+                    <SquareX />
+                  </Button>
+                </div>
               </div>
             );
           })}

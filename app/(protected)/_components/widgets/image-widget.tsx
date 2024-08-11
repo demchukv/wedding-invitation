@@ -16,7 +16,7 @@ interface ImageWidgetProps {
 }
 export const ImageWidget = ({ data, widgetData }: ImageWidgetProps) => {
   return (
-    <div className="py-2 border-b-2">
+    <div className="py-2">
       <div>Container for image</div>
       <div>SRC: {widgetData.imgSrc}</div>
     </div>

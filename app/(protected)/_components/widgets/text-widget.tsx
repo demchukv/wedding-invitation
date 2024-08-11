@@ -16,7 +16,7 @@ interface TextWidgetProps {
 }
 export const TextWidget = ({ data, widgetData }: TextWidgetProps) => {
   return (
-    <div className="py-2 border-b-2">
+    <div className="py-2">
       <div>{widgetData.text}</div>
       <div>{data.nameOne}</div>
       <div>{data.nameTwo}</div>
