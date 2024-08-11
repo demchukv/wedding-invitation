@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
 import { enabledWidgets } from "@/app/(protected)/_components/widgets/widgets-list";
 interface EnabledWidgetsProps {
-  onClickWidgetButton: (w: object) => void;
+  onClickWidgetButton: (w: WidgetType) => void;
 }
 export const EnabledWidgets = ({
   onClickWidgetButton,

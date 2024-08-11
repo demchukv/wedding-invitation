@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { InvitationType } from "@/types/invitation";
 import { ArrowBigDown, ArrowBigUp, Settings, SquareX } from "lucide-react";
+import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
 import dynamic from "next/dynamic";
 import React from "react";
 
 interface IncludedWidgetProps {
   data: InvitationType;
-  usedWidgets: any;
+  usedWidgets: WidgetType[];
 }
 export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
   const UsedWidgetComponents: any = {};

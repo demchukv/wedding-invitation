@@ -1,9 +1,17 @@
+export type WidgetType = {
+  id: string;
+  name: string;
+  file: string;
+  version: string;
+  description: string;
+  widgetData: object;
+};
+
 export const enabledWidgets = [
   {
     id: "text-widget-1-0-0",
     name: "TextWidget",
     file: "text-widget",
-    path: "@/app/(protected)/_components/widgets/text-widget.tsx",
     version: "1.0.0",
     description: "Simple widget for render text",
     widgetData: {
@@ -22,7 +30,6 @@ export const enabledWidgets = [
     id: "image-widget-1-0-0",
     name: "ImageWidget",
     file: "image-widget",
-    path: "@/app/(protected)/_components/widgets/image-widget.tsx",
     version: "1.0.0",
     description: "Simple widget for upload and render single image",
     widgetData: {
