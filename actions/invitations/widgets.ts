@@ -23,5 +23,4 @@ export const updateInviteWidgets = async (
   } catch (error) {
     return { error: "Failed to update widgets: " + error };
   }
-  //TODO: check if widgets exist or not and update them or insert them
 };
