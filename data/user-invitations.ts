@@ -30,6 +30,7 @@ export const getUserInvitationById = async (
         id,
       },
     });
+
     return userInvitation;
   } catch (error) {
     return null;

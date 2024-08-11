@@ -21,7 +21,18 @@ export type InviteWidgetType = {
   file: string;
   description: string;
   version: string;
-  widgetData: Prisma.InputJsonObject;
+  widgetData: JsonValue;
   createdAt?: Date;
   updatedAt?: Date;
 };
+
+export declare type JsonValue =
+  | string
+  | number
+  | boolean
+  | Prisma.InputJsonObject
+  | Prisma.InputJsonArray
+  | Prisma.JsonObject
+  | Prisma.JsonArray
+  | null
+  | typeof Prisma.JsonNull;
