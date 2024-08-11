@@ -1,6 +1,8 @@
 export const wldb = [
   {
     id: "asdfhakslh",
+    inviteId: "",
+    widgetId: "text-widget-1-0-0",
     order: 1,
     name: "TextWidget",
     displayName: "Text",
@@ -21,6 +23,8 @@ export const wldb = [
   },
   {
     id: "o3274jesfds",
+    inviteId: "",
+    widgetId: "image-widget-1-0-0",
     order: 2,
     name: "ImageWidget",
     displayName: "Image",
@@ -41,6 +45,8 @@ export const wldb = [
   },
   {
     id: "lbgnmglbn",
+    inviteId: "",
+    widgetId: "text-widget-1-0-0",
     order: 3,
     name: "TextWidget",
     displayName: "Text",

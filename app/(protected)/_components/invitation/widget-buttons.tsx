@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowBigDown, ArrowBigUp, Settings, SquareX } from "lucide-react";
-import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
+import { InviteWidgetType } from "@/types/invitation";
 
 interface WidgetButtonsProps {
-  widget: WidgetType;
-  changePosition: (id: string, direction: "up" | "down") => void;
-  removeWidget: (id: string) => void;
+  widget: InviteWidgetType;
+  changePosition: (id: String, direction: "up" | "down") => void;
+  removeWidget: (id: String) => void;
 }
 
 export const WidgetButtons = ({

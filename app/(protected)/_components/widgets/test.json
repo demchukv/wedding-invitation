@@ -1,0 +1,11 @@
+{
+      "text": "example text message",
+      "tAlign": "center",
+      "tValign": "center",
+      "fSize": "20px",
+      "fColor": "black",
+      "fStyle": "normal",
+      "fWeight": "normal",
+      "fFamily": "Arial",
+      "bColor": "transparent"
+    }

@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
+import { InviteWidgetType } from "@/types/invitation";
 import { enabledWidgets } from "@/app/(protected)/_components/widgets/widgets-list";
 interface EnabledWidgetsProps {
-  onClickWidgetButton: (w: WidgetType) => void;
+  onClickWidgetButton: (w: InviteWidgetType) => void;
 }
 export const EnabledWidgets = ({
   onClickWidgetButton,
@@ -11,7 +11,7 @@ export const EnabledWidgets = ({
     <>
       <h2 className="mb-4">Select template</h2>
       {enabledWidgets.map(w => (
-        <div key={w.id}>
+        <div key={w.widgetId}>
           <Button
             variant="outline"
             className="w-full"

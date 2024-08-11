@@ -23,25 +23,8 @@ export const getUserInvitationById = async (
 ): Promise<InvitationType | null> => {
   try {
     const userInvitation = await db.invite.findUnique({
-      select: {
-        id: true,
-        userId: true,
-        nameOne: true,
-        nameTwo: true,
-        endDate: true,
-        createdAt: true,
-        updatedAt: true,
-        InviteWidget: {
-          select: {
-            id: true,
-            inviteId: true,
-            widgetId: true,
-            widgetData: true,
-            widgetOrder: true,
-            createdAt: true,
-            updatedAt: true,
-          },
-        },
+      include: {
+        InviteWidget: true,
       },
       where: {
         id,
