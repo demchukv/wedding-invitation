@@ -9,6 +9,7 @@ import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
 
 interface EditInvitationProps {
   data: InvitationType;
@@ -67,6 +68,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
 
       <div className="col-span-3" id="invitationArea">
         <>
+          {isPending && <BeatLoader />}
           <UsedWidget
             data={data}
             usedWidgets={usedWidgets}
