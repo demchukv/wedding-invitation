@@ -22,18 +22,22 @@ export const IncludedWidget = ({ data, usedWidgets }: IncludedWidgetProps) => {
 
   return (
     <>
-      <>
-        {usedWidgets.map((widget: any) => {
-          const WidgetComponent = UsedWidgetComponents[widget.id];
-          return (
-            <WidgetComponent
-              key={widget.id}
-              data={data}
-              widgetData={widget.widgetData}
-            />
-          );
-        })}
-      </>
+      {usedWidgets.length === 0 && <p>Add widgets</p>}
+
+      {usedWidgets.length > 0 && (
+        <>
+          {usedWidgets.map((widget: any) => {
+            const WidgetComponent = UsedWidgetComponents[widget.id];
+            return (
+              <WidgetComponent
+                key={widget.id}
+                data={data}
+                widgetData={widget.widgetData}
+              />
+            );
+          })}
+        </>
+      )}
     </>
   );
 };
