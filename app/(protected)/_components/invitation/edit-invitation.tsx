@@ -3,7 +3,7 @@ import { wldb } from "@/app/(protected)/_components/widgets/widgets-list-db";
 //TODO: get list of widgets from db for this invitation
 
 import { EnabledWidgets } from "@/app/(protected)/_components/invitation/enabled-widgets";
-import { IncludedWidget } from "@/app/(protected)/_components/invitation/included-widget";
+import { UsedWidget } from "@/app/(protected)/_components/invitation/used-widget";
 import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
 
 import { nanoid } from "nanoid";
@@ -14,7 +14,7 @@ interface EditInvitationProps {
 }
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
-  const [usedWidgets, setUsedWidgets] = useState<any[]>(wldb);
+  const [usedWidgets, setUsedWidgets] = useState<WidgetType[]>(wldb);
 
   const onClickWidgetButton = (w: WidgetType) => {
     w = { ...w, id: nanoid() };
@@ -41,7 +41,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
 
       <div className="col-span-3" id="invitationArea">
         <>
-          <IncludedWidget
+          <UsedWidget
             data={data}
             usedWidgets={usedWidgets}
             removeWidget={removeWidget}

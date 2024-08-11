@@ -5,18 +5,18 @@ import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
 import dynamic from "next/dynamic";
 import React from "react";
 
-interface IncludedWidgetProps {
+interface UsedWidgetProps {
   data: InvitationType;
   usedWidgets: WidgetType[];
   removeWidget: (id: string) => void;
   changePosition: (id: string, direction: "up" | "down") => void;
 }
-export const IncludedWidget = ({
+export const UsedWidget = ({
   data,
   usedWidgets,
   removeWidget,
   changePosition,
-}: IncludedWidgetProps) => {
+}: UsedWidgetProps) => {
   const UsedWidgetComponents: any = {};
   for (let i = 0; i < usedWidgets.length; i++) {
     UsedWidgetComponents[usedWidgets[i].id] = dynamic(
