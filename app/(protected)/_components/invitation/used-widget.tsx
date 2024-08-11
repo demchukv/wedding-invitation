@@ -1,15 +1,14 @@
-import { InvitationType } from "@/types/invitation";
-import { WidgetType } from "@/app/(protected)/_components/widgets/widgets-list";
+import { InvitationType, InviteWidgetType } from "@/types/invitation";
 import { WidgetButtons } from "@/app/(protected)/_components/invitation/widget-buttons";
 import dynamic from "next/dynamic";
-import React from "react";
 
 interface UsedWidgetProps {
   data: InvitationType;
-  usedWidgets: WidgetType[];
-  removeWidget: (id: string) => void;
-  changePosition: (id: string, direction: "up" | "down") => void;
+  usedWidgets: InviteWidgetType[];
+  removeWidget: (id: String) => void;
+  changePosition: (id: String, direction: "up" | "down") => void;
 }
+
 export const UsedWidget = ({
   data,
   usedWidgets,
@@ -36,7 +35,7 @@ export const UsedWidget = ({
 
       {usedWidgets.length > 0 && (
         <>
-          {usedWidgets.map((widget: WidgetType) => {
+          {usedWidgets.map((widget: InviteWidgetType) => {
             const WidgetComponent = UsedWidgetComponents[widget.id];
             return (
               <div

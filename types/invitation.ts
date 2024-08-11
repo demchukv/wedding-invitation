@@ -1,3 +1,5 @@
+import { JsonValue } from "@prisma/client/runtime/library";
+
 export type InvitationType = {
   id: string;
   userId: string;
@@ -6,4 +8,20 @@ export type InvitationType = {
   endDate: Date;
   createdAt: Date;
   updatedAt: Date;
+  InviteWidget?: InviteWidgetType[];
+};
+
+export type InviteWidgetType = {
+  id: string;
+  inviteId?: string;
+  widgetId: string;
+  order: number;
+  name: string;
+  displayName: string;
+  file: string;
+  description: string;
+  version: string;
+  widgetData: JsonValue;
+  createdAt?: Date;
+  updatedAt?: Date;
 };

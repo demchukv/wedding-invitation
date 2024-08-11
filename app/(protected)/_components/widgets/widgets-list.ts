@@ -1,17 +1,8 @@
-export type WidgetType = {
-  id: string;
-  order: number;
-  name: string;
-  displayName: string;
-  file: string;
-  version: string;
-  description: string;
-  widgetData: object;
-};
-
 export const enabledWidgets = [
   {
-    id: "text-widget-1-0-0",
+    id: "",
+    inviteId: "",
+    widgetId: "text-widget-1-0-0",
     order: 1,
     name: "TextWidget",
     displayName: "Text",
@@ -31,7 +22,9 @@ export const enabledWidgets = [
     },
   },
   {
-    id: "image-widget-1-0-0",
+    id: "",
+    inviteId: "",
+    widgetId: "image-widget-1-0-0",
     order: 1,
     name: "ImageWidget",
     displayName: "Image",
