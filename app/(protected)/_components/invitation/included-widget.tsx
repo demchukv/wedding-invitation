@@ -9,11 +9,13 @@ interface IncludedWidgetProps {
   data: InvitationType;
   usedWidgets: WidgetType[];
   removeWidget: (id: string) => void;
+  changePosition: (id: string, direction: "up" | "down") => void;
 }
 export const IncludedWidget = ({
   data,
   usedWidgets,
   removeWidget,
+  changePosition,
 }: IncludedWidgetProps) => {
   const UsedWidgetComponents: any = {};
   for (let i = 0; i < usedWidgets.length; i++) {
@@ -49,16 +51,38 @@ export const IncludedWidget = ({
                   />
                 </div>
                 <div className="bg-slate-100 p-2 flex flex-col justify-between gap-2">
-                  <Button size="sm" variant="link">
+                  <Button
+                    title="Settings"
+                    className="hover:bg-yellow-200"
+                    size="sm"
+                    variant="link"
+                  >
                     <Settings />
                   </Button>
-                  <Button size="sm" variant="link">
+                  <Button
+                    title="Move up"
+                    className="hover:bg-green-200"
+                    size="sm"
+                    variant="link"
+                    onClick={() => {
+                      changePosition(widget.id, "up");
+                    }}
+                  >
                     <ArrowBigUp />
                   </Button>
-                  <Button size="sm" variant="link">
+                  <Button
+                    title="Move down"
+                    className="hover:bg-green-200"
+                    size="sm"
+                    variant="link"
+                    onClick={() => {
+                      changePosition(widget.id, "down");
+                    }}
+                  >
                     <ArrowBigDown />
                   </Button>
                   <Button
+                    title="Remove"
                     className="hover:bg-red-200"
                     size="sm"
                     variant="link"

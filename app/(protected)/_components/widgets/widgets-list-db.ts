@@ -1,11 +1,11 @@
 export const wldb = [
   {
     id: "asdfhakslh",
-    name: "TextWidget",
-    file: "text-widget",
-    path: "@/app/(protected)/_components/widgets/text-widget",
-    version: "1.0.0",
     order: 1,
+    name: "TextWidget",
+    displayName: "Text",
+    file: "text-widget",
+    version: "1.0.0",
     description: "Simple widget for render text",
     widgetData: {
       text: "example text message",
@@ -21,11 +21,11 @@ export const wldb = [
   },
   {
     id: "o3274jesfds",
-    name: "ImageWidget",
-    file: "image-widget",
-    path: "@/app/(protected)/_components/widgets/image-widget",
-    version: "1.0.0",
     order: 2,
+    name: "ImageWidget",
+    displayName: "Image",
+    file: "image-widget",
+    version: "1.0.0",
     description: "Simple widget for upload and render single image",
     widgetData: {
       imgSrc: "/path/to/image.png",
@@ -41,11 +41,11 @@ export const wldb = [
   },
   {
     id: "lbgnmglbn",
-    name: "TextWidget",
-    file: "text-widget",
-    path: "@/app/(protected)/_components/widgets/text-widget",
-    version: "1.0.0",
     order: 3,
+    name: "TextWidget",
+    displayName: "Text",
+    file: "text-widget",
+    version: "1.0.0",
     description: "Simple widget for render text",
     widgetData: {
       text: "example text message",

@@ -24,6 +24,11 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     setUsedWidgets(prev => prev.filter(w => w.id !== id));
   };
 
+  const changePosition = (id: string, direction: "up" | "down") => {
+    console.log(id, direction);
+    //TODO: add sorting logic
+  };
+
   return (
     <div className="grid w-full grid-cols-3 gap-2">
       <div>
@@ -36,6 +41,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
             data={data}
             usedWidgets={usedWidgets}
             removeWidget={removeWidget}
+            changePosition={changePosition}
           />
         </>
       </div>
