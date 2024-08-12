@@ -115,7 +115,12 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" disabled={isPending} className="w-full">
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="w-full"
+            variant="primary"
+          >
             {isPending ? <BeatLoader color="white" /> : `Register`}
           </Button>
         </form>
