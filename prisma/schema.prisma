@@ -90,6 +90,7 @@ model Feedback {
 
 model Review {
   id        String      @id @default(cuid())
+  name      String
   rating    Int
   message   String
   userId    String
