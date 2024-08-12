@@ -1,4 +1,5 @@
 import { AuthProvider } from "@/components/auth-provider";
+import { Footer } from "@/components/footer/footer";
 import { TopNavigation } from "@/components/top-navigation";
 
 interface ProtectedLayoutProps {
@@ -7,12 +8,11 @@ interface ProtectedLayoutProps {
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (
     <AuthProvider>
-      <div className="flex min-h-screen flex-col items-center justify-start">
-        <TopNavigation />
-        <main className="flex h-full flex-col items-center justify-start">
-          {children}
-        </main>
-      </div>
+      <TopNavigation />
+      <main className="flex flex-col items-center justify-start py-6">
+        {children}
+      </main>
+      <Footer />
     </AuthProvider>
   );
 };

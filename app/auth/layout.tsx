@@ -1,5 +1,6 @@
 import { TopNavigation } from "@/components/top-navigation";
 import { AuthProvider } from "@/components/auth-provider";
+import { Footer } from "@/components/footer/footer";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,6 +9,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       <main className="flex h-full flex-col items-center justify-center">
         {children}
       </main>
+      <Footer />
     </AuthProvider>
   );
 };
