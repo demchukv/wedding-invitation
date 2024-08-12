@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer/footer";
 interface ProtectedLayoutProps {
   children: React.ReactNode;
 }
-const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
+const PublicLayout = ({ children }: ProtectedLayoutProps) => {
   return (
     <AuthProvider>
       <Header />
@@ -17,4 +17,4 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   );
 };
 
-export default ProtectedLayout;
+export default PublicLayout;
