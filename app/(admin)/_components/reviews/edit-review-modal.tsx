@@ -30,12 +30,11 @@ export const EditReviewModal = ({ id }: EditReviewFormProps) => {
       });
     });
   };
-  
+
   useEffect(() => {
     getReviewData(id);
   }, [id]);
-  console.log(getReviewById(id))
-  
+
   return (
     <>
       <DialogContent className="max-w-min">
