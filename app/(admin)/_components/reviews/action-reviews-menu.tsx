@@ -21,7 +21,7 @@ export const ActionsReviewMenu = ({ review }: { review: ReviewType }) => {
 
   const openModal = (action: string) => {
     if (action === "edit") {
-      setModalType("edit");
+      setModalType(action);
       setOpen(true);
     }
     if (action === "delete") {
@@ -42,10 +42,16 @@ export const ActionsReviewMenu = ({ review }: { review: ReviewType }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem style={{cursor: 'pointer'}} onClick={() => openModal("edit")}>
+          <DropdownMenuItem
+            style={{ cursor: "pointer" }}
+            onClick={() => openModal("edit")}
+          >
             Edit review
           </DropdownMenuItem>
-          <DropdownMenuItem style={{cursor: 'pointer'}} onClick={() => openModal("delete")}>
+          <DropdownMenuItem
+            style={{ cursor: "pointer" }}
+            onClick={() => openModal("delete")}
+          >
             Delete review
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -54,7 +60,9 @@ export const ActionsReviewMenu = ({ review }: { review: ReviewType }) => {
       <Dialog open={open} modal={true} onOpenChange={setOpen}>
         <DialogContent>
           {modalType === "edit" && <EditReviewModal id={review.id} />}
-          {modalType === "delete" && <ReviewDeleteAlert id={review.id} setOpen={setOpen}/>}
+          {modalType === "delete" && (
+            <ReviewDeleteAlert id={review.id} setOpen={setOpen} />
+          )}
         </DialogContent>
       </Dialog>
     </>

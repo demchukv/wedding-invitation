@@ -78,13 +78,14 @@ model TwoFactorConfirmation {
 }
 
 model Feedback {
-  id        String   @id @default(cuid())
+  id        String        @id @default(cuid())
   name      String
   email     String
   phone     String
   message   String
   userId    String?
-  createdAt DateTime @default(now())
+  state     FeedbackState @default(NEW)
+  createdAt DateTime      @default(now())
 }
 
 model Review {
@@ -128,6 +129,11 @@ model InviteWidget {
 enum UserRole {
   ADMIN
   USER
+}
+
+enum FeedbackState {
+  NEW
+  CHECKED
 }
 
 enum ReviewState {
