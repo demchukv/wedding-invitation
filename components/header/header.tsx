@@ -5,7 +5,7 @@ import { NewUserMenu } from "@/components/auth/new-user-menu";
 import { Navbar } from "@/app/(protected)/_components/navbar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
-export const TopNavigation = () => {
+export const Header = () => {
   const session = useCurrentUser();
 
   return (

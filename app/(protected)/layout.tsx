@@ -1,6 +1,6 @@
 import { AuthProvider } from "@/components/auth-provider";
 import { Footer } from "@/components/footer/footer";
-import { TopNavigation } from "@/components/top-navigation";
+import { Header } from "@/components/header/header";
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface ProtectedLayoutProps {
 const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (
     <AuthProvider>
-      <TopNavigation />
+      <Header />
       <main className="flex flex-col items-center justify-start py-6">
         {children}
       </main>

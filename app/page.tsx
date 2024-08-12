@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import LoginButton from "@/components/auth/login-button";
-import { TopNavigation } from "@/components/top-navigation";
+import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import { auth } from "@/auth";
 
@@ -11,7 +11,7 @@ export default async function Home() {
   const session = await auth();
   return (
     <>
-      <TopNavigation />
+      <Header />
       <main className="flex h-full flex-col items-center justify-center">
         <div className="space-y-6 text-center">
           <h1

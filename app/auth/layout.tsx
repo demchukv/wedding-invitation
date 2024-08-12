@@ -1,11 +1,11 @@
-import { TopNavigation } from "@/components/top-navigation";
+import { Header } from "@/components/header/header";
 import { AuthProvider } from "@/components/auth-provider";
 import { Footer } from "@/components/footer/footer";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <AuthProvider>
-      <TopNavigation />
+      <Header />
       <main className="flex h-full flex-col items-center justify-center">
         {children}
       </main>
