@@ -64,6 +64,7 @@ export const getManageReviewList = async (
       select: {
         id: true,
         userId: true,
+        name: true,
         message: true,
         rating: true,
         createdAt: true,

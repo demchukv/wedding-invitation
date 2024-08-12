@@ -23,6 +23,7 @@ const ManageReviewsPage = () => {
       desc: true,
     },
   ];
+  
 
   const initFiltering = [] as ColumnFiltersState;
 
