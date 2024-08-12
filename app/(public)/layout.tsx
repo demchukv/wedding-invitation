@@ -1,20 +1,22 @@
-import { TopNavigation } from "@/components/top-navigation";
+import { Header } from "@/components/header/header";
 import { AuthProvider } from "@/components/auth-provider";
+import { Footer } from "@/components/footer/footer";
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
 }
-const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
+const PublicLayout = ({ children }: ProtectedLayoutProps) => {
   return (
     <AuthProvider>
-      <div className="flex h-full flex-col items-center justify-start bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
-        <TopNavigation />
-        <main className="flex h-full flex-col items-center justify-center">
+      <Header />
+      <main className="flex h-full py-6">
+        <div className="h-full container mx-auto sm:container md:container lg:container flex flex-col items-center justify-center">
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
+      <Footer />
     </AuthProvider>
   );
 };
 
-export default ProtectedLayout;
+export default PublicLayout;

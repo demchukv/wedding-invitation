@@ -4,6 +4,7 @@ import { Aside } from "@/app/(admin)/_components/aside";
 import { Header } from "@/app/(admin)/_components/header";
 import { AuthProvider } from "@/components/auth-provider";
 import { UserRole } from "@prisma/client";
+
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
