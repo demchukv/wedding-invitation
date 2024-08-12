@@ -12,27 +12,29 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="flex h-full flex-col items-center justify-center">
-        <div className="space-y-6 text-center">
-          <h1
-            className={cn(
-              "text-6xl font-semibold text-primary drop-shadow-md",
-              font.className
-            )}
-          >
-            Wedding Invitations
-          </h1>
-          <p className="text-primary text-lg">A simple test project</p>
-        </div>
-        {!session && (
-          <div>
-            <LoginButton mode="modal" asChild>
-              <Button variant="secondary" size="lg">
-                Sign in
-              </Button>
-            </LoginButton>
+      <main className="h-full ">
+        <div className="h-full container mx-auto sm:container md:container lg:container flex flex-col items-center justify-center">
+          <div className="space-y-6 text-center">
+            <h1
+              className={cn(
+                "text-6xl font-semibold text-primary drop-shadow-md",
+                font.className
+              )}
+            >
+              Wedding Invitations
+            </h1>
+            <p className="text-primary text-lg">A simple test project</p>
           </div>
-        )}
+          {!session && (
+            <div>
+              <LoginButton mode="modal" asChild>
+                <Button variant="secondary" size="lg">
+                  Sign in
+                </Button>
+              </LoginButton>
+            </div>
+          )}
+        </div>
       </main>
       <Footer />
     </>
