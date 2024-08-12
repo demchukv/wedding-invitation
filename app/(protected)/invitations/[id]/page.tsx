@@ -31,7 +31,6 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
   const getInvitation = async (id: string) => {
     startTransition(() => {
       getUserInvitationById(id).then(res => {
-        console.log(res);
         setData(res);
       });
     });

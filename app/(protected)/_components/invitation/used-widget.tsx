@@ -1,6 +1,7 @@
 import { InvitationType, InviteWidgetType } from "@/types/invitation";
 import { WidgetButtons } from "@/app/(protected)/_components/invitation/widget-buttons";
 import dynamic from "next/dynamic";
+import { BeatLoader } from "react-spinners";
 
 interface UsedWidgetProps {
   data: InvitationType;
@@ -25,6 +26,7 @@ export const UsedWidget = ({
         ).then(mod => mod[usedWidgets[i].name]),
       {
         ssr: false,
+        loading: () => <BeatLoader />,
       }
     );
   }
