@@ -34,6 +34,18 @@ body,
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    /* from figma */
+    --m-light-brown: 23, 100%, 88.24%;
+    --m-brown: 15.65, 40.35%, 33.53%;
+    --mblack: 12.86, 87.5%, 9.41%;
+    --m-dark-brown: 12.86, 26.42%, 20.78%;
+    --m-light-grey-background: 30, 100%, 99.61%;
+    --m-pink: 9.73, 94.87%, 84.71%;
+    --m-grey: 0, 0.4%, 51.57%;
+    --m-red: 0, 100%, 46.47%;
+    --m-green: 151.27, 100%, 27.84%;
+    --m-light-grey-background-70: 30, 1%, 100%, 0.7;
+    --mbtnhover: linear-gradient(135deg, #ffe1be 0%, #ffa391 100%);
   }
 
   .dark {
@@ -61,6 +73,19 @@ body,
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+
+    /* from figma */
+    --m-light-brown: 23, 100%, 88.24%;
+    --m-brown: 15.65, 40.35%, 33.53%;
+    --mblack: 12.86, 87.5%, 9.41%;
+    --m-dark-brown: 12.86, 26.42%, 20.78%;
+    --m-light-grey-background: 30, 100%, 99.61%;
+    --m-pink: 9.73, 94.87%, 84.71%;
+    --m-grey: 0, 0.4%, 51.57%;
+    --m-red: 0, 100%, 46.47%;
+    --m-green: 151.27, 100%, 27.84%;
+    --m-light-grey-background-70: 30, 1%, 100%, 0.7;
+    --mbtnhover: linear-gradient(135deg, #ffe1be 0%, #ffa391 100%);
   }
 }
 

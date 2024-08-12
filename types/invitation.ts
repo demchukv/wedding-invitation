@@ -36,3 +36,5 @@ export declare type JsonValue =
   | Prisma.JsonArray
   | null
   | typeof Prisma.JsonNull;
+
+  
