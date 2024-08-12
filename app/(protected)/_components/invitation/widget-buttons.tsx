@@ -5,12 +5,14 @@ import { WidgetSettingsButton } from "@/app/(protected)/_components/invitation/w
 
 interface WidgetButtonsProps {
   widget: InviteWidgetType;
+  totalWidgets: number;
   changePosition: (id: String, direction: "up" | "down") => void;
   removeWidget: (id: String) => void;
 }
 
 export const WidgetButtons = ({
   widget,
+  totalWidgets,
   changePosition,
   removeWidget,
 }: WidgetButtonsProps) => {
@@ -34,6 +36,7 @@ export const WidgetButtons = ({
         onClick={() => {
           changePosition(widget.id, "up");
         }}
+        disabled={widget.order === 0}
       >
         <ArrowBigUp />
       </Button>
@@ -45,6 +48,7 @@ export const WidgetButtons = ({
         onClick={() => {
           changePosition(widget.id, "down");
         }}
+        disabled={widget.order === totalWidgets - 1}
       >
         <ArrowBigDown />
       </Button>
