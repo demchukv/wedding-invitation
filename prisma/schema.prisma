@@ -84,8 +84,8 @@ model Feedback {
   phone     String
   message   String
   userId    String?
-  state     FeedbackState @default(NEW)
   createdAt DateTime      @default(now())
+  state     FeedbackState @default(NEW)
 }
 
 model Review {

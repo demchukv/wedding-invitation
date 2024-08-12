@@ -88,7 +88,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
 
       <div className="col-span-3" id="invitationArea">
         <>
-          {isPending && <BeatLoader />}
+          {/* {isPending && <BeatLoader />} */}
           <UsedWidget
             data={data}
             usedWidgets={usedWidgets}

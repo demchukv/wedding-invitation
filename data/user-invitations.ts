@@ -24,7 +24,7 @@ export const getUserInvitationById = async (
   try {
     const userInvitation = await db.invite.findUnique({
       include: {
-        InviteWidget: false,
+        InviteWidget: true,
       },
       where: {
         id,
