@@ -130,6 +130,11 @@ enum UserRole {
   USER
 }
 
+enum FeedbackState {
+  NEW
+  CHECKED
+}
+
 enum ReviewState {
   NEW
   APPROVED
