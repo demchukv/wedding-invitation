@@ -1,6 +1,4 @@
 import { InvitationType, InviteWidgetType } from "@/types/invitation";
-import { wldb } from "@/app/(protected)/_components/widgets/widgets-list-db";
-//TODO: get list of widgets from db for this invitation
 
 import { EnabledWidgets } from "@/app/(protected)/_components/invitation/enabled-widgets";
 import { UsedWidget } from "@/app/(protected)/_components/invitation/used-widget";
@@ -25,7 +23,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   const onClickWidgetButton = (w: InviteWidgetType) => {
     setUsedWidgets(prev => [
       ...prev,
-      { ...w, id: nanoid(), inviteId: data.id },
+      { ...w, id: nanoid(), inviteId: data.id, order: usedWidgets.length },
     ]);
   };
 
@@ -34,8 +32,30 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   };
 
   const changePosition = (id: String, direction: "up" | "down") => {
-    console.log(id, direction);
-    //TODO: add sorting logic
+    usedWidgets.sort((a, b) => a.order - b.order);
+    for (let i = 0; i < usedWidgets.length; i++) {
+      usedWidgets[i].order = i;
+    }
+    for (let i = 0; i < usedWidgets.length; i++) {
+      if (
+        usedWidgets[i].id === id &&
+        direction === "up" &&
+        usedWidgets[i].order > 0
+      ) {
+        usedWidgets[i].order = usedWidgets[i].order - 1;
+        usedWidgets[i - 1].order = usedWidgets[i - 1].order + 1;
+      }
+      if (
+        usedWidgets[i].id === id &&
+        direction === "down" &&
+        usedWidgets[i].order < usedWidgets.length - 1
+      ) {
+        usedWidgets[i].order = usedWidgets[i].order + 1;
+        usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
+      }
+    }
+    setUsedWidgets(prev => usedWidgets.sort((a, b) => a.order - b.order));
+    updateWidgets(usedWidgets);
   };
 
   const updateWidgets = (usedWidgets: InviteWidgetType[]) => {
@@ -52,6 +72,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   };
 
   useEffect(() => {
+    console.log("render changed widgets");
     if (firstRender) {
       setFirstRender(false);
     } else {

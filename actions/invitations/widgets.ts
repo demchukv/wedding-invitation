@@ -33,7 +33,6 @@ export const updateInviteWidgets = async (
           },
         });
       }
-      //   await db.inviteWidget.createMany({ data: widgets});
     }
     return { success: "Widgets updated!" };
   } catch (error) {

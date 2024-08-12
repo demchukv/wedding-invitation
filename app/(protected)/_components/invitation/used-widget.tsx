@@ -54,6 +54,7 @@ export const UsedWidget = ({
                 <div className="bg-slate-100 p-2 flex flex-col justify-between gap-2">
                   <WidgetButtons
                     widget={widget}
+                    totalWidgets={usedWidgets.length}
                     removeWidget={removeWidget}
                     changePosition={changePosition}
                   />
