@@ -2,8 +2,8 @@ import { ReviewState } from "@prisma/client";
 
 export type ReviewType = {
   id: string;
-  name: string;
   userId: string;
+  name: string;
   state: ReviewState;
   rating: number;
   message: string;
