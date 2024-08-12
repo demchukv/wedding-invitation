@@ -27,7 +27,7 @@ export default async function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "min-h-screen bg-background antialiased",
+            "min-h-screen bg-background antialiased flex flex-col justify-between",
             fontInter.className
           )}
         >

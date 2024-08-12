@@ -72,7 +72,6 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   };
 
   useEffect(() => {
-    console.log("render changed widgets");
     if (firstRender) {
       setFirstRender(false);
     } else {

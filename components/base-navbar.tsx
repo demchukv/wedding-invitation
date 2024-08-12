@@ -15,8 +15,8 @@ export const BaseNavbar = () => {
       <NavigationMenuList>
         <NavigationMenuItem
           className={cn(
-            "hover:text-white transition-all px-3 rounded-lg",
-            pathname === "/" && "bg-white"
+            "text-primary bg-secondary hover:text-secondary hover:bg-primary  transition-all px-3 py-2 rounded-lg",
+            pathname === "/" && "bg-primary text-secondary"
           )}
         >
           <Link href="/" legacyBehavior passHref>
@@ -25,8 +25,8 @@ export const BaseNavbar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "hover:text-white transition-all px-3 radius-md rounded-lg",
-            pathname === "/about" && "bg-white"
+            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
+            pathname === "/about" && "bg-primary text-secondary"
           )}
         >
           <Link href="/about" legacyBehavior passHref>
@@ -35,8 +35,8 @@ export const BaseNavbar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "hover:text-white transition-all px-3 radius-md rounded-lg",
-            pathname === "/templates" && "bg-white"
+            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
+            pathname === "/templates" && "bg-primary text-secondary"
           )}
         >
           <Link href="/templates" legacyBehavior passHref>
@@ -45,12 +45,12 @@ export const BaseNavbar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "hover:text-white transition-all px-3 radius-md rounded-lg",
-            pathname === "/feedback" && "bg-white"
+            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
+            pathname === "/feedback" && "bg-primary text-secondary"
           )}
         >
           <Link href="/feedback" legacyBehavior passHref>
-            <NavigationMenuLink>Feedback</NavigationMenuLink>
+            <NavigationMenuLink>Contact Us</NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
       </NavigationMenuList>

@@ -3,25 +3,26 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import LoginButton from "@/components/auth/login-button";
 import { TopNavigation } from "@/components/top-navigation";
+import { Footer } from "@/components/footer/footer";
 import { auth } from "@/auth";
 
 const font = Poppins({ subsets: ["latin"], weight: "600" });
 export default async function Home() {
   const session = await auth();
   return (
-    <div className="flex h-full flex-col items-center justify-start bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">
+    <>
       <TopNavigation />
       <main className="flex h-full flex-col items-center justify-center">
         <div className="space-y-6 text-center">
           <h1
             className={cn(
-              "text-6xl font-semibold text-white drop-shadow-md",
+              "text-6xl font-semibold text-primary drop-shadow-md",
               font.className
             )}
           >
             Wedding Invitations
           </h1>
-          <p className="text-white text-lg">A simple test project</p>
+          <p className="text-primary text-lg">A simple test project</p>
         </div>
         {!session && (
           <div>
@@ -33,6 +34,7 @@ export default async function Home() {
           </div>
         )}
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }

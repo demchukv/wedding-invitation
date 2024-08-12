@@ -9,9 +9,9 @@ export const TopNavigation = () => {
   const session = useCurrentUser();
 
   return (
-    <div className="flex flex-row items-center justify-around w-full py-4">
+    <header className="flex flex-row items-center justify-around w-full py-4">
       <BaseNavbar />
       {!session ? <NewUserMenu /> : <Navbar />}
-    </div>
+    </header>
   );
 };

@@ -15,8 +15,8 @@ export const NewUserMenu = () => {
       <NavigationMenuList className="gap-x-6">
         <NavigationMenuItem
           className={cn(
-            "hover:text-white transition-all px-3 radius-md rounded-lg",
-            pathname === "/auth/login" && "bg-white"
+            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
+            pathname === "/auth/login" && "bg-primary text-secondary"
           )}
         >
           <Link href="/auth/login" legacyBehavior passHref>
@@ -25,8 +25,8 @@ export const NewUserMenu = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "hover:text-white transition-all px-3 radius-md rounded-lg",
-            pathname === "/auth/register" && "bg-white"
+            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
+            pathname === "/auth/register" && "bg-primary text-secondary"
           )}
         >
           <Link href="/auth/register" legacyBehavior passHref>
