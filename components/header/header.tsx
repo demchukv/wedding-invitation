@@ -9,9 +9,11 @@ export const Header = () => {
   const session = useCurrentUser();
 
   return (
-    <header className="flex flex-row items-center justify-around w-full py-4">
-      <BaseNavbar />
-      {!session ? <NewUserMenu /> : <Navbar />}
+    <header className="py-4">
+      <div className="container mx-auto flex flex-row items-center justify-between w-full sm:container md:container lg:container">
+        <BaseNavbar />
+        {!session ? <NewUserMenu /> : <Navbar />}
+      </div>
     </header>
   );
 };

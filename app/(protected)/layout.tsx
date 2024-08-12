@@ -9,7 +9,7 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
   return (
     <AuthProvider>
       <Header />
-      <main className="flex flex-col items-center justify-start py-6">
+      <main className="flex h-full flex-col items-center justify-start py-6">
         {children}
       </main>
       <Footer />
