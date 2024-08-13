@@ -29,17 +29,14 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<InvitationType | null>();
   const [tab, setTab] = useState("account");
+  const [save, setSave] = useState(false);
   const id = params.id;
-
-  if (typeof window !== "undefined") {
-    window.onbeforeunload = () => {
-      console.log("before page leave: need save invitation data");
-    };
-  }
 
   const onTabSwitch = (value: string) => {
     if (tab === "account" && value !== "account") {
-      console.log("beforeChangeTab: need save invitation data");
+      setSave(true);
+    } else {
+      setSave(false);
     }
     setTab(value);
   };
@@ -81,7 +78,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
                 <CardDescription>Edit your invitation</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <EditInvitation data={data} />
+                <EditInvitation data={data} save={save} />
               </CardContent>
               {/* <CardFooter>
                 <Button>Save changes</Button>

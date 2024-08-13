@@ -2,19 +2,20 @@ import { InvitationType, InviteWidgetType } from "@/types/invitation";
 
 import { EnabledWidgets } from "@/app/(protected)/_components/invitation/enabled-widgets";
 import { UsedWidget } from "@/app/(protected)/_components/invitation/used-widget";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { BeatLoader } from "react-spinners";
 
 interface EditInvitationProps {
   data: InvitationType;
+  save: boolean;
 }
 
-export const EditInvitation = ({ data }: EditInvitationProps) => {
+export const EditInvitation = ({ data, save }: EditInvitationProps) => {
   const [isPending, startTransition] = useTransition();
   // const [firstRender, setFirstRender] = useState(true);
   const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
@@ -22,6 +23,8 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
       ? data.InviteWidget.sort((a, b) => a.order - b.order)
       : []
   );
+
+  const stringToDisplay = "Do you want to save before leaving the page ?";
 
   const onClickWidgetButton = (w: InviteWidgetType) => {
     setUsedWidgets(prev => [
@@ -75,7 +78,17 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
       });
     });
   };
-
+  console.log(save);
+  if (save) {
+    updateWidgets(data.id, usedWidgets);
+    console.log("before tab change: need save invitation data");
+  }
+  if (typeof window !== "undefined") {
+    window.onbeforeunload = () => {
+      updateWidgets(data.id, usedWidgets);
+      console.log("before page leave: need save invitation data");
+    };
+  }
   // useEffect(() => {
   //   if (firstRender) {
   //     setFirstRender(false);
