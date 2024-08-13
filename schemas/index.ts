@@ -116,7 +116,7 @@ export const ReviewSchema = z.object({
   message: z.string().min(1, {
     message: "Message is required",
   }),
-  rating: z.number()
+  rating: z.number(),
 });
 
 export const UpdateReviewSchema = z.object({
@@ -124,8 +124,8 @@ export const UpdateReviewSchema = z.object({
   message: z.string().min(1, {
     message: "Message is required",
   }),
-  rating: z.number()
-})
+  rating: z.number(),
+});
 
 export const InviteCreateSchema = z.object({
   userId: z.string().min(1),

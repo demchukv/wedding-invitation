@@ -7,7 +7,6 @@ import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-import { BeatLoader } from "react-spinners";
 
 interface EditInvitationProps {
   data: InvitationType;
@@ -54,7 +53,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
         usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
       }
     }
-    setUsedWidgets(prev => usedWidgets.sort((a, b) => a.order - b.order));
+    setUsedWidgets(usedWidgets.sort((a, b) => a.order - b.order));
     updateWidgets(usedWidgets);
   };
 

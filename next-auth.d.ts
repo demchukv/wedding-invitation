@@ -5,6 +5,9 @@ import { UserRole } from "@prisma/client";
 export type ExtendedUser = DefaultSession["user"] & {
   id: string;
   role: UserRole;
+  name: string | null;
+  email: string | null;
+  image: string | null;
   isTwoFactorEnabled: boolean;
   isOauth: boolean;
 };
