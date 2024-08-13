@@ -7,6 +7,8 @@ import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { BeatLoader } from "react-spinners";
 
 interface EditInvitationProps {
   data: InvitationType;
@@ -57,7 +59,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
         }
       }
       setUsedWidgets(usedWidgets.sort((a, b) => a.order - b.order));
-      updateWidgets(usedWidgets);
+      // updateWidgets(usedWidgets);
     });
   };
 
@@ -74,36 +76,45 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
     });
   };
 
-  useEffect(() => {
-    if (firstRender) {
-      setFirstRender(false);
-    } else {
-      updateWidgets(usedWidgets);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [usedWidgets]);
+  // useEffect(() => {
+  //   if (firstRender) {
+  //     setFirstRender(false);
+  //   } else {
+  //     updateWidgets(usedWidgets);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [usedWidgets]);
 
   return (
-    <div className="grid w-full grid-cols-4 gap-6">
-      <div>
-        <EnabledWidgets
-          onClickWidgetButton={onClickWidgetButton}
-          isPending={isPending}
-        />
-      </div>
-
-      <div className="col-span-3" id="invitationArea">
-        <>
-          {/* {isPending && <BeatLoader />} */}
-          <UsedWidget
-            data={data}
-            usedWidgets={usedWidgets}
-            removeWidget={removeWidget}
-            changePosition={changePosition}
+    <>
+      <div className="grid w-full grid-cols-4 gap-6">
+        <div>
+          <EnabledWidgets
+            onClickWidgetButton={onClickWidgetButton}
             isPending={isPending}
           />
-        </>
+        </div>
+
+        <div className="col-span-3" id="invitationArea">
+          <>
+            {/* {isPending && <BeatLoader />} */}
+            <UsedWidget
+              data={data}
+              usedWidgets={usedWidgets}
+              removeWidget={removeWidget}
+              changePosition={changePosition}
+              isPending={isPending}
+            />
+          </>
+        </div>
       </div>
-    </div>
+      <Button
+        onClick={() => updateWidgets(usedWidgets)}
+        disabled={isPending}
+        variant="default"
+      >
+        {isPending ? <BeatLoader /> : "Save your changes"}
+      </Button>
+    </>
   );
 };
