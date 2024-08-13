@@ -109,6 +109,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
         onClick={() => updateWidgets(usedWidgets)}
         disabled={isPending}
         variant="default"
+        className="w-full mt-6"
       >
         {isPending ? <BeatLoader /> : "Save your changes"}
       </Button>
