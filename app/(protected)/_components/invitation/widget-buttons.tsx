@@ -8,6 +8,7 @@ interface WidgetButtonsProps {
   totalWidgets: number;
   changePosition: (id: String, direction: "up" | "down") => void;
   removeWidget: (id: String) => void;
+  isPending: boolean;
 }
 
 export const WidgetButtons = ({
@@ -15,6 +16,7 @@ export const WidgetButtons = ({
   totalWidgets,
   changePosition,
   removeWidget,
+  isPending,
 }: WidgetButtonsProps) => {
   return (
     <>
@@ -24,6 +26,7 @@ export const WidgetButtons = ({
           className="hover:bg-yellow-200"
           size="sm"
           variant="link"
+          disabled={isPending}
         >
           <Settings />
         </Button>
@@ -36,7 +39,7 @@ export const WidgetButtons = ({
         onClick={() => {
           changePosition(widget.id, "up");
         }}
-        disabled={widget.order === 0}
+        disabled={widget.order === 0 || isPending}
       >
         <ArrowBigUp />
       </Button>
@@ -48,7 +51,7 @@ export const WidgetButtons = ({
         onClick={() => {
           changePosition(widget.id, "down");
         }}
-        disabled={widget.order === totalWidgets - 1}
+        disabled={widget.order === totalWidgets - 1 || isPending}
       >
         <ArrowBigDown />
       </Button>
@@ -60,6 +63,7 @@ export const WidgetButtons = ({
         onClick={() => {
           removeWidget(widget.id);
         }}
+        disabled={isPending}
       >
         <SquareX />
       </Button>

@@ -3,9 +3,11 @@ import { InviteWidgetType } from "@/types/invitation";
 import { enabledWidgets } from "@/app/(protected)/_components/widgets/widgets-list";
 interface EnabledWidgetsProps {
   onClickWidgetButton: (w: InviteWidgetType) => void;
+  isPending: boolean;
 }
 export const EnabledWidgets = ({
   onClickWidgetButton,
+  isPending,
 }: EnabledWidgetsProps) => {
   return (
     <>
@@ -17,6 +19,7 @@ export const EnabledWidgets = ({
             className="w-full"
             type="button"
             onClick={() => onClickWidgetButton(w)}
+            disabled={isPending}
           >
             {w.displayName}
           </Button>

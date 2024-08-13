@@ -16,7 +16,9 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   const [isPending, startTransition] = useTransition();
   const [firstRender, setFirstRender] = useState(true);
   const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
-    data?.InviteWidget || []
+    data?.InviteWidget
+      ? data.InviteWidget.sort((a, b) => a.order - b.order)
+      : []
   );
 
   const onClickWidgetButton = (w: InviteWidgetType) => {
@@ -31,30 +33,32 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   };
 
   const changePosition = (id: String, direction: "up" | "down") => {
-    usedWidgets.sort((a, b) => a.order - b.order);
-    for (let i = 0; i < usedWidgets.length; i++) {
-      usedWidgets[i].order = i;
-    }
-    for (let i = 0; i < usedWidgets.length; i++) {
-      if (
-        usedWidgets[i].id === id &&
-        direction === "up" &&
-        usedWidgets[i].order > 0
-      ) {
-        usedWidgets[i].order = usedWidgets[i].order - 1;
-        usedWidgets[i - 1].order = usedWidgets[i - 1].order + 1;
+    startTransition(() => {
+      // usedWidgets.sort((a, b) => a.order - b.order);
+      // for (let i = 0; i < usedWidgets.length; i++) {
+      //   usedWidgets[i].order = i;
+      // }
+      for (let i = 0; i < usedWidgets.length; i++) {
+        if (
+          usedWidgets[i].id === id &&
+          direction === "up" &&
+          usedWidgets[i].order > 0
+        ) {
+          usedWidgets[i].order = usedWidgets[i].order - 1;
+          usedWidgets[i - 1].order = usedWidgets[i - 1].order + 1;
+        }
+        if (
+          usedWidgets[i].id === id &&
+          direction === "down" &&
+          usedWidgets[i].order < usedWidgets.length - 1
+        ) {
+          usedWidgets[i].order = usedWidgets[i].order + 1;
+          usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
+        }
       }
-      if (
-        usedWidgets[i].id === id &&
-        direction === "down" &&
-        usedWidgets[i].order < usedWidgets.length - 1
-      ) {
-        usedWidgets[i].order = usedWidgets[i].order + 1;
-        usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
-      }
-    }
-    setUsedWidgets(usedWidgets.sort((a, b) => a.order - b.order));
-    updateWidgets(usedWidgets);
+      setUsedWidgets(usedWidgets.sort((a, b) => a.order - b.order));
+      updateWidgets(usedWidgets);
+    });
   };
 
   const updateWidgets = (usedWidgets: InviteWidgetType[]) => {
@@ -82,7 +86,10 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
   return (
     <div className="grid w-full grid-cols-4 gap-6">
       <div>
-        <EnabledWidgets onClickWidgetButton={onClickWidgetButton} />
+        <EnabledWidgets
+          onClickWidgetButton={onClickWidgetButton}
+          isPending={isPending}
+        />
       </div>
 
       <div className="col-span-3" id="invitationArea">
@@ -93,6 +100,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
             usedWidgets={usedWidgets}
             removeWidget={removeWidget}
             changePosition={changePosition}
+            isPending={isPending}
           />
         </>
       </div>
