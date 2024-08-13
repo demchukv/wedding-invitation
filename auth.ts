@@ -79,7 +79,8 @@ export const {
 
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token, user }) {
+      
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }

@@ -25,8 +25,11 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const ReviewForm = () => {
+  const user = useCurrentUser();
+
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -34,12 +37,15 @@ const ReviewForm = () => {
   const form = useForm<z.infer<typeof ReviewSchema>>({
     resolver: zodResolver(ReviewSchema),
     defaultValues: {
+      userId: user?.id || "",
+      name: user?.name || "",
       message: "",
       rating: 5,
     },
   });
 
   const onSubmit = (values: z.infer<typeof ReviewSchema>) => {
+    values.rating = Number(values.rating);
     setError("");
     setSuccess("");
     startTransition(() => {
@@ -59,6 +65,10 @@ const ReviewForm = () => {
         });
     });
   };
+
+  if (!user) {
+    return <div>Not logged in</div>;
+  }
 
   return (
     <CardWrapper
