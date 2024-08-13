@@ -96,16 +96,13 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
         </div>
 
         <div className="col-span-3" id="invitationArea">
-          <>
-            {/* {isPending && <BeatLoader />} */}
-            <UsedWidget
-              data={data}
-              usedWidgets={usedWidgets}
-              removeWidget={removeWidget}
-              changePosition={changePosition}
-              isPending={isPending}
-            />
-          </>
+          <UsedWidget
+            data={data}
+            usedWidgets={usedWidgets}
+            removeWidget={removeWidget}
+            changePosition={changePosition}
+            isPending={isPending}
+          />
         </div>
       </div>
       <Button
