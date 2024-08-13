@@ -90,29 +90,31 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
     updateWidgets(data.id, usedWidgets);
     console.log("before tab change: save invitation data");
   }
+
   if (typeof window !== "undefined") {
-    window.onbeforeunload = () => {
+    window.onbeforeunload = event => {
+      event.preventDefault();
       updateWidgets(data.id, usedWidgets);
       console.log("before page leave: save invitation data");
     };
   }
 
-  useEffect(() => {
-    const checkLinkClick = (event: any) => {
-      updateWidgets(data.id, usedWidgets);
-    };
+  const onLinkClick = (event: any) => {
+    updateWidgets(data.id, usedWidgets);
+  };
 
-    const aList = document.querySelectorAll("a");
-    aList.forEach(a => {
-      a.addEventListener("click", checkLinkClick);
-    });
+  const aList = document.querySelectorAll("a");
+  aList.forEach(a => {
+    a.addEventListener("click", onLinkClick);
+  });
 
-    return () => {
-      aList.forEach(a => {
-        a.removeEventListener("click", checkLinkClick);
-      });
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     aList.forEach(a => {
+  //       a.removeEventListener("click", onLinkClick);
+  //     });
+  //   }
+  // }, []);
 
   return (
     <>
@@ -140,7 +142,7 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
         variant="default"
         className="w-full mt-6"
       >
-        {isPending ? <BeatLoader /> : "Save your changes"}
+        {isPending ? <BeatLoader color="white" /> : "Save your changes"}
       </Button>
     </>
   );
