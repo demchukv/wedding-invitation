@@ -63,7 +63,7 @@ export const UserButton = () => {
         <DropdownMenuSeparator />
 
         <LogoutButton>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">
             <ExitIcon className="mr-2 h-4 w-4" />
             Logout
           </DropdownMenuItem>
