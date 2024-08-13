@@ -15,6 +15,7 @@ interface EditInvitationProps {
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
   const [isPending, startTransition] = useTransition();
+  // const [error, setError] = useState<string | null>(null);
   const [firstRender, setFirstRender] = useState(true);
   const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
     data?.InviteWidget || []
@@ -54,7 +55,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
         usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
       }
     }
-    setUsedWidgets(prev => usedWidgets.sort((a, b) => a.order - b.order));
+    setUsedWidgets(prev => prev.sort((a, b) => a.order - b.order));
     updateWidgets(usedWidgets);
   };
 
