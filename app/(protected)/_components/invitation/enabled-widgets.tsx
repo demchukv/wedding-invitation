@@ -11,7 +11,9 @@ export const EnabledWidgets = ({
 }: EnabledWidgetsProps) => {
   return (
     <>
-      <h2 className="mb-4">Select template</h2>
+      <h2 className="mb-4 text-center">
+        Select template (open in modal window)
+      </h2>
       {enabledWidgets.map(w => (
         <div key={w.widgetId}>
           <Button

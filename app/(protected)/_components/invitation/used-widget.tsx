@@ -50,7 +50,7 @@ export const UsedWidget = ({
                 key={widget.id}
                 className="w-full flex flex-row justify-between  border-b-2"
               >
-                <div>
+                <div className="w-full">
                   <WidgetComponent
                     key={widget.id}
                     data={data}
