@@ -11,23 +11,38 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// import { EditInvitation } from "@/app/(protected)/_components/invitation/edit-invitation";
 import { useEffect, useState, useTransition } from "react";
 import { getUserInvitationById } from "@/data/user-invitations";
 import { InvitationType } from "@/types/invitation";
 import { BeatLoader } from "react-spinners";
 import dynamic from "next/dynamic";
 
+// import { EditInvitation } from "@/app/(protected)/_components/invitation/edit-invitation";
+
 const EditInvitation = dynamic(() =>
   import("@/app/(protected)/_components/invitation/edit-invitation").then(
     mod => mod.EditInvitation
   )
 );
+
 const InvitePage = ({ params }: { params: { id: string } }) => {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<InvitationType | null>();
+  const [tab, setTab] = useState("account");
   const id = params.id;
 
+  if (typeof window !== "undefined") {
+    window.onbeforeunload = () => {
+      console.log("before page leave: need save invitation data");
+    };
+  }
+
+  const onTabSwitch = (value: string) => {
+    if (tab === "account" && value !== "account") {
+      console.log("beforeChangeTab: need save invitation data");
+    }
+    setTab(value);
+  };
   const getInvitation = async (id: string) => {
     startTransition(() => {
       getUserInvitationById(id).then(res => {
@@ -46,10 +61,16 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
       {isPending && <BeatLoader />}
       {!isPending && !data && <div>Invitation not found</div>}
       {!isPending && data && (
-        <Tabs defaultValue="account" className="w-[600px]">
+        <Tabs
+          defaultValue="account"
+          className="w-[600px]"
+          onValueChange={(value: string) => {
+            onTabSwitch(value);
+          }}
+        >
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="account">Edit</TabsTrigger>
-            <TabsTrigger value="password">Guests</TabsTrigger>
+            <TabsTrigger value="guests">Guests</TabsTrigger>
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="statisctic">Statistics</TabsTrigger>
           </TabsList>
@@ -67,7 +88,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
               </CardFooter> */}
             </Card>
           </TabsContent>
-          <TabsContent value="password">
+          <TabsContent value="guests">
             <Card>
               <CardHeader>
                 <CardTitle>Guests</CardTitle>

@@ -16,7 +16,7 @@ interface EditInvitationProps {
 
 export const EditInvitation = ({ data }: EditInvitationProps) => {
   const [isPending, startTransition] = useTransition();
-  const [firstRender, setFirstRender] = useState(true);
+  // const [firstRender, setFirstRender] = useState(true);
   const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
     data?.InviteWidget
       ? data.InviteWidget.sort((a, b) => a.order - b.order)
@@ -36,10 +36,6 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
 
   const changePosition = (id: String, direction: "up" | "down") => {
     startTransition(() => {
-      // usedWidgets.sort((a, b) => a.order - b.order);
-      // for (let i = 0; i < usedWidgets.length; i++) {
-      //   usedWidgets[i].order = i;
-      // }
       for (let i = 0; i < usedWidgets.length; i++) {
         if (
           usedWidgets[i].id === id &&
@@ -58,14 +54,18 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
           usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
         }
       }
-      setUsedWidgets(usedWidgets.sort((a, b) => a.order - b.order));
+      usedWidgets.sort((a, b) => a.order - b.order);
+      for (let i = 0; i < usedWidgets.length; i++) {
+        usedWidgets[i].order = i;
+      }
+      setUsedWidgets(usedWidgets);
       // updateWidgets(usedWidgets);
     });
   };
 
-  const updateWidgets = (usedWidgets: InviteWidgetType[]) => {
+  const updateWidgets = (inviteId: string, usedWidgets: InviteWidgetType[]) => {
     startTransition(() => {
-      updateInviteWidgets(data.id, usedWidgets).then(res => {
+      updateInviteWidgets(inviteId, usedWidgets).then(res => {
         if (res?.error) {
           console.log(res.error);
         }
@@ -106,7 +106,7 @@ export const EditInvitation = ({ data }: EditInvitationProps) => {
         </div>
       </div>
       <Button
-        onClick={() => updateWidgets(usedWidgets)}
+        onClick={() => updateWidgets(data.id, usedWidgets)}
         disabled={isPending}
         variant="default"
         className="w-full mt-6"
