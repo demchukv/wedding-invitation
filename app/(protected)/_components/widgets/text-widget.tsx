@@ -17,7 +17,7 @@ interface TextWidgetProps {
 export const TextWidget = ({ data, widgetData }: TextWidgetProps) => {
   return (
     <div className="py-2">
-      <div>{widgetData.text}</div>
+      <div>{widgetData?.text}</div>
       <div>{data.nameOne}</div>
       <div>{data.nameTwo}</div>
       <div>{data.endDate.toLocaleDateString()}</div>

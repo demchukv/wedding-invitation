@@ -57,14 +57,14 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
             <Card>
               <CardHeader>
                 <CardTitle>Edit</CardTitle>
-                <CardDescription>Tabs for edit invitation</CardDescription>
+                <CardDescription>Edit your invitation</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <EditInvitation data={data} />
               </CardContent>
-              <CardFooter>
+              {/* <CardFooter>
                 <Button>Save changes</Button>
-              </CardFooter>
+              </CardFooter> */}
             </Card>
           </TabsContent>
           <TabsContent value="password">
