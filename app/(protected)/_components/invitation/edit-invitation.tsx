@@ -24,8 +24,6 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
       : []
   );
 
-  const stringToDisplay = "Do you want to save before leaving the page ?";
-
   const onClickWidgetButton = (w: InviteWidgetType) => {
     setUsedWidgets(prev => [
       ...prev,
@@ -78,17 +76,6 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
       });
     });
   };
-  console.log(save);
-  if (save) {
-    updateWidgets(data.id, usedWidgets);
-    console.log("before tab change: need save invitation data");
-  }
-  if (typeof window !== "undefined") {
-    window.onbeforeunload = () => {
-      updateWidgets(data.id, usedWidgets);
-      console.log("before page leave: need save invitation data");
-    };
-  }
   // useEffect(() => {
   //   if (firstRender) {
   //     setFirstRender(false);
@@ -97,6 +84,35 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
   //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [usedWidgets]);
+
+  console.log(save);
+  if (save) {
+    updateWidgets(data.id, usedWidgets);
+    console.log("before tab change: save invitation data");
+  }
+  if (typeof window !== "undefined") {
+    window.onbeforeunload = () => {
+      updateWidgets(data.id, usedWidgets);
+      console.log("before page leave: save invitation data");
+    };
+  }
+
+  useEffect(() => {
+    const checkLinkClick = (event: any) => {
+      updateWidgets(data.id, usedWidgets);
+    };
+
+    const aList = document.querySelectorAll("a");
+    aList.forEach(a => {
+      a.addEventListener("click", checkLinkClick);
+    });
+
+    return () => {
+      aList.forEach(a => {
+        a.removeEventListener("click", checkLinkClick);
+      });
+    };
+  }, []);
 
   return (
     <>
