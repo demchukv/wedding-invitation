@@ -11,47 +11,52 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition, useRef } from "react";
 import { getUserInvitationById } from "@/data/user-invitations";
 import { InvitationType } from "@/types/invitation";
 import { BeatLoader } from "react-spinners";
 import dynamic from "next/dynamic";
+import {
+  EditInvitation,
+  EditRef,
+} from "@/app/(protected)/_components/invitation/edit-invitation";
 
-// import { EditInvitation } from "@/app/(protected)/_components/invitation/edit-invitation";
-
-const EditInvitation = dynamic(() =>
-  import("@/app/(protected)/_components/invitation/edit-invitation").then(
-    mod => mod.EditInvitation
-  )
-);
+// const EditInvitation = dynamic(() =>
+//   import("@/app/(protected)/_components/invitation/edit-invitation").then(
+//     mod => mod.EditInvitation
+//   )
+// );
 
 const InvitePage = ({ params }: { params: { id: string } }) => {
   const [isPending, startTransition] = useTransition();
   const [data, setData] = useState<InvitationType | null>();
   const [tab, setTab] = useState("account");
-  const [save, setSave] = useState(false);
+  const [reloadData, setReloadData] = useState(false);
   const id = params.id;
+  const editRef = useRef<EditRef>(null);
 
   const onTabSwitch = (value: string) => {
     if (tab === "account" && value !== "account") {
-      setSave(true);
-    } else {
-      setSave(false);
+      editRef?.current?.onTabChangeSaveData();
+    }
+    if (tab !== "account" && value === "account") {
+      setReloadData(true);
     }
     setTab(value);
   };
-  const getInvitation = async (id: string) => {
-    startTransition(() => {
-      getUserInvitationById(id).then(res => {
-        setData(res);
-      });
-    });
-  };
 
   useEffect(() => {
+    const getInvitation = async (id: string) => {
+      startTransition(() => {
+        getUserInvitationById(id).then(res => {
+          console.log("Load data from DB");
+          setData(res);
+          setReloadData(false);
+        });
+      });
+    };
     getInvitation(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, reloadData]);
 
   return (
     <>
@@ -61,6 +66,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
         <Tabs
           defaultValue="account"
           className="w-[600px]"
+          activationMode="manual"
           onValueChange={(value: string) => {
             onTabSwitch(value);
           }}
@@ -78,11 +84,8 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
                 <CardDescription>Edit your invitation</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <EditInvitation data={data} save={save} />
+                <EditInvitation data={data} ref={editRef} />
               </CardContent>
-              {/* <CardFooter>
-                <Button>Save changes</Button>
-              </CardFooter> */}
             </Card>
           </TabsContent>
           <TabsContent value="guests">
