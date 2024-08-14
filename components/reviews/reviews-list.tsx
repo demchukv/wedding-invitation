@@ -6,23 +6,27 @@ import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 import CardWrapper from "../auth/card-wrapper";
 import ReviewsListItem from "./reviews-list-item";
+import { BeatLoader } from "react-spinners";
 
 const ReviewsList = () => {
   const [reviews, setReviews] = useState<ReviewType[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    const fetchReviews = async () => {
-      const data = await getAllReviews();
-      console.log(data);
-
-      if ("error" in data) {
-        setError(data.error);
-        toast.error(data.error);
-      } else {
-        setReviews(data);
-      }
+    const fetchReviews = () => {
+      startTransition(() => {
+        const data = getAllReviews().then(data => {
+          if ("error" in data) {
+            setError(data.error);
+            toast.error(data.error);
+          } else {
+            setReviews(data);
+          }
+        });
+      });
     };
+    fetchReviews();
   }, []);
 
   return (
@@ -33,13 +37,16 @@ const ReviewsList = () => {
         backButtonHref=""
         backButtonLabel=""
       >
-        <ul className="space-y-4">
-          {reviews?.map(review => (
-            <li key={review.id}>
-              <ReviewsListItem review={review} />
-            </li>
-          ))}
-        </ul>
+        {isPending && <BeatLoader color="black" />}
+        {!isPending && reviews && (
+          <ul className="space-y-4">
+            {reviews?.map(review => (
+              <li key={review.id}>
+                <ReviewsListItem review={review} />
+              </li>
+            ))}
+          </ul>
+        )}
       </CardWrapper>
     </>
   );
