@@ -89,7 +89,7 @@ const ReviewForm = () => {
                 <FormControl>
                   <RadioGroup
                     defaultValue={String(field.value)}
-                    onValueChange={() => field.onChange(Number(field.value))}
+                    onValueChange={value => field.onChange(Number(value))}
                     className="flex flex-row space-y-1"
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">
