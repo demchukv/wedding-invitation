@@ -19,7 +19,8 @@ const config = {
       },
     },
     fontFamily: {
-      sans: ["var(--font-sans)", ...fontFamily.serif],
+      cinzel: ["var(--font-cinzel)", ...fontFamily.serif],
+      quicksand: ["var(--font-quicksand)", ...fontFamily.sans],
     },
     extend: {
       colors: {
