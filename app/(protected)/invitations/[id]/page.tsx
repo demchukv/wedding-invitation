@@ -17,8 +17,6 @@ import { InvitationType } from "@/types/invitation";
 import { BeatLoader } from "react-spinners";
 import dynamic from "next/dynamic";
 
-// import { EditInvitation } from "@/app/(protected)/_components/invitation/edit-invitation";
-
 const EditInvitation = dynamic(() =>
   import("@/app/(protected)/_components/invitation/edit-invitation").then(
     mod => mod.EditInvitation
@@ -40,17 +38,16 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
     }
     setTab(value);
   };
-  const getInvitation = async (id: string) => {
-    startTransition(() => {
-      getUserInvitationById(id).then(res => {
-        setData(res);
-      });
-    });
-  };
 
   useEffect(() => {
+    const getInvitation = async (id: string) => {
+      startTransition(() => {
+        getUserInvitationById(id).then(res => {
+          setData(res);
+        });
+      });
+    };
     getInvitation(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (
@@ -61,6 +58,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
         <Tabs
           defaultValue="account"
           className="w-[600px]"
+          activationMode="manual"
           onValueChange={(value: string) => {
             onTabSwitch(value);
           }}
@@ -80,9 +78,6 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
               <CardContent className="space-y-2">
                 <EditInvitation data={data} save={save} />
               </CardContent>
-              {/* <CardFooter>
-                <Button>Save changes</Button>
-              </CardFooter> */}
             </Card>
           </TabsContent>
           <TabsContent value="guests">

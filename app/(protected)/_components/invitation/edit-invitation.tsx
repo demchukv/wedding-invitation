@@ -17,7 +17,6 @@ interface EditInvitationProps {
 
 export const EditInvitation = ({ data, save }: EditInvitationProps) => {
   const [isPending, startTransition] = useTransition();
-  // const [firstRender, setFirstRender] = useState(true);
   const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
     data?.InviteWidget
       ? data.InviteWidget.sort((a, b) => a.order - b.order)
@@ -25,14 +24,18 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
   );
 
   const onClickWidgetButton = (w: InviteWidgetType) => {
-    setUsedWidgets(prev => [
-      ...prev,
-      { ...w, id: nanoid(), inviteId: data.id, order: usedWidgets.length },
-    ]);
+    startTransition(() => {
+      setUsedWidgets(prev => [
+        ...prev,
+        { ...w, id: nanoid(), inviteId: data.id, order: usedWidgets.length },
+      ]);
+    });
   };
 
   const removeWidget = (id: String) => {
-    setUsedWidgets(prev => prev.filter(w => w.id !== id));
+    startTransition(() => {
+      setUsedWidgets(prev => prev.filter(w => w.id !== id));
+    });
   };
 
   const changePosition = (id: String, direction: "up" | "down") => {
@@ -60,11 +63,11 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
         usedWidgets[i].order = i;
       }
       setUsedWidgets(usedWidgets);
-      // updateWidgets(usedWidgets);
     });
   };
 
   const updateWidgets = (inviteId: string, usedWidgets: InviteWidgetType[]) => {
+    console.log(usedWidgets);
     startTransition(() => {
       updateInviteWidgets(inviteId, usedWidgets).then(res => {
         if (res?.error) {
@@ -76,45 +79,47 @@ export const EditInvitation = ({ data, save }: EditInvitationProps) => {
       });
     });
   };
-  // useEffect(() => {
-  //   if (firstRender) {
-  //     setFirstRender(false);
-  //   } else {
-  //     updateWidgets(usedWidgets);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [usedWidgets]);
+  const updateWidgets1 = () => {
+    console.log(usedWidgets);
+    startTransition(() => {
+      updateInviteWidgets(data.id, usedWidgets).then(res => {
+        if (res?.error) {
+          console.log(res.error);
+        }
+        if (res?.success) {
+          console.log(res.success);
+        }
+      });
+    });
+  };
 
-  console.log(save);
   if (save) {
     updateWidgets(data.id, usedWidgets);
     console.log("before tab change: save invitation data");
   }
 
   if (typeof window !== "undefined") {
-    window.onbeforeunload = event => {
-      event.preventDefault();
+    window.onbeforeunload = () => {
       updateWidgets(data.id, usedWidgets);
       console.log("before page leave: save invitation data");
     };
   }
 
-  const onLinkClick = (event: any) => {
-    updateWidgets(data.id, usedWidgets);
-  };
-
-  const aList = document.querySelectorAll("a");
-  aList.forEach(a => {
-    a.addEventListener("click", onLinkClick);
-  });
-
-  // useEffect(() => {
-  //   return () => {
-  //     aList.forEach(a => {
-  //       a.removeEventListener("click", onLinkClick);
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    const onLinkClick = () => {
+      updateWidgets(data.id, usedWidgets);
+      console.log("After link click: save invitation data");
+    };
+    const aList = document.querySelectorAll("a");
+    aList.forEach(a => {
+      a.addEventListener("click", onLinkClick);
+    });
+    return () => {
+      aList.forEach(a => {
+        a.removeEventListener("click", onLinkClick);
+      });
+    };
+  }, [data.id, usedWidgets]);
 
   return (
     <>
