@@ -34,12 +34,13 @@ export const ResetForm = () => {
       email: "",
     },
   });
+  const { isSubmitting, isValid, isDirty } = form.formState;
 
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      reset(values).then((data) => {
+      reset(values).then(data => {
         setError(data?.error);
         setSuccess(data?.success);
       });
@@ -75,7 +76,11 @@ export const ResetForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" disabled={isPending} className="w-full">
+          <Button
+            type="submit"
+            disabled={isPending || !isValid || !isDirty}
+            className="w-full"
+          >
             {isPending ? <BeatLoader color="white" /> : `Send reset email`}
           </Button>
         </form>

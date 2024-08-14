@@ -54,6 +54,7 @@ export const InviteCreateForm = () => {
       endDate: new Date(),
     },
   });
+  const { isSubmitting, isValid, isDirty } = form.formState;
 
   const onSubmit = (values: z.infer<typeof InviteCreateSchema>) => {
     setError("");
@@ -168,7 +169,11 @@ export const InviteCreateForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
 
-          <Button type="submit" disabled={isPending} className="w-full">
+          <Button
+            type="submit"
+            disabled={isPending || !isValid || !isDirty}
+            className="w-full"
+          >
             {isPending ? <BeatLoader color="white" /> : "Create Invitation"}
           </Button>
         </form>

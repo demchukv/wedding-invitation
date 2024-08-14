@@ -36,6 +36,7 @@ export const RegisterForm = () => {
       password: "",
     },
   });
+  const { isSubmitting, isValid, isDirty } = form.formState;
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
@@ -117,7 +118,7 @@ export const RegisterForm = () => {
           <FormSuccess message={success} />
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={isPending || !isValid || !isDirty}
             className="w-full"
             variant="primary"
           >

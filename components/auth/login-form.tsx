@@ -39,6 +39,7 @@ export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -47,6 +48,7 @@ export const LoginForm = () => {
       code: "",
     },
   });
+  const { isSubmitting, isValid, isDirty } = form.formState;
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
@@ -154,7 +156,12 @@ export const LoginForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
-          <Button type="submit" disabled={isPending} className="w-full">
+
+          <Button
+            type="submit"
+            disabled={isPending || !isValid || !isDirty}
+            className="w-full"
+          >
             {isPending ? (
               <BeatLoader color="white" />
             ) : showTowFactor ? (
