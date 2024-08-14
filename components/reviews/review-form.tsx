@@ -45,7 +45,6 @@ const ReviewForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof ReviewSchema>) => {
-    values.rating = Number(values.rating);
     setError("");
     setSuccess("");
     startTransition(() => {
@@ -90,7 +89,7 @@ const ReviewForm = () => {
                 <FormControl>
                   <RadioGroup
                     defaultValue={String(field.value)}
-                    onValueChange={field.onChange}
+                    onValueChange={() => field.onChange(Number(field.value))}
                     className="flex flex-row space-y-1"
                   >
                     <FormItem className="flex items-center space-x-3 space-y-0">

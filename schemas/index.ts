@@ -116,7 +116,9 @@ export const ReviewSchema = z.object({
   message: z.string().min(1, {
     message: "Message is required",
   }),
-  rating: z.number(),
+  rating: z.number({
+    invalid_type_error: "Rating must be a number",
+  }),
 });
 
 export const UpdateReviewSchema = z.object({
