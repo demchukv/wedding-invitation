@@ -11,8 +11,8 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="h-full ">
-        <div className="h-full container mx-auto sm:container md:container lg:container flex flex-col items-center justify-center">
+      <main className="flex-grow flex">
+        <div className="min-h-full container mx-auto sm:container md:container lg:container flex flex-col items-center justify-center">
           <div className="space-y-6 text-center">
             <h1
               className={cn(

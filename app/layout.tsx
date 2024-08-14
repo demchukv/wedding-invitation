@@ -23,7 +23,7 @@ export default async function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "min-h-screen bg-background antialiased flex flex-col justify-between",
+            "min-h-screen flex flex-col bg-background antialiased",
             quicksand.className
           )}
         >
