@@ -24,7 +24,9 @@ const config = {
     extend: {
       colors: {
         mblack: "hsl(var(--mblack))",
+        mbrown: "hsl(var(--m-brown))",
         mbtnhover: "var(--mbtnhover)",
+
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

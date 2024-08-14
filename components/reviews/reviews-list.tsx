@@ -10,7 +10,6 @@ import { BeatLoader } from "react-spinners";
 
 const ReviewsList = () => {
   const [reviews, setReviews] = useState<ReviewType[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const ReviewsList = () => {
       startTransition(() => {
         const data = getAllReviews().then(data => {
           if ("error" in data) {
-            setError(data.error);
             toast.error(data.error);
           } else {
             setReviews(data);
