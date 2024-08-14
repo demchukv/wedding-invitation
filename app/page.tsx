@@ -12,7 +12,7 @@ export default async function Home() {
     <>
       <Header />
       <main className="flex-grow flex">
-        <div className="min-h-full container mx-auto sm:container md:container lg:container flex flex-col items-center justify-center">
+        <div className="min-h-full container mx-auto flex flex-col items-center justify-center">
           <div className="space-y-6 text-center">
             <h1
               className={cn(

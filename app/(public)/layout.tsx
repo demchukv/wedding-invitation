@@ -10,7 +10,7 @@ const PublicLayout = ({ children }: ProtectedLayoutProps) => {
     <AuthProvider>
       <Header />
       <main className="flex-grow flex">
-        <div className="h-full container mx-auto sm:container md:container lg:container flex flex-col items-center justify-start w-full">
+        <div className="h-full container mx-auto flex flex-col items-center justify-start w-full">
           {children}
         </div>
       </main>
