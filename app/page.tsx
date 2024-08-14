@@ -1,12 +1,11 @@
-import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import LoginButton from "@/components/auth/login-button";
 import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import { auth } from "@/auth";
+import { cinzel } from "@/styles/fonts";
 
-const font = Poppins({ subsets: ["latin"], weight: "600" });
 export default async function Home() {
   const session = await auth();
   return (
@@ -17,8 +16,8 @@ export default async function Home() {
           <div className="space-y-6 text-center">
             <h1
               className={cn(
-                "text-6xl font-semibold text-primary drop-shadow-md",
-                font.className
+                "text-6xl font-semibold text-primary drop-shadow-md font-ginzel",
+                cinzel.className
               )}
             >
               Wedding Invitations

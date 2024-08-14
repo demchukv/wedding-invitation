@@ -46,6 +46,9 @@ body,
     --m-green: 151.27, 100%, 27.84%;
     --m-light-grey-background-70: 30, 1%, 100%, 0.7;
     --mbtnhover: linear-gradient(135deg, #ffe1be 0%, #ffa391 100%);
+
+    /* --font-quicksand: Quicksand;
+    --font-ginzel: Cinzel; */
   }
 
   .dark {
@@ -86,6 +89,9 @@ body,
     --m-green: 151.27, 100%, 27.84%;
     --m-light-grey-background-70: 30, 1%, 100%, 0.7;
     --mbtnhover: linear-gradient(135deg, #ffe1be 0%, #ffa391 100%);
+
+    /* --font-quicksand: Quicksand;
+    --font-ginzel: Cinzel; */
   }
 }
 

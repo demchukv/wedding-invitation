@@ -37,7 +37,7 @@ const ReviewsList = () => {
       >
         {isPending && <BeatLoader color="black" />}
         {!isPending && reviews && (
-          <ul className="space-y-4">
+          <ul className="flex flex-col gap-4 md:flex-row">
             {reviews?.map(review => (
               <li key={review.id}>
                 <ReviewsListItem review={review} />
