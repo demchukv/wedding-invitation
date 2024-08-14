@@ -60,13 +60,12 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      {isPending && <BeatLoader />}
-      {!isPending && !data && <div>Invitation not found</div>}
-      {!isPending && data && (
+      {!isPending && !data ? (
+        <div>Invitation not found</div>
+      ) : (
         <Tabs
           defaultValue="account"
           className="w-[600px]"
-          activationMode="manual"
           onValueChange={(value: string) => {
             onTabSwitch(value);
           }}
@@ -84,7 +83,10 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
                 <CardDescription>Edit your invitation</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
-                <EditInvitation data={data} ref={editRef} />
+                {isPending && <BeatLoader />}
+                {!isPending && data && (
+                  <EditInvitation data={data} ref={editRef} />
+                )}
               </CardContent>
             </Card>
           </TabsContent>
