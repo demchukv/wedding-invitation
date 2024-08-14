@@ -6,7 +6,7 @@ export const Footer = () => {
       <div className="container mx-auto sm:container md:container lg:container">
         <div className="flex flex-row justify-between items-center">
           <div>&copy; {new Date().getFullYear()} InviteTeam</div>
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 md:flex-row md:gap-1">
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
             <Link href="/templates">Templates</Link>
