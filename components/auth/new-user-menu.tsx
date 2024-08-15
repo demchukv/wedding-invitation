@@ -7,8 +7,12 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LoginButton from "@/components/auth/login-button";
+import { Button } from "@/components/ui/button";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const NewUserMenu = () => {
+  const session = useCurrentUser();
   const pathname = usePathname();
   return (
     <NavigationMenu>
@@ -19,9 +23,16 @@ export const NewUserMenu = () => {
             pathname === "/auth/login" && "bg-primary text-secondary"
           )}
         >
-          <Link href="/auth/login" legacyBehavior passHref>
+          {!session && (
+            <LoginButton mode="modal" asChild>
+              <NavigationMenuLink className="cursor-pointer">
+                Sign in
+              </NavigationMenuLink>
+            </LoginButton>
+          )}
+          {/* <Link href="/auth/login" legacyBehavior passHref>
             <NavigationMenuLink>Sign in</NavigationMenuLink>
-          </Link>
+          </Link> */}
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
