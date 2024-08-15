@@ -21,7 +21,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import CardWrapper from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
@@ -154,11 +153,12 @@ export const LoginForm = () => {
 
           <Button
             type="submit"
+            variant="primary"
             disabled={isPending || !isValid || !isDirty}
-            className="w-full"
+            className="mx-auto cursor-pointer rounded-[2px] border bg-white border-mblack text-mblack font-semibold px-[24px] py-[10px] text-center hover:bg-mlightgreybackground"
           >
             {isPending ? (
-              <BeatLoader color="white" />
+              <BeatLoader className="text-mblack" />
             ) : showTowFactor ? (
               "Confirm"
             ) : (

@@ -28,6 +28,12 @@ const config = {
         mbrown: "hsl(var(--m-brown))",
         mdarkbrown: "hsl(var(--m-dark-brown))",
         mbtnhover: "var(--mbtnhover)",
+        mlightgreybackground: "hsl(var(--m-light-grey-background))",
+        mlightgreybackground70: "hsl(var(--m-light-grey-background-70))",
+        mpink: "hsl(var(--m-pink))",
+        mgrey: "hsl(var(--m-grey))",
+        mred: "hsl(var(--m-red))",
+        mgreen: "hsl(var(--m-green))",
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
