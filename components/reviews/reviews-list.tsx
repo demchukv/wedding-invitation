@@ -1,53 +1,38 @@
-"use client";
+"use server";
 
 import { getAllReviews } from "@/data/review";
 import { ReviewType } from "@/types/review";
-import { useEffect, useState, useTransition } from "react";
-import { toast } from "sonner";
-import CardWrapper from "../auth/card-wrapper";
-import ReviewsListItem from "./reviews-list-item";
-import { BeatLoader } from "react-spinners";
+import { ReviewsListItem } from "@/components/reviews/reviews-list-item";
 
-const ReviewsList = () => {
-  const [reviews, setReviews] = useState<ReviewType[] | null>(null);
-  const [isPending, startTransition] = useTransition();
+interface ReviewInput {
+  take?: number | undefined;
+}
 
-  useEffect(() => {
-    const fetchReviews = () => {
-      startTransition(() => {
-        const data = getAllReviews().then(data => {
-          if ("error" in data) {
-            toast.error(data.error);
-          } else {
-            setReviews(data);
-          }
-        });
-      });
-    };
-    fetchReviews();
-  }, []);
+export const ReviewsList = async ({ take }: ReviewInput) => {
+  const reviews = (await getAllReviews(take)) as {
+    success: boolean;
+    data: ReviewType[];
+  };
+
+  if (!reviews.success) {
+    return null;
+  }
+
+  const items = reviews.data.length;
+  const mdItems = items < 4 ? items : 4;
+  const lgItems = items < 6 ? items : 6;
 
   return (
     <>
-      <CardWrapper
-        headerTitle="Reviews"
-        headerLabel="Reviews list"
-        backButtonHref=""
-        backButtonLabel=""
-      >
-        {isPending && <BeatLoader color="black" />}
-        {!isPending && reviews && (
-          <ul className="flex flex-col gap-4 md:flex-row">
-            {reviews?.map(review => (
-              <li key={review.id}>
-                <ReviewsListItem review={review} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </CardWrapper>
+      <div className="w-full my-6 rounded-lg border p-4">
+        <ul
+          className={`grid grid-cols-1 gap-4 sm:grid-cols-2  md:grid-cols-${mdItems}  lg:grid-cols-${lgItems}`}
+        >
+          {reviews.data.map(review => (
+            <ReviewsListItem key={review.id} review={review} />
+          ))}
+        </ul>
+      </div>
     </>
   );
 };
-
-export default ReviewsList;

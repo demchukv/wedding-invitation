@@ -1,12 +1,14 @@
+"use server";
+
 import { ReviewType } from "@/types/review";
 
-const ReviewsListItem = ({ review }: { review: ReviewType }) => {
+export const ReviewsListItem = ({ review }: { review: ReviewType }) => {
+  console.log(review);
   return (
-    <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md text-mbrown">
+    <li className="flex flex-col items-start justify-start rounded-lg border gap-1 p-3 shadow-md text-mbrown">
       <p>Rating: {review.rating}</p>
+      <p className="font-bold text-sm">{review.name}</p>
       <p>{review.message}</p>
-    </div>
+    </li>
   );
 };
-
-export default ReviewsListItem;

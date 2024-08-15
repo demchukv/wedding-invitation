@@ -15,7 +15,6 @@ import { useEffect, useState, useTransition, useRef } from "react";
 import { getUserInvitationById } from "@/data/user-invitations";
 import { InvitationType } from "@/types/invitation";
 import { BeatLoader } from "react-spinners";
-import dynamic from "next/dynamic";
 import {
   EditInvitation,
   EditRef,

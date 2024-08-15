@@ -1,10 +1,10 @@
-import ReviewsList from "@/components/reviews/reviews-list";
+import { ReviewsList } from "@/components/reviews/reviews-list";
 
 const AboutPage = () => {
   return (
-    <div className="container mx-auto md:container lg:container">
+    <div className="w-full">
       <h1 className="text-3xl">About service</h1>
-      <ReviewsList />
+      <ReviewsList take={6} />
     </div>
   );
 };
