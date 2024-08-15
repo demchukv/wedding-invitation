@@ -5,11 +5,13 @@ import {
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { headers } from "next/headers";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export const BaseNavbar = () => {
-  const pathname = usePathname();
+  const headersList = headers();
+  const pathname = headersList.get("x-current-path");
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
