@@ -20,7 +20,7 @@ export const NewUserMenu = () => {
           )}
         >
           <Link href="/auth/login" legacyBehavior passHref>
-            <NavigationMenuLink>Login</NavigationMenuLink>
+            <NavigationMenuLink>Sign in</NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem
@@ -30,7 +30,7 @@ export const NewUserMenu = () => {
           )}
         >
           <Link href="/auth/register" legacyBehavior passHref>
-            <NavigationMenuLink>Register</NavigationMenuLink>
+            <NavigationMenuLink>Sign up</NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
       </NavigationMenuList>

@@ -1,6 +1,4 @@
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import LoginButton from "@/components/auth/login-button";
 import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import { auth } from "@/auth";
@@ -24,15 +22,6 @@ export default async function Home() {
             </h1>
             <p className="text-primary text-lg">A simple test project</p>
           </div>
-          {!session && (
-            <div>
-              <LoginButton mode="modal" asChild>
-                <Button variant="secondary" size="lg">
-                  Sign in
-                </Button>
-              </LoginButton>
-            </div>
-          )}
         </div>
       </main>
       <Footer />
