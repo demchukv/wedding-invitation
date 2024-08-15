@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BeatLoader } from "react-spinners";
 import Link from "next/link";
+import { Social } from "@/components/auth/social";
 
 import { login } from "@/actions/login";
 
@@ -75,13 +76,7 @@ export const LoginForm = () => {
     });
   };
   return (
-    <CardWrapper
-      headerTitle="Sign In"
-      headerLabel="Welcome back"
-      backButtonLabel="Don't have an account?"
-      backButtonHref="/auth/register"
-      showSocial
-    >
+    <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
@@ -172,6 +167,7 @@ export const LoginForm = () => {
           </Button>
         </form>
       </Form>
-    </CardWrapper>
+      <Social />
+    </>
   );
 };

@@ -14,7 +14,7 @@ export default async function Home() {
           <div className="space-y-6 text-center">
             <h1
               className={cn(
-                "text-6xl font-semibold text-primary drop-shadow-md font-ginzel",
+                "text-3xl sm:text-6xl font-semibold text-primary drop-shadow-md font-ginzel",
                 cinzel.className
               )}
             >

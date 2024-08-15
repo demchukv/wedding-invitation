@@ -1,3 +1,5 @@
+"use server";
+
 import {
   NavigationMenu,
   NavigationMenuLink,
@@ -14,7 +16,7 @@ export const BaseNavbar = () => {
 
   return (
     <NavigationMenu>
-      <NavigationMenuList>
+      <NavigationMenuList className="flex-col sm:flex-row">
         <NavigationMenuItem
           className={cn(
             "text-primary bg-secondary hover:text-secondary hover:bg-primary  transition-all px-3 py-2 rounded-lg",
