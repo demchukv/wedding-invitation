@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BeatLoader } from "react-spinners";
 import Link from "next/link";
 import { Social } from "@/components/auth/social";
+import css from "./login-form.module.css";
 
 import { login } from "@/actions/login";
 
@@ -155,7 +156,12 @@ export const LoginForm = () => {
             type="submit"
             variant="primary"
             disabled={isPending || !isValid || !isDirty}
-            className="mx-auto cursor-pointer rounded-[2px] border bg-white border-mblack text-mblack font-semibold px-[24px] py-[10px] text-center hover:bg-mlightgreybackground"
+            // className={css.btn}
+            className="
+            mx-auto cursor-pointer rounded-[2px] border bg-mlightgrey border-mblack text-mblack font-semibold px-[24px] py-[10px] text-center transition-background
+            hover:bg-gradient-to-br from-btnbgstart to-btnbgend
+            shadow-[2px_2px_0_1px_rgba(0,0,0)]
+            "
           >
             {isPending ? (
               <BeatLoader className="text-mblack" />
