@@ -127,6 +127,7 @@ export const UpdateReviewSchema = z.object({
     message: "Message is required",
   }),
   rating: z.number(),
+  state: z.string()
 });
 
 export const InviteCreateSchema = z.object({
