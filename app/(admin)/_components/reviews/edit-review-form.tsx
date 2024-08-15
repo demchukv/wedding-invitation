@@ -19,6 +19,7 @@ import { Controller, useForm } from "react-hook-form";
 import { UpdateReviewSchema } from "@/schemas";
 import { ReviewType } from "@/types/review";
 import { updateReview } from "@/actions/review/update-review";
+import StarRating from '../../../../components/rating/StarRating'
 
 export const EditReviewForm = ({ review }: { review: ReviewType }) => {
   const [isPending, startTransition] = useTransition();
@@ -101,6 +102,20 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
                       <option value="APPROVED" className="text-green-600">APPROVED</option>
                       <option value="DECLINED" className="text-red-600">DECLINED</option>
                     </select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div>
+            <FormField
+              control={form.control}
+              name="rating"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{"Rating:"}</FormLabel>
+                  <FormControl>
+                   <StarRating totalStars={5} size={32} {...field} />
                   </FormControl>
                 </FormItem>
               )}
