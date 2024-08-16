@@ -1,5 +1,4 @@
-import { UserRole } from "@prisma/client";
-import { MdPassword } from "react-icons/md";
+import { UserRole, ReviewState } from "@prisma/client";
 import * as z from "zod";
 
 export const SettingsSchema = z
@@ -127,7 +126,8 @@ export const UpdateReviewSchema = z.object({
     message: "Message is required",
   }),
   rating: z.number(),
-  state: z.string()
+  // state: z.string()
+  state: z.enum([ReviewState.NEW, ReviewState.APPROVED, ReviewState.DECLINED]),
 });
 
 export const InviteCreateSchema = z.object({
