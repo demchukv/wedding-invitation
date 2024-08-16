@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BeatLoader } from "react-spinners";
 import Link from "next/link";
 import { Social } from "@/components/auth/social";
-import css from "./login-form.module.css";
 
 import { login } from "@/actions/login";
 
@@ -156,18 +155,10 @@ export const LoginForm = () => {
             type="submit"
             variant="primary"
             disabled={isPending || !isValid || !isDirty}
-            // className={css.btn}
-            className="
-            mx-auto cursor-pointer rounded-[2px] border bg-mlightgrey border-mblack text-mblack font-semibold px-[24px] py-[10px] text-center transition-background
-            hover:bg-gradient-to-br from-btnbgstart to-btnbgend
-            border-width: 0px, 4px, 4px, 0px;
-
-border-style: solid;
-
-border-image-source: linear-gradient(96.61deg, #FFE1BE 0%, #FFA391 100%);
-
-
-            "
+            className="w-full cursor-pointer rounded-[2px] text-mblack font-semibold px-6 py-2.5 text-center transition-background 
+            [border-width: 0px, 4px, 4px, 0px]
+            [border-image-source: linear-gradient(96.61deg, #FFE1BE 0%, #FFA391 100%)]
+            hover:bg-gradient-to-br from-btnbgstart to-btnbgend"
           >
             {isPending ? (
               <BeatLoader className="text-mblack" />
@@ -177,6 +168,14 @@ border-image-source: linear-gradient(96.61deg, #FFE1BE 0%, #FFA391 100%);
               "Login"
             )}
           </Button>
+
+          <div className="rounded-sm flex gap-2.5 justify-center items-center self-stretch relative w-full bg-[#fffefd]">
+            <button className="rounded-sm border-[0.5px] border-[#2d0c03] px-6 py-2.5 flex gap-2.5 justify-center items-center flex-1 relative w-full bg-transparent">
+              <span className="font-semibold leading-[21px] text-base text-[#2d0c03]">
+                Sign in
+              </span>
+            </button>
+          </div>
         </form>
       </Form>
       <Social />

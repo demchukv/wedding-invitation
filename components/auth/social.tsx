@@ -1,8 +1,8 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
+// import { FcGoogle } from "react-icons/fc";
+// import { FaFacebook, FaGithub, FaInstagram } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -28,9 +28,9 @@ export const Social = () => {
           onClick("google");
         }}
       >
-        <FcGoogle />
+        Sign in with Google
       </Button>
-      <Button
+      {/* <Button
         variant="outline"
         size="lg"
         className="w-full"
@@ -39,7 +39,7 @@ export const Social = () => {
         }}
       >
         <FaGithub className="w-5 h-5" />
-      </Button>
+      </Button> */}
       {/* <Button
         variant="outline"
         size="lg"
