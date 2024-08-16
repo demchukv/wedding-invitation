@@ -27,6 +27,8 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useSession } from "next-auth/react";
 
+import { cn } from "@/lib/utils";
+
 export const LoginForm = () => {
   const { update } = useSession();
   const searchParams = useSearchParams();
@@ -156,6 +158,21 @@ export const LoginForm = () => {
             variant="primary"
             disabled={isPending || !isValid || !isDirty}
             size="auto"
+            className={cn(
+              "w-full cursor-pointer rounded-[6px] border-[none] bg-mbrown pt-[0] pr-[4px] pb-[4px] pl-[0]",
+
+              "hover:[box-shadow:0px_4px_8px_0px_#61110640] active:[box-shadow:0px_4px_8px_0px_#61110640] disabled:bg-[#848383]",
+
+              "*:w-full *:flex *:items-center *:justify-center *:gap-[10px] *:px-[24px] *:py-[10px] *:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] *:border-[0.5px] *:border-[solid] *:border-[#2d0c03] *:rounded-[2px]",
+
+              "text-[18px] font-semibold leading-[23.4px] text-[#2d0c03]",
+
+              "hover:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)]",
+              "active:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] active:*:text-[#FFFEFD]",
+              "focus:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] active:*:text-[#FFFEFD]",
+
+              "disabled:*:bg-[#EAE9E9] disabled:*:text-[#848383] disabled:*:border-[#848383]"
+            )}
           >
             <span>
               {isPending ? (
@@ -167,11 +184,6 @@ export const LoginForm = () => {
               )}
             </span>
           </Button>
-          <div className="my-4 flex items-center justify-center">
-            <button type="button" className="btn">
-              <span>Sign in</span>
-            </button>
-          </div>
         </form>
       </Form>
       <Social />
