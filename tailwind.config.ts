@@ -34,6 +34,7 @@ const config = {
         mgrey: "hsl(var(--m-grey))",
         mred: "hsl(var(--m-red))",
         mgreen: "hsl(var(--m-green))",
+
         btnbgstart: "var(--btn-bg-start)",
         btnbgend: "var(--btn-bg-end)",
 
