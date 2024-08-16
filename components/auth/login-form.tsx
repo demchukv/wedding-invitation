@@ -160,10 +160,13 @@ export const LoginForm = () => {
             className="
             mx-auto cursor-pointer rounded-[2px] border bg-mlightgrey border-mblack text-mblack font-semibold px-[24px] py-[10px] text-center transition-background
             hover:bg-gradient-to-br from-btnbgstart to-btnbgend
-            shadow-[2px_2px_0_1px_var(--btn-bg-end)]
-            hover:shadow-[2px_2px_0_1px_var(--m-brown)]
-            focus:shadow-[2px_2px_0_1px_var(--m-brown),0_4px_8px_0_rgba(97, 17, 6, 0.25)]
-            active:shadow-[2px_2px_0_1px_var(--m-brown),0_4px_8px_0_rgba(97, 17, 6, 0.25)]
+            border-width: 0px, 4px, 4px, 0px;
+
+border-style: solid;
+
+border-image-source: linear-gradient(96.61deg, #FFE1BE 0%, #FFA391 100%);
+
+
             "
           >
             {isPending ? (

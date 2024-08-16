@@ -23,7 +23,7 @@ const InvitationsListItem = ({
       </Link>
       <div className="flex gap-2">
         <Button
-          variant="custom"
+          variant="default"
           size="sm"
           title="Go to edit invitation"
           disabled={isPending}
