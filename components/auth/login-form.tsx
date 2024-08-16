@@ -159,24 +159,24 @@ export const LoginForm = () => {
             disabled={isPending || !isValid || !isDirty}
             size="auto"
             className={cn(
-              "w-full cursor-pointer rounded-[6px] border-[none] bg-mbrown pt-[0] pr-[4px] pb-[4px] pl-[0]",
+              "group w-full cursor-pointer rounded-[5px] border-[none] bg-mbrown pt-[0] pr-[4px] pb-[4px] pl-[0]",
 
-              "hover:[box-shadow:0px_4px_8px_0px_#61110640] active:[box-shadow:0px_4px_8px_0px_#61110640] disabled:bg-[#848383]",
+              "hover:[box-shadow:0px_4px_8px_0px_#61110640] active:[box-shadow:0px_4px_8px_0px_#61110640] disabled:bg-[#848383] disabled:opacity-100",
 
-              "*:w-full *:flex *:items-center *:justify-center *:gap-[10px] *:px-[24px] *:py-[10px] *:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] *:border-[0.5px] *:border-[solid] *:border-[#2d0c03] *:rounded-[2px]",
+              "*:w-full *:flex *:items-center *:justify-center *:gap-[10px] *:px-6 *:py-[10px]",
+              "*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] *:border-[0.5px] *:border-mblack *:rounded-[2px]",
 
-              "text-[18px] font-semibold leading-[23.4px] text-[#2d0c03]",
+              "text-lg font-semibold leading-6 text-mblack",
 
-              "hover:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)]",
-              "active:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] active:*:text-[#FFFEFD]",
-              "focus:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] active:*:text-[#FFFEFD]",
+              "active:text-[#FFFEFD]",
+              "focus:text-[#FFFEFD]",
 
-              "disabled:*:bg-[#EAE9E9] disabled:*:text-[#848383] disabled:*:border-[#848383]"
+              "group-disabled:bg-[#EAE9E9] group-disabled:border-[#848383] disabled:text-[#848383]"
             )}
           >
             <span>
               {isPending ? (
-                <BeatLoader className="text-mblack" />
+                <BeatLoader className="text-mbrown" />
               ) : showTowFactor ? (
                 "Confirm"
               ) : (
