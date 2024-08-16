@@ -111,11 +111,11 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
             <FormField
               control={form.control}
               name="rating"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>{"Rating:"}</FormLabel>
                   <FormControl>
-                   <StarRating totalStars={5} size={32} {...field} />
+                   <StarRating totalStars={5} size={32} handleClick={(stars) => {form.setValue("rating", stars)}}/>
                   </FormControl>
                 </FormItem>
               )}
