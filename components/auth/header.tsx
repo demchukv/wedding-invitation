@@ -1,5 +1,4 @@
 import { cinzel } from "@/styles/fonts";
-
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {

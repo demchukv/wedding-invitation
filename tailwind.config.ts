@@ -24,9 +24,19 @@ const config = {
     },
     extend: {
       colors: {
-        mblack: "hsl(var(--mblack))",
-        mbrown: "hsl(var(--m-brown))",
+        mblack: "hsl(var(--m-black))",
+        mbrown: "var(--m-brown)",
+        mdarkbrown: "hsl(var(--m-dark-brown))",
         mbtnhover: "var(--mbtnhover)",
+        mlightgrey: "hsl(var(--m-light-grey-background))",
+        mlightgrey70: "hsl(var(--m-light-grey-background-70))",
+        mpink: "hsl(var(--m-pink))",
+        mgrey: "hsl(var(--m-grey))",
+        mred: "hsl(var(--m-red))",
+        mgreen: "hsl(var(--m-green))",
+
+        btnbgstart: "var(--btn-bg-start)",
+        btnbgend: "var(--btn-bg-end)",
 
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

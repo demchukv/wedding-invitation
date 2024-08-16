@@ -120,7 +120,7 @@ export const UserInvitations = ({ userId }: UserAccountsProps) => {
                       {invite.updatedAt.toLocaleDateString()}
                     </TableCell>
                     <TableCell>
-                      <Button variant="custom" size="sm">
+                      <Button variant="default" size="sm">
                         <Link href={`/invitations/${invite.id}`}>
                           <Edit className="h-4 w-4" />
                         </Link>

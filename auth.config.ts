@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import GitHub from "next-auth/providers/github";
+// import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 // import Facebook from "next-auth/providers/facebook";
 // import Instagram from "next-auth/providers/instagram";
@@ -16,11 +16,11 @@ export default {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
-    GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      allowDangerousEmailAccountLinking: true,
-    }),
+    // GitHub({
+    //   clientId: process.env.GITHUB_CLIENT_ID,
+    //   clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    //   allowDangerousEmailAccountLinking: true,
+    // }),
     // Instagram({
     //   clientId: process.env.INSTAGRAM_CLIENT_ID,
     //   clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,

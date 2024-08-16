@@ -1,3 +1,6 @@
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
 import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import {
@@ -41,6 +44,12 @@ export default auth(req => {
 
   return undefined;
 });
+
+export function middleware(request: NextRequest) {
+  const headers = new Headers(request.headers);
+  headers.set("x-current-path", request.nextUrl.pathname);
+  return NextResponse.next({ headers });
+}
 
 export const config = {
   matcher: [

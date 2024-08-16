@@ -1,5 +1,8 @@
 "use client";
 
+import { cinzel } from "@/styles/fonts";
+import { cn } from "@/lib/utils";
+
 import { useRouter } from "next/navigation";
 import {
   Dialog,
@@ -30,8 +33,15 @@ const LoginButton = ({
       <Dialog>
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
 
-        <DialogContent className="p-0 w-auto bg-transparent border-none">
-          <DialogTitle>Sign in</DialogTitle>
+        <DialogContent className="p-[24px] pt-[72px] w-[320px] bg-background border border-mdarkbrown rounded-[2px] gap-[32px]">
+          <DialogTitle
+            className={cn(
+              cinzel.className,
+              "text-[28px] text-mblack font-bold text-center"
+            )}
+          >
+            Welcom Back
+          </DialogTitle>
           <LoginForm />
         </DialogContent>
       </Dialog>

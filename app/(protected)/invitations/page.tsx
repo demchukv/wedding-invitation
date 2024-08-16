@@ -10,6 +10,13 @@ import { Suspense } from "react";
 
 const InvitationsPage = async () => {
   const user = await currentUser();
+  if (!user) {
+    return (
+      <div>
+        <h1>Unauthorized!</h1>
+      </div>
+    );
+  }
   const invitations = await getUserInvitationsList(user?.id as string);
 
   return (

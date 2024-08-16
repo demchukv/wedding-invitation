@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BeatLoader } from "react-spinners";
 import Link from "next/link";
+import { Social } from "@/components/auth/social";
 
 import { login } from "@/actions/login";
 
@@ -20,7 +21,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import CardWrapper from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
@@ -75,13 +75,7 @@ export const LoginForm = () => {
     });
   };
   return (
-    <CardWrapper
-      headerTitle="Sign In"
-      headerLabel="Welcome back"
-      backButtonLabel="Don't have an account?"
-      backButtonHref="/auth/register"
-      showSocial
-    >
+    <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
@@ -159,19 +153,28 @@ export const LoginForm = () => {
 
           <Button
             type="submit"
+            variant="primary"
             disabled={isPending || !isValid || !isDirty}
-            className="w-full"
+            size="auto"
           >
-            {isPending ? (
-              <BeatLoader color="white" />
-            ) : showTowFactor ? (
-              "Confirm"
-            ) : (
-              "Login"
-            )}
+            <span>
+              {isPending ? (
+                <BeatLoader className="text-mblack" />
+              ) : showTowFactor ? (
+                "Confirm"
+              ) : (
+                "Sign in"
+              )}
+            </span>
           </Button>
+          <div className="my-4 flex items-center justify-center">
+            <button type="button" className="btn">
+              <span>Sign in</span>
+            </button>
+          </div>
         </form>
       </Form>
-    </CardWrapper>
+      <Social />
+    </>
   );
 };
