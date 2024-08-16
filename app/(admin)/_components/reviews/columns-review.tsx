@@ -15,6 +15,17 @@ declare module "@tanstack/react-table" {
   }
 }
 
+const inputTextColor = (state: string) => {
+  switch (state) {
+    case 'APPROVED':
+      return 'px-2 py-1 rounded-md border-2 border-green-600 text-green-600';
+    case 'DECLINED':
+      return 'px-2 py-1 rounded-md border-2 border-red-600 text-red-600'; 
+    default:
+      return 'px-2 py-1 rounded-md border-2 text-black';
+  }
+};
+
 export const columns: ColumnDef<ReviewType>[] = [
   {
     accessorKey: "id",
@@ -34,6 +45,24 @@ export const columns: ColumnDef<ReviewType>[] = [
         <div title={id} className="text-sm truncate font-mono w-[80px]">
           {id}
         </div>
+      );
+    },
+  },
+  {
+    accessorKey: "name",
+    header: () => {
+      return (
+        <Button
+          variant="ghost"
+        >
+          Name
+        </Button>
+      );
+    },
+    cell: ({ getValue }) => {
+      const name = getValue<string>();
+      return (
+          <p>{name}</p>
       );
     },
   },
@@ -116,7 +145,7 @@ export const columns: ColumnDef<ReviewType>[] = [
       if (!state) {
         return "";
       } else {
-        return <p>{state}</p>;
+        return <p className={inputTextColor(state)}>{state}</p>;
       }
     },
     meta: {

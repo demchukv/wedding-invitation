@@ -15,10 +15,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { BeatLoader } from "react-spinners";
 import { useTransition, useState } from "react";
-import { useForm } from "react-hook-form";
-import { UpdateReviewSchema, UpdateUserSchema } from "@/schemas";
+import { Controller, useForm } from "react-hook-form";
+import { UpdateReviewSchema } from "@/schemas";
 import { ReviewType } from "@/types/review";
 import { updateReview } from "@/actions/review/update-review";
+import StarRating from '../../../../components/rating/StarRating'
 
 export const EditReviewForm = ({ review }: { review: ReviewType }) => {
   const [isPending, startTransition] = useTransition();
@@ -30,26 +31,40 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
     defaultValues: {
       id: review.id || undefined,
       message: review?.message || undefined,
-      rating: review?.rating || undefined
+      rating: review?.rating || 0,
+      state: review?.state || undefined
     },
   });
 
   const onSubmit = (values: z.infer<typeof UpdateReviewSchema>) => {
     startTransition(() => {
-      updateReview(values).then(data => {
-        if (data?.error) {
-          setError(data.error)
-          setSuccess(undefined)
-        }
-        if (data?.success) {
-          setSuccess(data.success)
-          setError(undefined)
-        }
-      }).catch(() => {
-        setError("Something went wrong!")
-      })
-    })
-  }
+      updateReview(values)
+        .then(data => {
+          if (data?.error) {
+            setError(data.error);
+            setSuccess(undefined);
+          }
+          if (data?.success) {
+            setSuccess(data.success);
+            setError(undefined);
+          }
+        })
+        .catch(() => {
+          setError("Something went wrong!");
+        });
+    });
+  };
+
+  const inputTextColor = (status: string) => {
+    switch (status) {
+      case 'APPROVED':
+        return 'text-green-600';
+      case 'DECLINED':
+        return 'text-red-600'; 
+      default:
+        return 'text-black';
+    }
+  };
 
   return (
     <>
@@ -61,15 +76,47 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
+                  <FormLabel>{"Message"}</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      type="text"
-                    />
+                    <Input {...field} disabled={isPending} type="text" />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div>
+            <FormField
+              control={form.control}
+              name="state"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{"Status:"}</FormLabel>
+                  <FormControl>
+                    <select
+                      id="status"
+                      {...field}
+                      className={`mx-5 px-2 py-1 rounded-md border-2 border-black ${inputTextColor(field.value)}`}
+                    >
+                      <option value="NEW" className="text-black">NEW</option>
+                      <option value="APPROVED" className="text-green-600">APPROVED</option>
+                      <option value="DECLINED" className="text-red-600">DECLINED</option>
+                    </select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div>
+            <FormField
+              control={form.control}
+              name="rating"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{"Rating:"}</FormLabel>
+                  <FormControl>
+                   <StarRating totalStars={5} size={32} {...field} />
+                  </FormControl>
                 </FormItem>
               )}
             />
