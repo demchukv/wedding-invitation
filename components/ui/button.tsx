@@ -19,8 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        primary:
-          "p-0 cursor-pointer rounded-[6px] border-[none] bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] pt-[0] pr-[4px] pb-[4px] pl-[0] hover:bg-[#784533] active:bg-[#784533] active:[box-shadow:0px_4px_8px_0px_#61110640] bg-[#848383] *:flex items-center justify-center gap-[10px] px-[24px] py-[10px] bg-[#fffefd] border-[0.5px] border-[solid] border-[#2d0c03] rounded-[2px] text-[18px] font-semibold leading-[23.4px] text-[#2d0c03] bg-[#fffefd] [transition:all_250ms_cubic-bezier(0.32,_0.72,_0,_1)] hover:*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)]",
+        primary: "",
       },
       size: {
         default: "h-9 px-4 py-2",
