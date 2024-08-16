@@ -1,15 +1,22 @@
-import React, { HTMLAttributes, useState } from 'react';
-import './StarRating.css';
+import React, { HTMLAttributes, useState } from "react";
+import "./StarRating.css";
 
 type StarRatingProps = {
   totalStars: number;
-  size?: number
-  handleClick?: (value: number) => void
+  size?: number;
+  rating?: number;
+  handleClick?: (value: number) => void;
 } & HTMLAttributes<HTMLElement>;
 
-const StarRating: React.FC<StarRatingProps> = ({ totalStars, size = 24, handleClick = () => { }, ...props }) => {
-  const [filledStars, setFilledStars] = useState<number>(0);
-  const [selectedStar, setSelectedStar] = useState<number | null>(null)
+const StarRating: React.FC<StarRatingProps> = ({
+  totalStars,
+  size = 24,
+  rating = 0,
+  handleClick = () => {},
+  ...props
+}) => {
+  const [filledStars, setFilledStars] = useState<number>(rating);
+  const [selectedStar, setSelectedStar] = useState<number | null>(rating);
 
   const handleStarHover = (hoveredStars: number): void => {
     setFilledStars(hoveredStars);
@@ -19,14 +26,14 @@ const StarRating: React.FC<StarRatingProps> = ({ totalStars, size = 24, handleCl
     if (!selectedStar) {
       setFilledStars(0);
     } else {
-      setFilledStars(selectedStar)
+      setFilledStars(selectedStar);
     }
   };
 
   const handleStarClick = (clickedStars: number): void => {
     setFilledStars(clickedStars);
-    setSelectedStar(clickedStars)
-    handleClick(clickedStars)
+    setSelectedStar(clickedStars);
+    handleClick(clickedStars);
   };
 
   const renderStars = (): JSX.Element[] => {
@@ -35,7 +42,7 @@ const StarRating: React.FC<StarRatingProps> = ({ totalStars, size = 24, handleCl
       stars.push(
         <span
           key={i}
-          className={`star ${filledStars >= i ? 'filled' : ''}`}
+          className={`star ${filledStars >= i ? "filled" : ""}`}
           onMouseEnter={() => handleStarHover(i)}
           onMouseLeave={() => handleStarLeave()}
           onClick={() => handleStarClick(i)}
@@ -47,7 +54,15 @@ const StarRating: React.FC<StarRatingProps> = ({ totalStars, size = 24, handleCl
     return stars;
   };
 
-  return <div {...props} style={{ fontSize: `${size}px` }}  className={`${props.className ? props.className : ''} starRating`}>{renderStars()}</div>;
+  return (
+    <div
+      {...props}
+      style={{ fontSize: `${size}px` }}
+      className={`${props.className ? props.className : ""} starRating`}
+    >
+      {renderStars()}
+    </div>
+  );
 };
 
 export default StarRating;

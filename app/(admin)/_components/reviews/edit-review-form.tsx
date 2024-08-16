@@ -19,7 +19,7 @@ import { Controller, useForm } from "react-hook-form";
 import { UpdateReviewSchema } from "@/schemas";
 import { ReviewType } from "@/types/review";
 import { updateReview } from "@/actions/review/update-review";
-import StarRating from '../../../../components/rating/StarRating'
+import StarRating from "../../../../components/rating/StarRating";
 
 export const EditReviewForm = ({ review }: { review: ReviewType }) => {
   const [isPending, startTransition] = useTransition();
@@ -32,7 +32,7 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
       id: review.id || undefined,
       message: review?.message || undefined,
       rating: review?.rating || 0,
-      state: review?.state || undefined
+      state: review?.state || undefined,
     },
   });
 
@@ -57,12 +57,12 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
 
   const inputTextColor = (status: string) => {
     switch (status) {
-      case 'APPROVED':
-        return 'text-green-600';
-      case 'DECLINED':
-        return 'text-red-600'; 
+      case "APPROVED":
+        return "text-green-600";
+      case "DECLINED":
+        return "text-red-600";
       default:
-        return 'text-black';
+        return "text-black";
     }
   };
 
@@ -98,9 +98,15 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
                       {...field}
                       className={`mx-5 px-2 py-1 rounded-md border-2 border-black ${inputTextColor(field.value)}`}
                     >
-                      <option value="NEW" className="text-black">NEW</option>
-                      <option value="APPROVED" className="text-green-600">APPROVED</option>
-                      <option value="DECLINED" className="text-red-600">DECLINED</option>
+                      <option value="NEW" className="text-black">
+                        NEW
+                      </option>
+                      <option value="APPROVED" className="text-green-600">
+                        APPROVED
+                      </option>
+                      <option value="DECLINED" className="text-red-600">
+                        DECLINED
+                      </option>
                     </select>
                   </FormControl>
                 </FormItem>
@@ -111,11 +117,16 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
             <FormField
               control={form.control}
               name="rating"
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>{"Rating:"}</FormLabel>
                   <FormControl>
-                   <StarRating totalStars={5} size={32} handleClick={(stars) => {form.setValue("rating", stars)}}/>
+                    <StarRating
+                      totalStars={5}
+                      size={32}
+                      rating={field.value}
+                      handleClick={field.onChange}
+                    />
                   </FormControl>
                 </FormItem>
               )}

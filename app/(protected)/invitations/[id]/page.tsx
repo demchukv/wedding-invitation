@@ -45,7 +45,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
   };
 
   useEffect(() => {
-    const getInvitation = async (id: string) => {
+    const getInvitation = (id: string) => {
       startTransition(() => {
         getUserInvitationById(id).then(res => {
           console.log("Load data from DB");
