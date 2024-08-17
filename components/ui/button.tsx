@@ -20,6 +20,21 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         primary: "",
+        one: cn(
+          "text-lg font-semibold leading-6 text-mblack",
+          "cursor-pointer py-3 px-6 rounded-[5px] rounded-tl-[2px]",
+          "bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)]",
+          "shadow-[inset_0_0_0_0.5px_rgba(0,0,0,0.75)]",
+          "border-mbrown border-t-0 border-l-0 border-r-4 border-b-4 border-solid",
+          "hover:[box-shadow:inset_0_0_0_0.5px_#2D0C03,0px_4px_8px_0px_#61110640]",
+          "active:[box-shadow:inset_0_0_0_0.5px_#2D0C03,0px_4px_8px_0px_#61110640]",
+          "focus:[box-shadow:inset_0_0_0_0.5px_#2D0C03,0px_4px_8px_0px_#61110640]",
+          "focus:active:text-mlightgreybg",
+          "disabled:[box-shadow:inset_0_0_0_0.5px_#848383]",
+          "disabled:bg-[linear-gradient(96.61deg,_#EAE9E9_0%,_#EAE9E9_100%)]",
+          "disabled:border-mgrey disabled:text-mgrey disabled:opacity-100",
+          "transition-[box-shadow,background-color,transform] duration-300 ease-in-out"
+        ),
       },
       size: {
         default: "h-9 px-4 py-2",

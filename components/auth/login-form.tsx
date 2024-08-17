@@ -155,34 +155,18 @@ export const LoginForm = () => {
 
           <Button
             type="submit"
-            variant="primary"
+            variant="one"
             disabled={isPending || !isValid || !isDirty}
             size="auto"
-            className={cn(
-              "group w-full cursor-pointer rounded-[5px] border-[none] bg-mbrown pt-[0] pr-[4px] pb-[4px] pl-[0]",
-
-              "hover:[box-shadow:0px_4px_8px_0px_#61110640] active:[box-shadow:0px_4px_8px_0px_#61110640] disabled:bg-[#848383] disabled:opacity-100",
-
-              "*:w-full *:flex *:items-center *:justify-center *:gap-[10px] *:px-6 *:py-[10px]",
-              "*:bg-[linear-gradient(96.61deg,_#ffe1be_0%,_#ffa391_100%)] *:border-[0.5px] *:border-mblack *:rounded-[2px]",
-
-              "text-lg font-semibold leading-6 text-mblack",
-
-              "active:text-[#FFFEFD]",
-              "focus:text-[#FFFEFD]",
-
-              "group-disabled:bg-[#EAE9E9] group-disabled:border-[#848383] disabled:text-[#848383]"
-            )}
+            className="w-full"
           >
-            <span>
-              {isPending ? (
-                <BeatLoader className="text-mbrown" />
-              ) : showTowFactor ? (
-                "Confirm"
-              ) : (
-                "Sign in"
-              )}
-            </span>
+            {isPending ? (
+              <BeatLoader className="text-mbrown" />
+            ) : showTowFactor ? (
+              "Confirm"
+            ) : (
+              "Sign in"
+            )}
           </Button>
         </form>
       </Form>
