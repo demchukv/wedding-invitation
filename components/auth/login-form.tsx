@@ -27,9 +27,10 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useSession } from "next-auth/react";
 
-import { cn } from "@/lib/utils";
-
-export const LoginForm = () => {
+interface Props {
+  title?: boolean;
+}
+export const LoginForm = ({ title }: Props = { title: true }) => {
   const { update } = useSession();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams?.get("callbackUrl");
@@ -153,24 +154,27 @@ export const LoginForm = () => {
           <FormError message={error || urlError} />
           <FormSuccess message={success} />
 
-          <Button
-            type="submit"
-            variant="one"
-            disabled={isPending || !isValid || !isDirty}
-            size="auto"
-            className="w-full"
-          >
-            {isPending ? (
-              <BeatLoader className="text-mbrown" />
-            ) : showTowFactor ? (
-              "Confirm"
-            ) : (
-              "Sign in"
-            )}
-          </Button>
+          <div className="flex flex-col justify-center items-center w-full gap-2">
+            <Button
+              type="submit"
+              variant="one"
+              disabled={isPending || !isValid || !isDirty}
+              size="auto"
+              className="w-full"
+            >
+              {isPending ? (
+                <BeatLoader className="text-mbrown" />
+              ) : showTowFactor ? (
+                "Confirm"
+              ) : (
+                "Sign in"
+              )}
+            </Button>
+
+            <Social />
+          </div>
         </form>
       </Form>
-      <Social />
     </>
   );
 };

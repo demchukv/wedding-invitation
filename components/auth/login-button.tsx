@@ -33,7 +33,7 @@ const LoginButton = ({
       <Dialog>
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
 
-        <DialogContent className="p-[24px] pt-[72px] w-[320px] bg-background border border-mdarkbrown rounded-[2px] gap-[32px]">
+        <DialogContent className="p-[24px] pt-[72px] w-[300px] sm:w-[340px] md:w-[400px] bg-background border border-mdarkbrown rounded-[2px] gap-[32px]">
           <DialogTitle
             className={cn(
               cinzel.className,
@@ -42,7 +42,7 @@ const LoginButton = ({
           >
             Welcom Back
           </DialogTitle>
-          <LoginForm />
+          <LoginForm title={false} />
         </DialogContent>
       </Dialog>
     );
