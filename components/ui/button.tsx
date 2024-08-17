@@ -19,6 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        primary: "",
         oneTest: cn(
           "text-lg font-semibold leading-6 text-mblack",
           "cursor-pointer py-3 px-6 rounded-[5px] rounded-tl-[2px]",
