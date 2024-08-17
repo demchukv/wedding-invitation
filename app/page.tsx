@@ -22,11 +22,40 @@ export default async function Home() {
               Wedding Invitations
             </h1>
             <p className="text-primary text-lg">A simple test project</p>
-            {/* <div className="flex gap-4">
-              <Button variant="one" size="auto">
-                One variant
+
+            <div className="grid grid-cols-2 gap-4 py-4">
+              <Button variant="one" type="button" size="auto">
+                variant=&quot;one&quot;
               </Button>
-            </div> */}
+
+              <Button
+                size="auto"
+                variant="one"
+                type="button"
+                className="btnOne"
+                disabled={true}
+              >
+                variant=&quot;one&quot;
+              </Button>
+
+              <Button
+                variant="two"
+                type="button"
+                className="btnTwo"
+                size="auto"
+              >
+                variant=&quot;two&quot;
+              </Button>
+              <Button
+                size="auto"
+                variant="two"
+                type="button"
+                className="btnTwo"
+                disabled={true}
+              >
+                variant=&quot;two&quot;
+              </Button>
+            </div>
           </div>
         </div>
       </main>

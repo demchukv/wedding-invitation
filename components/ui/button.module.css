@@ -1,0 +1,104 @@
+.btnOne {
+  position: relative;
+
+  margin-bottom: 4px;
+  margin-right: 4px;
+
+  border: 0 4px 4px 0 solid transparent;
+  border-radius: 2px;
+  background: linear-gradient(96.61deg, #ffe1be 0%, #ffa391 100%);
+  background-clip: border-box;
+  padding: 14px 28px;
+  box-shadow: inset 0 0 0 0.5px #784533;
+
+  font-weight: 600;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #2d0c03;
+
+  transition: all 0.15s ease-in-out;
+}
+.btnOne::after {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  bottom: -4px;
+  left: 0;
+  background: #784533;
+  content: "";
+  z-index: -1;
+  border-radius: 6px;
+}
+.btnOne:hover,
+.btnOne:active,
+.btnOne:focus {
+  box-shadow:
+    inset 0 0 0 0.5px #784533,
+    0px 4px 8px 0px #61110640;
+}
+.btnOne:active,
+.btnOne:focus {
+  color: #fff;
+}
+.btnOne:disabled {
+  background: #eae9e9;
+  box-shadow: inset 0 0 0 0.5px #848383;
+  color: #848383;
+}
+.btnOne:disabled::after {
+  background: #848383;
+}
+
+.btnTwo {
+  position: relative;
+  margin-bottom: 4px;
+  margin-right: 4px;
+  border: 0 4px 4px 0 solid transparent;
+  border-radius: 2px;
+  background: #fff;
+  background-clip: border-box;
+  padding: 14px 28px;
+  box-shadow: inset 0 0 0 0.5px #2d0c03;
+
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #2d0c03;
+
+  transition: all 0.15s ease-in-out;
+}
+.btnTwo::after {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, #ee6f57, #813d25);
+  content: "";
+  z-index: -1;
+  border-radius: 6px;
+}
+.btnTwo:hover,
+.btnTwo:active,
+.btnTwo:focus {
+  background: linear-gradient(90deg, #ee6f57 0%, #813d25 100%);
+  color: #fff;
+}
+.btnTwo:active,
+.btnTwo:focus {
+  box-shadow:
+    inset 0 0 0 0.5px #2d0c03,
+    0px 4px 8px 0px #61110640;
+}
+.btnTwo:disabled {
+  background: #fff;
+  box-shadow: inset 0 0 0 0.5px #848383;
+  color: #848383;
+}
+.btnTwo:hover::after,
+.btnTwo:active::after,
+.btnTwo:focus::after,
+.btnTwo:disabled::after {
+  background: #848383;
+}

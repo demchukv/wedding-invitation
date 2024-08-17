@@ -43,7 +43,7 @@ body,
     --m-light-grey-background: #fffefd;
     --m-pink: #fdbfb3;
     --m-grey: #848383;
-    --light-grey: #eae9e9;
+    --m-light-grey: #eae9e9;
     --m-red: #ed0000;
     --m-green: #008e4a;
     --m-light-grey-background-50: rgba(255, 254, 253, 0.5);
@@ -119,3 +119,4 @@ body,
     background-position: right -50px top 0;
   }
 }
+/** ************************************************************** */

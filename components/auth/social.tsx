@@ -19,10 +19,11 @@ export const Social = () => {
     });
   };
   return (
-    <div className="flex items-center w-full gap-x-2">
+    <>
+      {/* <div className="flex items-center w-full gap-x-2"> */}
       <Button
-        variant="outline"
-        size="lg"
+        variant="two"
+        size="auto"
         className="w-full"
         onClick={() => {
           onClick("google");
@@ -60,6 +61,7 @@ export const Social = () => {
       >
         <FaInstagram className="w-5 h-5" />
       </Button> */}
-    </div>
+      {/* </div> */}
+    </>
   );
 };

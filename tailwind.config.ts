@@ -81,6 +81,10 @@ const config = {
       borderWidth: {
         0.5: "0.5px",
       },
+      boxShadow: {
+        outerbtn: "0px 4px 8px 0px #61110640",
+        innerbtn: "inset 0px 0px 0px 0.5px #2D0C03",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
