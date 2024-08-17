@@ -28,12 +28,13 @@ const config = {
         mbrown: "var(--m-brown)",
         mdarkbrown: "var(--m-dark-brown)",
         mbtnhover: "var(--mbtnhover)",
-        mlightgrey: "hsl(var(--m-light-grey-background))",
-        mlightgrey70: "hsl(var(--m-light-grey-background-70))",
-        mpink: "hsl(var(--m-pink))",
-        mgrey: "hsl(var(--m-grey))",
-        mred: "hsl(var(--m-red))",
-        mgreen: "hsl(var(--m-green))",
+        mlightgreybg: "var(--m-light-grey-background)",
+        mlightgrey50: "hsl(var(--m-light-grey-background-50))",
+        mpink: "var(--m-pink)",
+        mgrey: "var(--m-grey)",
+        mlightgrey: "var(--m-light-grey)",
+        mred: "var(--m-red)",
+        mgreen: "var(--m-green)",
 
         btnbgstart: "var(--btn-bg-start)",
         btnbgend: "var(--btn-bg-end)",
@@ -77,6 +78,9 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      borderWidth: {
+        0.5: "0.5px",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -93,6 +97,7 @@ const config = {
       },
     },
   },
+
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
 

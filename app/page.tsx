@@ -3,6 +3,7 @@ import { Header } from "@/components/header/header";
 import { Footer } from "@/components/footer/footer";
 import { auth } from "@/auth";
 import { cinzel } from "@/styles/fonts";
+import { Button } from "@/components/ui/button";
 
 export default async function Home() {
   const session = await auth();
@@ -21,6 +22,11 @@ export default async function Home() {
               Wedding Invitations
             </h1>
             <p className="text-primary text-lg">A simple test project</p>
+            {/* <div className="flex gap-4">
+              <Button variant="one" size="auto">
+                One variant
+              </Button>
+            </div> */}
           </div>
         </div>
       </main>
