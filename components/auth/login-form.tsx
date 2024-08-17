@@ -27,10 +27,13 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useSession } from "next-auth/react";
 
+import { cn } from "@/lib/utils";
+import { cinzel } from "@/styles/fonts";
+
 interface Props {
   title?: boolean;
 }
-export const LoginForm = ({ title }: Props = { title: true }) => {
+export const LoginForm = ({ title = true }: Props) => {
   const { update } = useSession();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams?.get("callbackUrl");
@@ -77,8 +80,19 @@ export const LoginForm = ({ title }: Props = { title: true }) => {
         });
     });
   };
+
   return (
     <>
+      {title && (
+        <h1
+          className={cn(
+            cinzel.className,
+            "text-[28px] text-mblack font-bold text-center mb-4 "
+          )}
+        >
+          Welcome back
+        </h1>
+      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
