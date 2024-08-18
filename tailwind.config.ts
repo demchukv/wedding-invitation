@@ -27,6 +27,7 @@ const config = {
         mblack: "var(--m-black)",
         mbrown: "var(--m-brown)",
         mdarkbrown: "var(--m-dark-brown)",
+        mlightbrown: "var(--m-light-brown)",
         mbtnhover: "var(--mbtnhover)",
         mlightgreybg: "var(--m-light-grey-background)",
         mlightgrey50: "hsl(var(--m-light-grey-background-50))",

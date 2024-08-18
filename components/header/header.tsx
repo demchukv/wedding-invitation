@@ -8,8 +8,8 @@ import { Navbar } from "@/app/(protected)/_components/navbar";
 export const Header = async () => {
   const session = await auth();
   return (
-    <header className="py-4">
-      <div className="container mx-auto flex flex-row items-center justify-between w-full">
+    <header>
+      <div className="container mx-auto flex flex-row items-center justify-between w-full py-4 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
         <BaseNavbar />
         {!session ? <NewUserMenu /> : <Navbar />}
       </div>

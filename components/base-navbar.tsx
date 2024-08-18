@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import {
   NavigationMenu,
@@ -7,20 +7,19 @@ import {
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { headers } from "next/headers";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const BaseNavbar = () => {
-  const headersList = headers();
-  const pathname = headersList.get("x-current-path");
+  const pathname = usePathname();
 
   return (
     <NavigationMenu>
-      <NavigationMenuList className="flex-col sm:flex-row">
+      <NavigationMenuList className="flex-col sm:flex-row sm:gap-3">
         <NavigationMenuItem
           className={cn(
-            "text-primary bg-secondary hover:text-secondary hover:bg-primary  transition-all px-3 py-2 rounded-lg",
-            pathname === "/" && "bg-primary text-secondary"
+            "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
+            pathname === "/" && "border-mlightbrown bg-mlightbrown"
           )}
         >
           <Link href="/" legacyBehavior passHref>
@@ -29,8 +28,8 @@ export const BaseNavbar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
-            pathname === "/about" && "bg-primary text-secondary"
+            "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
+            pathname === "/about" && "border-mlightbrown bg-mlightbrown"
           )}
         >
           <Link href="/about" legacyBehavior passHref>
@@ -39,8 +38,8 @@ export const BaseNavbar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
-            pathname === "/templates" && "bg-primary text-secondary"
+            "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
+            pathname === "/templates" && "border-mlightbrown bg-mlightbrown"
           )}
         >
           <Link href="/templates" legacyBehavior passHref>
@@ -49,8 +48,8 @@ export const BaseNavbar = () => {
         </NavigationMenuItem>
         <NavigationMenuItem
           className={cn(
-            "text-primary bg-secondary hover:text-secondary hover:bg-primary transition-all px-3 py-2 radius-md rounded-lg",
-            pathname === "/feedback" && "bg-primary text-secondary"
+            "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
+            pathname === "/feedback" && "border-mlightbrown bg-mlightbrown"
           )}
         >
           <Link href="/feedback" legacyBehavior passHref>
