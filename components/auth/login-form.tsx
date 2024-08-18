@@ -147,7 +147,7 @@ export const LoginForm = ({ title = true }: Props) => {
                         size="sm"
                         variant="link"
                         asChild
-                        className="px-0 font-normal"
+                        className="px-0 font-medium text-mbrown text-base"
                       >
                         <Link href="/auth/reset">Forgot password?</Link>
                       </Button>
