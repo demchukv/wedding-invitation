@@ -82,7 +82,7 @@ export const LoginForm = ({ title = true }: Props) => {
 
   return (
     <>
-      {title && <PageTitle className="mb-[56px]">Welcome back</PageTitle>}
+      {title && <PageTitle>Welcome back</PageTitle>}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -147,7 +147,7 @@ export const LoginForm = ({ title = true }: Props) => {
                         size="sm"
                         variant="link"
                         asChild
-                        className="px-0 font-normal"
+                        className="px-0 font-medium text-mbrown text-base"
                       >
                         <Link href="/auth/reset">Forgot password?</Link>
                       </Button>

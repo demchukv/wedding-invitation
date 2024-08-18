@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { LoginForm } from "@/components/auth/login-form";
 
@@ -42,6 +43,7 @@ const LoginButton = ({
           >
             Welcom Back
           </DialogTitle>
+          <DialogDescription className="hidden">Welcom Back</DialogDescription>
           <LoginForm title={false} />
         </DialogContent>
       </Dialog>

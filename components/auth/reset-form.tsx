@@ -18,11 +18,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import CardWrapper from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+
+import { PageTitle } from "@/components/page-title";
+import Link from "next/link";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -47,13 +49,13 @@ export const ResetForm = () => {
     });
   };
   return (
-    <CardWrapper
-      headerLabel="Forgot your password?"
-      backButtonLabel="Back to login"
-      backButtonHref="/auth/login"
-    >
+    <>
+      <PageTitle className="mb-[56px]">Reset password</PageTitle>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 max-w-[440px] w-full"
+        >
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -85,8 +87,16 @@ export const ResetForm = () => {
           >
             {isPending ? <BeatLoader color="white" /> : `Send reset email`}
           </Button>
+          <Button
+            size="sm"
+            variant="link"
+            asChild
+            className="px-0 font-medium text-mbrown text-base"
+          >
+            <Link href="/auth/login">Back to login</Link>
+          </Button>
         </form>
       </Form>
-    </CardWrapper>
+    </>
   );
 };
