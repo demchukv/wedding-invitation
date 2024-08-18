@@ -35,7 +35,6 @@ const LoginButton = ({
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
 
         <DialogContent className="p-[24px] pt-[72px] w-[300px] sm:w-[340px] md:w-[400px] bg-background border border-mdarkbrown rounded-[2px] gap-[32px]">
-          <DialogDescription>Welcom Back</DialogDescription>
           <DialogTitle
             className={cn(
               cormorant.className,
@@ -44,6 +43,7 @@ const LoginButton = ({
           >
             Welcom Back
           </DialogTitle>
+          <DialogDescription className="hidden">Welcom Back</DialogDescription>
           <LoginForm title={false} />
         </DialogContent>
       </Dialog>

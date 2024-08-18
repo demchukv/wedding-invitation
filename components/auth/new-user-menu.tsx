@@ -11,11 +11,13 @@ export const NewUserMenu = async () => {
   // const session = await auth();
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3">
       <LoginButton mode="modal" asChild>
-        <Button variant="one">Sign in</Button>
+        <Button variant="one" size="auto">
+          Sign in
+        </Button>
       </LoginButton>
-      <Button variant="two" asChild>
+      <Button variant="two" size="auto" asChild>
         <Link href="/auth/register">Sign up</Link>
       </Button>
     </div>
