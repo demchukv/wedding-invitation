@@ -77,6 +77,8 @@ export const ResetForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button
+            variant="one"
+            size="auto"
             type="submit"
             disabled={isPending || !isValid || !isDirty}
             className="w-full"
