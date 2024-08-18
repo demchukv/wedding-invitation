@@ -1,16 +1,5 @@
-import { Quicksand, Cinzel, Cormorant_SC, Ubuntu } from "next/font/google";
+import { Cormorant_SC, Ubuntu } from "next/font/google";
 // define your variable fonts
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const cormorant = Cormorant_SC({
   weight: ["300", "400", "500", "600", "700"],
@@ -32,4 +21,4 @@ const ubuntu = Ubuntu({
 // define a custom local font where GreatVibes-Regular.ttf is stored in the styles folder
 // const greatVibes = localFont({ src: "./GreatVibes-Regular.ttf" });
 
-export { quicksand, cinzel, cormorant, ubuntu };
+export { cormorant, ubuntu };

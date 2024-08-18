@@ -1,4 +1,4 @@
-import { cinzel } from "@/styles/fonts";
+import { cormorant } from "@/styles/fonts";
 import { cn } from "@/lib/utils";
 
 interface HeaderProps {
@@ -11,7 +11,7 @@ export const Header = ({
 }: HeaderProps & { label: string }) => {
   return (
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
-      <h1 className={cn("text-3xl font-semibold", cinzel.className)}>
+      <h1 className={cn("text-3xl font-semibold", cormorant.className)}>
         {headerTitle || "Wedding Invitation"}
       </h1>
       <p className="text-muted-foreground text-sm">{label}</p>

@@ -19,8 +19,6 @@ const config = {
       },
     },
     fontFamily: {
-      cinzel: ["var(--font-cinzel)", ...fontFamily.serif],
-      quicksand: ["var(--font-quicksand)", ...fontFamily.sans],
       cormorant: ["var(--font-cormorant)", ...fontFamily.serif],
       ubuntu: ["var(--font-ubuntu)", ...fontFamily.sans],
     },
