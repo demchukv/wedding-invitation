@@ -87,9 +87,14 @@ export const ResetForm = () => {
           >
             {isPending ? <BeatLoader color="white" /> : `Send reset email`}
           </Button>
-          <div>
+          <Button
+            size="sm"
+            variant="link"
+            asChild
+            className="px-0 font-medium text-mbrown text-base"
+          >
             <Link href="/auth/login">Back to login</Link>
-          </div>
+          </Button>
         </form>
       </Form>
     </>

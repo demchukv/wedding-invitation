@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { LoginForm } from "@/components/auth/login-form";
 
@@ -34,6 +35,7 @@ const LoginButton = ({
         <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
 
         <DialogContent className="p-[24px] pt-[72px] w-[300px] sm:w-[340px] md:w-[400px] bg-background border border-mdarkbrown rounded-[2px] gap-[32px]">
+          <DialogDescription>Welcom Back</DialogDescription>
           <DialogTitle
             className={cn(
               cormorant.className,
