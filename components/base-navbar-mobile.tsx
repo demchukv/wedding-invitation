@@ -11,27 +11,13 @@ import { cormorant } from "@/styles/fonts";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const BaseNavbar = () => {
+export const BaseNavbarMobile = () => {
   const pathname = usePathname();
 
   return (
     <>
       <NavigationMenu>
-        <NavigationMenuList className="flex-col items-center flex-row gap-3">
-          <NavigationMenuItem>
-            <NavigationMenuLink asChild>
-              <Link
-                className={cn(
-                  cormorant.className,
-                  "no-underline outline-none text-mblack pr-16 text-[24px] leading-8 font-normal"
-                )}
-                href="/"
-              >
-                InviTEAM
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
-
+        <NavigationMenuList className="flex-col items-start gap-4 py-10">
           <NavigationMenuItem
             className={cn(
               "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
