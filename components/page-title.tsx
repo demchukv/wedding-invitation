@@ -1,4 +1,3 @@
-import css from "@/components/page-title.module.css";
 import { cn } from "@/lib/utils";
 import { cinzel } from "@/styles/fonts";
 
