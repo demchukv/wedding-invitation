@@ -24,6 +24,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import Link from "next/link";
+import { PageTitle } from "@/components/page-title";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
@@ -51,20 +53,20 @@ export const NewPasswordForm = () => {
     });
   };
   return (
-    <CardWrapper
-      headerLabel="Enter a new password"
-      backButtonLabel="Back to login"
-      backButtonHref="/auth/login"
-    >
+    <>
+      <PageTitle className="mb-[56px]">Change password</PageTitle>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 max-w-[440px] w-full"
+        >
           <div className="space-y-4">
             <FormField
               control={form.control}
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>New password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -89,8 +91,11 @@ export const NewPasswordForm = () => {
           >
             {isPending ? <BeatLoader color="white" /> : `Reset password`}
           </Button>
+          <div>
+            <Link href="/auth/login">Back to login</Link>
+          </div>
         </form>
       </Form>
-    </CardWrapper>
+    </>
   );
 };

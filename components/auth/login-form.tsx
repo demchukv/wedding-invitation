@@ -82,7 +82,7 @@ export const LoginForm = ({ title = true }: Props) => {
 
   return (
     <>
-      {title && <PageTitle className="mb-[56px]">Welcome back</PageTitle>}
+      {title && <PageTitle>Welcome back</PageTitle>}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
