@@ -6,6 +6,7 @@ html,
 body,
 :root {
   height: 100%;
+  font-weight: 300;
 }
 @layer base {
   :root {
@@ -93,6 +94,10 @@ body,
     /* --font-quicksand: Quicksand;
     --font-ginzel: Cinzel; */
   }
+}
+
+button {
+  font-weight: 500;
 }
 
 @layer base {

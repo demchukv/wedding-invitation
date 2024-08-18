@@ -3,7 +3,7 @@ import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/components/auth-provider";
 import { cn } from "@/lib/utils";
-import { quicksand, cinzel } from "@/styles/fonts";
+import { ubuntu } from "@/styles/fonts";
 import "@/app/globals.css";
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default async function RootLayout({
         <body
           className={cn(
             "min-h-screen min-w-[320px] flex flex-col bg-background antialiased",
-            quicksand.className
+            ubuntu.className
           )}
         >
           <Toaster />

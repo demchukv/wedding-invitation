@@ -27,8 +27,6 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useSession } from "next-auth/react";
 
-import { cn } from "@/lib/utils";
-import { cinzel } from "@/styles/fonts";
 import { PageTitle } from "@/components/page-title";
 
 interface Props {

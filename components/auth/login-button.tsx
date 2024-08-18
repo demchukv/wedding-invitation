@@ -1,6 +1,6 @@
 "use client";
 
-import { cinzel } from "@/styles/fonts";
+import { cormorant } from "@/styles/fonts";
 import { cn } from "@/lib/utils";
 
 import { useRouter } from "next/navigation";
@@ -36,7 +36,7 @@ const LoginButton = ({
         <DialogContent className="p-[24px] pt-[72px] w-[300px] sm:w-[340px] md:w-[400px] bg-background border border-mdarkbrown rounded-[2px] gap-[32px]">
           <DialogTitle
             className={cn(
-              cinzel.className,
+              cormorant.className,
               "text-[28px] text-mblack font-bold text-center"
             )}
           >
