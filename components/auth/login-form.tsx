@@ -29,6 +29,7 @@ import { useSession } from "next-auth/react";
 
 import { cn } from "@/lib/utils";
 import { cinzel } from "@/styles/fonts";
+import { PageTitle } from "@/components/page-title";
 
 interface Props {
   title?: boolean;
@@ -83,18 +84,12 @@ export const LoginForm = ({ title = true }: Props) => {
 
   return (
     <>
-      {title && (
-        <h1
-          className={cn(
-            cinzel.className,
-            "text-[28px] text-mblack font-bold text-center mb-4 "
-          )}
-        >
-          Welcome back
-        </h1>
-      )}
+      {title && <PageTitle className="mb-[56px]">Welcome back</PageTitle>}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 max-w-[440px] w-full"
+        >
           <div className="space-y-4">
             {showTowFactor && (
               <FormField

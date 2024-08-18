@@ -1,11 +1,14 @@
 import { ReviewsList } from "@/components/reviews/reviews-list";
+import { PageTitle } from "@/components/page-title";
 
 const AboutPage = () => {
   return (
-    <div className="w-full">
-      <h1 className="text-3xl">About service</h1>
+    <>
+      <PageTitle className="mb-[56px] mt-[56px] self-center">
+        About service
+      </PageTitle>
       <ReviewsList take={6} />
-    </div>
+    </>
   );
 };
 
