@@ -23,13 +23,13 @@ const InvitationsPage = async () => {
   return (
     <>
       <PageTitle>Invitations</PageTitle>
-      <div className="grid gripd-cols-1 md:grid-cols-2 gap-6">
+      <div className="w-full grid gripd-cols-1 md:grid-cols-2 gap-10 md:gap-28">
         <Suspense fallback={<InvitationListSkeleton />}>
           {Array.isArray(invitations) && invitations.length > 0 && (
             <InvitationsList invitations={invitations} />
           )}
           {Array.isArray(invitations) && invitations.length === 0 && (
-            <h2>No invitations found.</h2>
+            <h2>You still don’t have your own invitations. Let’s start now.</h2>
           )}
         </Suspense>
         <div className="mb-4">

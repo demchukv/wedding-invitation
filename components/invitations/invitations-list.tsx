@@ -35,24 +35,17 @@ export const InvitationsList = ({
 
   return (
     <>
-      <CardWrapper
-        headerTitle="Invitations"
-        headerLabel="List your invitations"
-        backButtonHref=""
-        backButtonLabel=""
-      >
-        <ul className="space-y-4">
-          {invitations.map(invitation => (
-            <li key={invitation.id}>
-              <InvitationsListItem
-                invitation={invitation}
-                onDelete={onDelete}
-                isPending={isPending}
-              />
-            </li>
-          ))}
-        </ul>
-      </CardWrapper>
+      <ul className="space-y-4">
+        {invitations.map(invitation => (
+          <li key={invitation.id}>
+            <InvitationsListItem
+              invitation={invitation}
+              onDelete={onDelete}
+              isPending={isPending}
+            />
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
