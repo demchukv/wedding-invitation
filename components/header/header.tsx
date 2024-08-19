@@ -4,7 +4,7 @@
 import { BaseNavbar } from "@/components/base-navbar";
 import { BaseNavbarMobile } from "@/components/base-navbar-mobile";
 import { NewUserMenu } from "@/components/auth/new-user-menu";
-import { Navbar } from "@/app/(protected)/_components/navbar";
+import { UserButton } from "@/components/auth/user-button";
 import {
   Sheet,
   SheetClose,
@@ -32,7 +32,7 @@ export const Header = () => {
       <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-6 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
         <BaseNavbar />
         <div className="flex gap-8 items-center">
-          {!session ? <NewUserMenu /> : <Navbar />}
+          {!session ? <NewUserMenu /> : <UserButton />}
           <LanguagesSelect />
         </div>
       </div>
@@ -60,7 +60,7 @@ export const Header = () => {
               <SheetDescription></SheetDescription>
             </SheetHeader>
             <BaseNavbarMobile onClick={setOpen} />
-            {!session ? <NewUserMenu /> : <Navbar />}
+            {!session ? <NewUserMenu /> : <UserButton />}
             <SheetFooter className="hidden">
               <SheetClose asChild>
                 <Button type="submit">Save changes</Button>

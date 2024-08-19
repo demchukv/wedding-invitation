@@ -22,7 +22,14 @@ export const UserButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex gap-1 outline-none items-center">
-        <Image priority src={icon} alt="menu" width={24} height={24} />
+        <Image
+          priority
+          src={user?.image ?? icon}
+          alt="menu"
+          width={24}
+          height={24}
+          className="rounded-full"
+        />
         <span className="block max-w-28 truncate text-nowrap text-ellipsis text-mblack font-normal text-lg">
           {user?.name}
         </span>
