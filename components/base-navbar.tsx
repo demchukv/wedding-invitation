@@ -15,7 +15,7 @@ export const BaseNavbar = () => {
   const pathname = usePathname();
 
   const linkClass =
-    "block text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-3 rounded-[2px]";
+    "block text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]";
   const currentLinkClass = "border-mlightbrown bg-mlightbrown";
   return (
     <>
