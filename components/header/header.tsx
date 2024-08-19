@@ -4,7 +4,7 @@
 import { BaseNavbar } from "@/components/base-navbar";
 import { BaseNavbarMobile } from "@/components/base-navbar-mobile";
 import { NewUserMenu } from "@/components/auth/new-user-menu";
-import { Navbar } from "@/app/(protected)/_components/navbar";
+import { UserButton } from "@/components/auth/user-button";
 import {
   Sheet,
   SheetClose,
@@ -20,6 +20,7 @@ import icon from "@/public/icons/menu.svg";
 import Image from "next/image";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useState } from "react";
+import { LanguagesSelect } from "@/components/languages-select";
 
 export const Header = () => {
   // const session = await auth();
@@ -28,16 +29,16 @@ export const Header = () => {
 
   return (
     <header>
-      <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-4 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
+      <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-6 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
         <BaseNavbar />
-        <div className="flex gap-3 items-center flex-shrink">
-          {!session ? <NewUserMenu /> : <Navbar />}
-          <div className="text-xl flex-shrink">Lang</div>
+        <div className="flex gap-8 items-center">
+          {!session ? <NewUserMenu /> : <UserButton />}
+          <LanguagesSelect />
         </div>
       </div>
 
       <div className="container mx-auto flex flex-row items-center justify-between p-4 lg:hidden sm:[background:url(/icons/bg/head-md-bg.svg)_115px_top_no-repeat]">
-        <div className="text-xl">Lang</div>
+        <LanguagesSelect />
         <div className="text-mblack text-xl leading-6 font-normal">
           InviTeam
         </div>
@@ -59,7 +60,7 @@ export const Header = () => {
               <SheetDescription></SheetDescription>
             </SheetHeader>
             <BaseNavbarMobile onClick={setOpen} />
-            {!session ? <NewUserMenu /> : <Navbar />}
+            {!session ? <NewUserMenu /> : <UserButton />}
             <SheetFooter className="hidden">
               <SheetClose asChild>
                 <Button type="submit">Save changes</Button>
