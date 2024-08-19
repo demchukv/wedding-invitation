@@ -26,7 +26,9 @@ export default async function RootLayout({
             "min-w-[320px] flex flex-col bg-background antialiased",
             ubuntu.className,
             "bg-right-bottom bg-no-repeat bg-scroll bg-clip-border bg-origin-border",
-            "bg-[url(/icons/bg/page-bg.svg)]"
+            "bg-[url(/icons/bg/page-sm-bg.svg)]",
+            "sm:bg-[url(/icons/bg/page-md-bg.svg)]",
+            "lg:bg-[url(/icons/bg/page-bg.svg)]"
           )}
         >
           <Toaster />

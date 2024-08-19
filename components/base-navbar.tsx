@@ -26,7 +26,7 @@ export const BaseNavbar = () => {
               <Link
                 className={cn(
                   cormorant.className,
-                  "block p-3 no-underline outline-none text-mblack mr-12 text-[24px] leading-8 font-normal"
+                  "block p-3 no-underline outline-none text-mblack mr-10 text-[24px] leading-8 font-normal"
                 )}
                 href="/"
               >
