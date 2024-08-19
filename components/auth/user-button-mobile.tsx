@@ -24,7 +24,7 @@ export const UserButtonMobile = ({ onClick }: UserButtonMobileProps) => {
         <Image
           priority
           src={user?.image ?? icon}
-          alt="menu"
+          alt="user menu"
           width={24}
           height={24}
           className="rounded-full flex-shrink-1"

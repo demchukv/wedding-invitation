@@ -1,6 +1,5 @@
 "use client";
 
-// import { auth } from "@/auth";
 import { BaseNavbar } from "@/components/base-navbar";
 import { BaseNavbarMobile } from "@/components/base-navbar-mobile";
 import { NewUserMenu } from "@/components/auth/new-user-menu";
@@ -24,7 +23,6 @@ import { useState } from "react";
 import { LanguagesSelect } from "@/components/languages-select";
 
 export const Header = () => {
-  // const session = await auth();
   const session = useCurrentUser();
   const [open, setOpen] = useState(false);
 
