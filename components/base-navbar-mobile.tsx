@@ -20,8 +20,8 @@ export const BaseNavbarMobile = ({ onClick }: BaseNavbarMobileProps) => {
   const activeLinkClass = "text-mbrown";
   return (
     <>
-      <NavigationMenu className="max-w-full items-start justify-start p-9">
-        <NavigationMenuList className="flex-col justify-start items-start gap-4 py-10">
+      <NavigationMenu className="max-w-full items-start justify-start">
+        <NavigationMenuList className="flex-col justify-start items-start gap-4">
           <NavigationMenuItem
             className={cn(linkClass, pathname === "/" && activeLinkClass)}
           >

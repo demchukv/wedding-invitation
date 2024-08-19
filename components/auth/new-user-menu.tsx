@@ -11,7 +11,7 @@ export const NewUserMenu = () => {
   // const session = await auth();
 
   return (
-    <div className="flex gap-3 flex-shrink-0">
+    <div className="flex flex-col md:flex-row gap-3 flex-shrink-0">
       <LoginButton mode="modal" asChild>
         <Button variant="one" size="auto">
           Sign in

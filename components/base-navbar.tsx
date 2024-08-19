@@ -17,7 +17,7 @@ export const BaseNavbar = () => {
   return (
     <>
       <NavigationMenu>
-        <NavigationMenuList className="items-center flex-row gap-3">
+        <NavigationMenuList className="items-center flex-row gap-0">
           <NavigationMenuItem>
             <NavigationMenuLink asChild>
               <Link
