@@ -58,7 +58,11 @@ export const UserButton = () => {
         align="end"
       >
         <DropdownMenuItem className={menuItemClass}>
-          <Link href="/invitations" className={linkClass}>
+          <Link
+            href="/invitations"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
             Invitations
           </Link>
         </DropdownMenuItem>
@@ -66,7 +70,10 @@ export const UserButton = () => {
         {/* relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors
       focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 */}
 
-        <DropdownMenuItem className={menuItemClass}>
+        <DropdownMenuItem
+          className={menuItemClass}
+          onClick={() => setOpen(false)}
+        >
           <Link href="/settings" className={linkClass}>
             Profile
           </Link>
@@ -75,7 +82,10 @@ export const UserButton = () => {
         {user?.role === UserRole.ADMIN && (
           <>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className={menuItemClass}>
+            <DropdownMenuItem
+              className={menuItemClass}
+              onClick={() => setOpen(false)}
+            >
               <Link href="/manage" className={linkClass}>
                 Admin dashboard
               </Link>
@@ -84,7 +94,10 @@ export const UserButton = () => {
           </>
         )}
 
-        <DropdownMenuItem className={menuItemClass}>
+        <DropdownMenuItem
+          className={menuItemClass}
+          onClick={() => setOpen(false)}
+        >
           <LogoutButton className={linkClass}>
             <ExitIcon className="mr-2 h-4 w-4" />
             Logout
