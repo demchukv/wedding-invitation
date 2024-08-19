@@ -23,7 +23,7 @@ export default async function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "min-w-[320px] flex flex-col bg-background antialiased pt-28",
+            "min-w-[320px] flex flex-col bg-background antialiased",
             ubuntu.className,
             "bg-right-bottom bg-no-repeat bg-scroll bg-clip-border bg-origin-border",
             "bg-[url(/icons/bg/page-sm-bg.svg)]",
