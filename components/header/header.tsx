@@ -27,7 +27,7 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header>
+    <header className="fixed top-0 left-0 right-0 backdrop-grayscale-0  bg-gradient-to-b from-white via-white to-transparent">
       <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-6 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
         <BaseNavbar />
         <div className="flex gap-8 items-center">
