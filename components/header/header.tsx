@@ -20,6 +20,7 @@ import icon from "@/public/icons/menu.svg";
 import Image from "next/image";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { useState } from "react";
+import { LanguagesSelect } from "@/components/languages-select";
 
 export const Header = () => {
   // const session = await auth();
@@ -28,16 +29,16 @@ export const Header = () => {
 
   return (
     <header>
-      <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-4 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
+      <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-6 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
         <BaseNavbar />
-        <div className="flex gap-3 items-center flex-shrink">
+        <div className="flex gap-8 items-center">
           {!session ? <NewUserMenu /> : <Navbar />}
-          <div className="text-xl flex-shrink">Lang</div>
+          <LanguagesSelect />
         </div>
       </div>
 
       <div className="container mx-auto flex flex-row items-center justify-between p-4 lg:hidden sm:[background:url(/icons/bg/head-md-bg.svg)_115px_top_no-repeat]">
-        <div className="text-xl">Lang</div>
+        <LanguagesSelect />
         <div className="text-mblack text-xl leading-6 font-normal">
           InviTeam
         </div>
