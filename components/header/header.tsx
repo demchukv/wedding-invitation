@@ -5,6 +5,7 @@ import { BaseNavbar } from "@/components/base-navbar";
 import { BaseNavbarMobile } from "@/components/base-navbar-mobile";
 import { NewUserMenu } from "@/components/auth/new-user-menu";
 import { UserButton } from "@/components/auth/user-button";
+import { UserButtonMobile } from "@/components/auth/user-button-mobile";
 import {
   Sheet,
   SheetClose,
@@ -61,7 +62,11 @@ export const Header = () => {
             </SheetHeader>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-start items-start p-9 mt-6">
               <BaseNavbarMobile onClick={setOpen} />
-              {!session ? <NewUserMenu /> : <UserButton />}
+              {!session ? (
+                <NewUserMenu />
+              ) : (
+                <UserButtonMobile onClick={setOpen} />
+              )}
             </div>
             <SheetFooter className="hidden">
               <SheetClose asChild>
