@@ -15,12 +15,15 @@ import { UserRole } from "@prisma/client";
 import Image from "next/image";
 import icon from "@/public/icons/user.svg";
 import iconArrowDown from "@/public/icons/arrow-down.svg";
+import iconArrowUp from "@/public/icons/arrow-up.svg";
+import { useState } from "react";
 
 export const UserButton = () => {
   const user = useCurrentUser();
+  const [open, setOpen] = useState(false);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger className="flex gap-1 outline-none items-center">
         <Image
           priority
@@ -33,7 +36,17 @@ export const UserButton = () => {
         <span className="block max-w-28 truncate text-nowrap text-ellipsis text-mblack font-normal text-lg">
           {user?.name}
         </span>
-        <Image priority src={iconArrowDown} alt="menu" width={24} height={24} />
+        {open ? (
+          <Image
+            priority
+            src={iconArrowDown}
+            alt="menu"
+            width={24}
+            height={24}
+          />
+        ) : (
+          <Image priority src={iconArrowUp} alt="menu" width={24} height={24} />
+        )}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-40" align="end">
