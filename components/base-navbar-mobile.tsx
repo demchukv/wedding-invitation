@@ -7,11 +7,13 @@ import {
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import { cormorant } from "@/styles/fonts";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const BaseNavbarMobile = () => {
+interface BaseNavbarMobileProps {
+  onClick: (open: boolean) => void;
+}
+export const BaseNavbarMobile = ({ onClick }: BaseNavbarMobileProps) => {
   const pathname = usePathname();
 
   return (
@@ -24,9 +26,9 @@ export const BaseNavbarMobile = () => {
               pathname === "/" && "border-mlightbrown bg-mlightbrown"
             )}
           >
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink>Home</NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink href="/" onClick={() => onClick(false)}>
+              Home
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem
             className={cn(
@@ -34,9 +36,9 @@ export const BaseNavbarMobile = () => {
               pathname === "/about" && "border-mlightbrown bg-mlightbrown"
             )}
           >
-            <Link href="/about" legacyBehavior passHref>
-              <NavigationMenuLink>About</NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink href="/about" onClick={() => onClick(false)}>
+              About
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem
             className={cn(
@@ -44,9 +46,12 @@ export const BaseNavbarMobile = () => {
               pathname === "/templates" && "border-mlightbrown bg-mlightbrown"
             )}
           >
-            <Link href="/templates" legacyBehavior passHref>
-              <NavigationMenuLink>Templates</NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink
+              href="/templates"
+              onClick={() => onClick(false)}
+            >
+              Templates
+            </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem
             className={cn(
@@ -54,9 +59,9 @@ export const BaseNavbarMobile = () => {
               pathname === "/feedback" && "border-mlightbrown bg-mlightbrown"
             )}
           >
-            <Link href="/feedback" legacyBehavior passHref>
-              <NavigationMenuLink>Contact Us</NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink href="/feedback" onClick={() => onClick(false)}>
+              Contact Us
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

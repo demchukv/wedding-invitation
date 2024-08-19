@@ -22,6 +22,7 @@ export const Social = () => {
     <>
       {/* <div className="flex items-center w-full gap-x-2"> */}
       <Button
+        type="button"
         variant="two"
         size="auto"
         className="w-full"
