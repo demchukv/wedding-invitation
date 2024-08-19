@@ -9,8 +9,7 @@ export default async function Home() {
   return (
     <>
       <Header />
-      <main className="flex-grow  py-10 container mx-auto flex flex-col items-center justify-start">
-        {/* <div className="min-h-full container mx-auto flex flex-col items-center justify-center"> */}
+      <main className="flex-grow py-10 container mx-auto flex flex-col items-center justify-start">
         <div className="space-y-6 text-center">
           <PageTitle>Wedding Invitations</PageTitle>
           <p className="text-primary">A simple test project</p>

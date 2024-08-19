@@ -14,6 +14,9 @@ import { usePathname } from "next/navigation";
 export const BaseNavbar = () => {
   const pathname = usePathname();
 
+  const linkClass =
+    "block text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-3 rounded-[2px]";
+  const currentLinkClass = "border-mlightbrown bg-mlightbrown";
   return (
     <>
       <NavigationMenu>
@@ -36,10 +39,7 @@ export const BaseNavbar = () => {
             <NavigationMenuLink asChild>
               <Link
                 href="/"
-                className={cn(
-                  "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-                  pathname === "/" && "border-mlightbrown bg-mlightbrown"
-                )}
+                className={cn(linkClass, pathname === "/" && currentLinkClass)}
               >
                 Home
               </Link>
@@ -50,8 +50,8 @@ export const BaseNavbar = () => {
               <Link
                 href="/about"
                 className={cn(
-                  "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-                  pathname === "/about" && "border-mlightbrown bg-mlightbrown"
+                  linkClass,
+                  pathname === "/about" && currentLinkClass
                 )}
               >
                 About
@@ -63,9 +63,8 @@ export const BaseNavbar = () => {
               <Link
                 href="/templates"
                 className={cn(
-                  "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-                  pathname === "/templates" &&
-                    "border-mlightbrown bg-mlightbrown"
+                  linkClass,
+                  pathname === "/templates" && currentLinkClass
                 )}
               >
                 Templates
@@ -77,9 +76,8 @@ export const BaseNavbar = () => {
               <Link
                 href="/feedback"
                 className={cn(
-                  "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-                  pathname === "/feedback" &&
-                    "border-mlightbrown bg-mlightbrown"
+                  linkClass,
+                  pathname === "/feedback" && currentLinkClass
                 )}
               >
                 Contact Us
