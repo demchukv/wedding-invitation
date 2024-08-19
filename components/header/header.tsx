@@ -1,6 +1,6 @@
-"use server";
+"use client";
 
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
 import { BaseNavbar } from "@/components/base-navbar";
 import { BaseNavbarMobile } from "@/components/base-navbar-mobile";
 import { NewUserMenu } from "@/components/auth/new-user-menu";
@@ -18,15 +18,22 @@ import {
 import { Button } from "../ui/button";
 import icon from "@/public/icons/menu.svg";
 import Image from "next/image";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { useState } from "react";
 
-export const Header = async () => {
-  const session = await auth();
+export const Header = () => {
+  // const session = await auth();
+  const session = useCurrentUser();
+  const [open, setOpen] = useState(false);
+
   return (
     <header>
-      <div className="container hidden mx-auto lg:flex flex-row items-center justify-between w-full py-4 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
+      <div className="container hidden mx-auto lg:flex flex-row gap-3 items-center justify-between w-full py-4 lg:[background:url(/icons/bg/head-lg-bg.svg)_132px_top_no-repeat]">
         <BaseNavbar />
-        {!session ? <NewUserMenu /> : <Navbar />}
-        <div className="text-xl">Lang</div>
+        <div className="flex gap-3 items-center flex-shrink">
+          {!session ? <NewUserMenu /> : <Navbar />}
+          <div className="text-xl flex-shrink">Lang</div>
+        </div>
       </div>
 
       <div className="container mx-auto flex flex-row items-center justify-between p-4 lg:hidden sm:[background:url(/icons/bg/head-md-bg.svg)_115px_top_no-repeat]">
@@ -35,7 +42,7 @@ export const Header = async () => {
           InviTeam
         </div>
 
-        <Sheet>
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button
               variant="ghost"
@@ -51,7 +58,8 @@ export const Header = async () => {
               <SheetTitle>Menu</SheetTitle>
               <SheetDescription></SheetDescription>
             </SheetHeader>
-            <BaseNavbarMobile />
+            <BaseNavbarMobile onClick={setOpen} />
+            {!session ? <NewUserMenu /> : <Navbar />}
             <SheetFooter className="hidden">
               <SheetClose asChild>
                 <Button type="submit">Save changes</Button>

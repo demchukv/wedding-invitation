@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 // import { auth } from "@/auth";
 
@@ -7,11 +7,11 @@ import LoginButton from "@/components/auth/login-button";
 import { Button } from "@/components/ui/button";
 // import { useCurrentUser } from "@/hooks/use-current-user";
 
-export const NewUserMenu = async () => {
+export const NewUserMenu = () => {
   // const session = await auth();
 
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-3 flex-shrink-0">
       <LoginButton mode="modal" asChild>
         <Button variant="one" size="auto">
           Sign in
