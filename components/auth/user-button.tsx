@@ -55,7 +55,7 @@ export const UserButton = () => {
 
       <DropdownMenuContent
         className="max-w-60 border-mbrown rounded-[2px] p-4"
-        align="end"
+        align="start"
       >
         <DropdownMenuItem className={menuItemClass}>
           <Link
