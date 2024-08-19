@@ -99,14 +99,6 @@ body,
 button {
   font-weight: 500;
 }
-a,
-a:visited {
-  color: var(--m-brown);
-}
-a:active,
-a:focus {
-  color: var(--m-dark-brown);
-}
 
 @layer base {
   * {

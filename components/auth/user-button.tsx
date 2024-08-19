@@ -22,6 +22,10 @@ export const UserButton = () => {
   const user = useCurrentUser();
   const [open, setOpen] = useState(false);
 
+  const linkClass =
+    "text-mblack hover:text-mbrown text-lg font-normal outline-none cursor-pointer focus:bg-transparent p-2";
+  const menuItemClass = "focus:bg-transparent";
+
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger className="flex gap-1 outline-none items-center">
@@ -49,45 +53,53 @@ export const UserButton = () => {
         )}
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-40" align="end">
-        <DropdownMenuItem>
-          <Link href="/invitations">Invitations</Link>
+      <DropdownMenuContent
+        className="max-w-60 border-mbrown rounded-[2px] p-4"
+        align="start"
+      >
+        <DropdownMenuItem className={menuItemClass}>
+          <Link
+            href="/invitations"
+            className={linkClass}
+            onClick={() => setOpen(false)}
+          >
+            Invitations
+          </Link>
         </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          className={menuItemClass}
+          onClick={() => setOpen(false)}
+        >
+          <Link href="/settings" className={linkClass}>
+            Profile
+          </Link>
+        </DropdownMenuItem>
+
         {user?.role === UserRole.ADMIN && (
           <>
-            <DropdownMenuItem>
-              <Link href="/manage">Admin dashboard</Link>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              className={menuItemClass}
+              onClick={() => setOpen(false)}
+            >
+              <Link href="/manage" className={linkClass}>
+                Admin dashboard
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
           </>
         )}
 
-        <DropdownMenuItem>
-          <Link href="/server">Server</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/client">Client</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href="/admin">Admin</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <DropdownMenuItem>
-          <Link href="/settings">Settings</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuSeparator />
-
-        <LogoutButton>
-          <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem
+          className={menuItemClass}
+          onClick={() => setOpen(false)}
+        >
+          <LogoutButton className={linkClass}>
             <ExitIcon className="mr-2 h-4 w-4" />
             Logout
-          </DropdownMenuItem>
-        </LogoutButton>
+          </LogoutButton>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

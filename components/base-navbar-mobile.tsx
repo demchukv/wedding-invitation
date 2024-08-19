@@ -7,7 +7,6 @@ import {
   NavigationMenuItem,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface BaseNavbarMobileProps {
@@ -16,25 +15,22 @@ interface BaseNavbarMobileProps {
 export const BaseNavbarMobile = ({ onClick }: BaseNavbarMobileProps) => {
   const pathname = usePathname();
 
+  const linkClass =
+    "text-mblack hover:text-mbrown font-normal text-lg active:text-mbrown focus:text-mbrown transition-all px-3 py-2";
+  const activeLinkClass = "text-mbrown";
   return (
     <>
-      <NavigationMenu>
-        <NavigationMenuList className="flex-col items-start gap-4 py-10">
+      <NavigationMenu className="max-w-sm items-start justify-start">
+        <NavigationMenuList className="flex-col justify-start items-start gap-4">
           <NavigationMenuItem
-            className={cn(
-              "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-              pathname === "/" && "border-mlightbrown bg-mlightbrown"
-            )}
+            className={cn(linkClass, pathname === "/" && activeLinkClass)}
           >
             <NavigationMenuLink href="/" onClick={() => onClick(false)}>
               Home
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem
-            className={cn(
-              "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-              pathname === "/about" && "border-mlightbrown bg-mlightbrown"
-            )}
+            className={cn(linkClass, pathname === "/about" && activeLinkClass)}
           >
             <NavigationMenuLink href="/about" onClick={() => onClick(false)}>
               About
@@ -42,8 +38,8 @@ export const BaseNavbarMobile = ({ onClick }: BaseNavbarMobileProps) => {
           </NavigationMenuItem>
           <NavigationMenuItem
             className={cn(
-              "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-              pathname === "/templates" && "border-mlightbrown bg-mlightbrown"
+              linkClass,
+              pathname === "/templates" && activeLinkClass
             )}
           >
             <NavigationMenuLink
@@ -55,8 +51,8 @@ export const BaseNavbarMobile = ({ onClick }: BaseNavbarMobileProps) => {
           </NavigationMenuItem>
           <NavigationMenuItem
             className={cn(
-              "text-mblack font-normal text-xl border-transparent border-[2px] hover:border-mpink active:bg-mpink focus:bg-mpink transition-all px-3 py-2 rounded-[2px]",
-              pathname === "/feedback" && "border-mlightbrown bg-mlightbrown"
+              linkClass,
+              pathname === "/feedback" && activeLinkClass
             )}
           >
             <NavigationMenuLink href="/feedback" onClick={() => onClick(false)}>

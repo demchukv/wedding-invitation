@@ -59,8 +59,10 @@ export const Header = () => {
               <SheetTitle>Menu</SheetTitle>
               <SheetDescription></SheetDescription>
             </SheetHeader>
-            <BaseNavbarMobile onClick={setOpen} />
-            {!session ? <NewUserMenu /> : <UserButton />}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-start items-start p-9 mt-6">
+              <BaseNavbarMobile onClick={setOpen} />
+              {!session ? <NewUserMenu /> : <UserButton />}
+            </div>
             <SheetFooter className="hidden">
               <SheetClose asChild>
                 <Button type="submit">Save changes</Button>
