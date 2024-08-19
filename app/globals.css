@@ -79,20 +79,19 @@ body,
     --chart-5: 340 75% 55%;
 
     /* from figma */
-    --m-light-brown: 23, 100%, 88.24%;
-    --m-brown: 15.65, 40.35%, 33.53%;
-    --mblack: 12.86, 87.5%, 9.41%;
-    --m-dark-brown: 12.86, 26.42%, 20.78%;
-    --m-light-grey-background: 30, 100%, 99.61%;
-    --m-pink: 9.73, 94.87%, 84.71%;
-    --m-grey: 0, 0.4%, 51.57%;
-    --m-red: 0, 100%, 46.47%;
-    --m-green: 151.27, 100%, 27.84%;
-    --m-light-grey-background-70: 30, 1%, 100%, 0.7;
-    --mbtnhover: linear-gradient(135deg, #ffe1be 0%, #ffa391 100%);
-
-    /* --font-quicksand: Quicksand;
-    --font-ginzel: Cinzel; */
+    --m-light-brown: #ffdac3;
+    --m-brown: #784533;
+    --m-black: #2d0c03;
+    --m-dark-brown: #432d27;
+    --m-light-grey-background: #fffefd;
+    --m-pink: #fdbfb3;
+    --m-grey: #848383;
+    --m-light-grey: #eae9e9;
+    --m-red: #ed0000;
+    --m-green: #008e4a;
+    --m-light-grey-background-50: rgba(255, 254, 253, 0.5);
+    --btn-bg-start: #ffe1be;
+    --btn-bg-end: #ffa391;
   }
 }
 
@@ -109,11 +108,8 @@ button {
   }
 }
 
-/* HTML: <div class="loader"></div> */
 .loader {
-  /* width: 120px; */
   width: 100%;
-  /* height: 20px; */
   height: 10px;
   background: linear-gradient(90deg, #0000, orange) left -50px top 0/50px 20px no-repeat
     lightblue;
@@ -124,4 +120,3 @@ button {
     background-position: right -50px top 0;
   }
 }
-/** ************************************************************** */

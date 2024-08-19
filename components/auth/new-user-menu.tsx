@@ -1,15 +1,10 @@
 "use client";
 
-// import { auth } from "@/auth";
-
 import Link from "next/link";
 import LoginButton from "@/components/auth/login-button";
 import { Button } from "@/components/ui/button";
-// import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const NewUserMenu = () => {
-  // const session = await auth();
-
   return (
     <div className="flex flex-col md:flex-row gap-3 flex-shrink-0">
       <LoginButton mode="modal" asChild>
