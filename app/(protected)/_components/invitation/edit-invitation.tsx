@@ -11,7 +11,6 @@ import React, {
 import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { BeatLoader } from "react-spinners";
 
@@ -22,6 +21,7 @@ import {
   removeOneWidget,
   addOneWidget,
 } from "@/store/invite/inviteSlice";
+import { toast } from "sonner";
 
 interface EditInvitationProps {
   // data: InvitationType;
@@ -35,30 +35,31 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
     EditInvitation.displayName = "EditInvitation";
 
     const dispatch = useDispatch();
-
+    // setData(useSelector(selectInvitation));
+    // const [data, setData] = React.useState<InvitationType>({} as InvitationType);
     const data = useSelector(selectInvitation);
 
     const [isPending, startTransition] = useTransition();
 
-    // const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
-    //   data?.InviteWidget || []
-    // );
-
-    // useImperativeHandle(ref, () => ({
-    //   onTabChangeSaveData: () => {
-    //     updateWidgets(data.id, data?.InviteWidget || []);
-    //   },
-    // }));
+    useImperativeHandle(ref, () => ({
+      onTabChangeSaveData: () => {
+        if (data) {
+          updateWidgets(data.id, data?.InviteWidget || []);
+        }
+      },
+    }));
 
     const onClickWidgetButton = (w: InviteWidgetType) => {
-      dispatch(
-        addOneWidget({
-          ...w,
-          id: nanoid(),
-          inviteId: data.id,
-          order: data.InviteWidget?.length || 1,
-        })
-      );
+      if (data) {
+        dispatch(
+          addOneWidget({
+            ...w,
+            id: nanoid(),
+            inviteId: data.id,
+            order: data.InviteWidget?.length || 1,
+          })
+        );
+      }
     };
 
     const removeWidget = (id: String) => {
@@ -73,14 +74,13 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
       inviteId: string,
       usedWidgets: InviteWidgetType[]
     ) => {
-      console.log(usedWidgets);
       startTransition(() => {
         updateInviteWidgets(inviteId, usedWidgets).then(res => {
           if (res?.error) {
-            console.log(res.error);
+            toast.error(res.error);
           }
           if (res?.success) {
-            console.log(res.success);
+            toast.success(res.success);
           }
         });
       });
@@ -88,13 +88,17 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
 
     if (typeof window !== "undefined") {
       window.onbeforeunload = () => {
-        updateWidgets(data.id, data?.InviteWidget || []);
+        if (data) {
+          updateWidgets(data.id, data?.InviteWidget || []);
+        }
       };
     }
 
     useEffect(() => {
       const onLinkClick = () => {
-        updateWidgets(data.id, data?.InviteWidget || []);
+        if (data) {
+          updateWidgets(data.id, data?.InviteWidget || []);
+        }
       };
       const aList = document.querySelectorAll("a");
       aList.forEach(a => {
@@ -105,37 +109,42 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
           a.removeEventListener("click", onLinkClick);
         });
       };
-    }, [data.id, data?.InviteWidget]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data?.id, data?.InviteWidget]);
 
     return (
       <>
-        <div className="grid w-auto grid-cols-4 gap-6">
-          <div>
-            <EnabledWidgets
-              onClickWidgetButton={onClickWidgetButton}
-              isPending={isPending}
-            />
-          </div>
+        {data && (
+          <>
+            <div className="grid w-auto grid-cols-4 gap-6">
+              <div>
+                <EnabledWidgets
+                  onClickWidgetButton={onClickWidgetButton}
+                  isPending={isPending}
+                />
+              </div>
 
-          <div className="col-span-3" id="invitationArea">
-            <UsedWidget
-              data={data}
-              usedWidgets={data?.InviteWidget || []}
-              removeWidget={removeWidget}
-              changePosition={changePosition}
-              isPending={isPending}
-            />
-          </div>
-        </div>
-        <Button
-          onClick={() => updateWidgets(data.id, data?.InviteWidget || [])}
-          disabled={isPending}
-          variant="one"
-          size="auto"
-          className="mt-6"
-        >
-          {isPending ? <BeatLoader color="white" /> : "Save your changes"}
-        </Button>
+              <div className="col-span-3" id="invitationArea">
+                <UsedWidget
+                  data={data}
+                  usedWidgets={data?.InviteWidget || []}
+                  removeWidget={removeWidget}
+                  changePosition={changePosition}
+                  isPending={isPending}
+                />
+              </div>
+            </div>
+            <Button
+              onClick={() => updateWidgets(data.id, data?.InviteWidget || [])}
+              disabled={isPending}
+              variant="one"
+              size="auto"
+              className="mt-6"
+            >
+              {isPending ? <BeatLoader color="white" /> : "Save your changes"}
+            </Button>
+          </>
+        )}
       </>
     );
   }
