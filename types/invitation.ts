@@ -9,7 +9,7 @@ export type InvitationType = {
   createdAt: Date;
   updatedAt: Date;
   InviteWidget?: InviteWidgetType[];
-} | null;
+};
 
 export type InviteWidgetType = {
   id: string;
