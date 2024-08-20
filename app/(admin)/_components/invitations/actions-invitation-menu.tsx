@@ -31,56 +31,64 @@ export const ActionsUserMenu = ({
 
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(invitation.userId)}
-          >
-            Copy user ID
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Edit invitation</DropdownMenuItem>
-          <DropdownMenuItem>Preview invitation</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>Delete invitation</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => openModal("edit")}>
-            Edit user
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => openModal("accounts")}>
-            User accounts
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => openModal("invitations")}>
-            User invitations
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => openModal("delete")}>
-            Delete user
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      {invitation && (
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() =>
+                  navigator.clipboard.writeText(invitation?.userId || "")
+                }
+              >
+                Copy user ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Edit invitation</DropdownMenuItem>
+              <DropdownMenuItem>Preview invitation</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Delete invitation</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => openModal("edit")}>
+                Edit user
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => openModal("accounts")}>
+                User accounts
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => openModal("invitations")}>
+                User invitations
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => openModal("delete")}>
+                Delete user
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
-      <Dialog open={open} modal={true} onOpenChange={setOpen}>
-        {/* <DialogTrigger>Open</DialogTrigger> */}
+          <Dialog open={open} modal={true} onOpenChange={setOpen}>
+            {/* <DialogTrigger>Open</DialogTrigger> */}
 
-        {modalType === "edit" && <EditUserModal userId={invitation.userId} />}
-        {modalType === "accounts" && (
-          <UserAccounts userId={invitation.userId} />
-        )}
-        {modalType === "invitations" && (
-          <UserInvitations userId={invitation.userId} />
-        )}
-        {modalType === "delete" && (
-          <UserDeleteAlert userId={invitation.userId} setOpen={setOpen} />
-        )}
-      </Dialog>
+            {modalType === "edit" && (
+              <EditUserModal userId={invitation.userId} />
+            )}
+            {modalType === "accounts" && (
+              <UserAccounts userId={invitation.userId} />
+            )}
+            {modalType === "invitations" && (
+              <UserInvitations userId={invitation.userId} />
+            )}
+            {modalType === "delete" && (
+              <UserDeleteAlert userId={invitation.userId} setOpen={setOpen} />
+            )}
+          </Dialog>
+        </>
+      )}
     </>
   );
 };
