@@ -23,6 +23,9 @@ const config = {
       ubuntu: ["var(--font-ubuntu)", ...fontFamily.sans],
     },
     extend: {
+      screens: {
+        'max-md': { 'max': '768px' }
+      },
       colors: {
         mblack: "var(--m-black)",
         mbrown: "var(--m-brown)",
