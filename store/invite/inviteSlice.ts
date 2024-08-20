@@ -72,11 +72,24 @@ export const inviteSlice = createSlice({
         }
       }
     },
+
+    updateWidgetData: (state, action: PayloadAction<InviteWidgetType>) => {
+      const widgetIndex: number | undefined =
+        state.invitation?.InviteWidget?.findIndex(
+          widget => widget.id === action.payload.id
+        );
+      console.log("widgetIndex: ", widgetIndex);
+    },
   },
 });
 
-export const { setInvitation, changeOrder, removeOneWidget, addOneWidget } =
-  inviteSlice.actions;
+export const {
+  setInvitation,
+  changeOrder,
+  removeOneWidget,
+  addOneWidget,
+  updateWidgetData,
+} = inviteSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectInvitation = (state: RootState) => state.invite.invitation;

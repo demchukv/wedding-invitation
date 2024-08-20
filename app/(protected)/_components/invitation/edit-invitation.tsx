@@ -23,9 +23,7 @@ import {
 } from "@/store/invite/inviteSlice";
 import { toast } from "sonner";
 
-interface EditInvitationProps {
-  // data: InvitationType;
-}
+interface EditInvitationProps {}
 export type EditRef = {
   onTabChangeSaveData: () => void;
 };
@@ -35,8 +33,7 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
     EditInvitation.displayName = "EditInvitation";
 
     const dispatch = useDispatch();
-    // setData(useSelector(selectInvitation));
-    // const [data, setData] = React.useState<InvitationType>({} as InvitationType);
+
     const data = useSelector(selectInvitation);
 
     const [isPending, startTransition] = useTransition();
@@ -126,8 +123,6 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
 
               <div className="col-span-3" id="invitationArea">
                 <UsedWidget
-                  data={data}
-                  usedWidgets={data?.InviteWidget || []}
                   removeWidget={removeWidget}
                   changePosition={changePosition}
                   isPending={isPending}

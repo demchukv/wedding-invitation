@@ -1,37 +1,25 @@
+"use client";
+
 import { InvitationType, InviteWidgetType } from "@/types/invitation";
 import { WidgetButtons } from "@/app/(protected)/_components/invitation/widget-buttons";
 // import dynamic from "next/dynamic";
 import { Widgets } from "@/app/(protected)/_components/widgets";
+import { useSelector } from "react-redux";
+import { selectInvitation } from "@/store/invite/inviteSlice";
 
 interface UsedWidgetProps {
-  data: InvitationType;
-  usedWidgets: InviteWidgetType[];
   removeWidget: (id: String) => void;
   changePosition: (id: String, direction: "up" | "down") => void;
   isPending: boolean;
 }
 
 export const UsedWidget = ({
-  data,
-  usedWidgets,
   removeWidget,
   changePosition,
   isPending,
 }: UsedWidgetProps) => {
-  // const UsedWidgetComponents: any = {};
-
-  // for (let i = 0; i < usedWidgets.length; i++) {
-  //   UsedWidgetComponents[usedWidgets[i].id] = dynamic(
-  //     () =>
-  //       import(
-  //         `@/app/(protected)/_components/widgets/${usedWidgets[i].file}`
-  //       ).then(mod => mod[usedWidgets[i].name]),
-  //     {
-  //       ssr: false,
-  //       loading: () => <BeatLoader />,
-  //     }
-  //   );
-  // }
+  const data = useSelector(selectInvitation);
+  const usedWidgets = data?.InviteWidget || [];
 
   return (
     <>
@@ -39,12 +27,12 @@ export const UsedWidget = ({
         <p>Add widgets from left panel for start editing your invitation</p>
       )}
 
-      {usedWidgets.length > 0 && (
+      {data && usedWidgets.length > 0 && (
         <>
           {usedWidgets.map((widget: InviteWidgetType) => {
-            // const WidgetComponent = UsedWidgetComponents[widget.id];
             const WidgetComponent =
               Widgets[widget.name as keyof typeof Widgets];
+
             return (
               <div
                 key={widget.id}
