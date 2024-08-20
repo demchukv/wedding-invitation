@@ -3,12 +3,10 @@ import type { RootState } from "@/store/store";
 import { InvitationType, InviteWidgetType } from "@/types/invitation";
 
 export interface CounterState {
-  value: number;
   invitation: InvitationType | null;
 }
 
 const initialState: CounterState = {
-  value: 0,
   invitation: null,
 };
 
@@ -81,7 +79,6 @@ export const { setInvitation, changeOrder, removeOneWidget, addOneWidget } =
   inviteSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.invite.value;
 export const selectInvitation = (state: RootState) => state.invite.invitation;
 
 export default inviteSlice.reducer;
