@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { InviteWidgetType } from "@/types/invitation";
+import { WidgetsForm } from "@/app/(protected)/_components/invitation/widgets-form";
 
 interface WidgetSettingsFormProps {
   widget: InviteWidgetType;
@@ -15,7 +16,7 @@ interface WidgetSettingsFormProps {
 export const WidgetSettingsForm = ({ widget }: WidgetSettingsFormProps) => {
   return (
     <>
-      <Card className="w-[400px] shadow-md border-none">
+      <Card className="max-w-[440px] shadow-md border-none">
         <CardHeader>
           <CardTitle>Widget settings</CardTitle>
           <CardDescription>
@@ -24,11 +25,10 @@ export const WidgetSettingsForm = ({ widget }: WidgetSettingsFormProps) => {
         </CardHeader>
         <CardContent className="space-y-2">
           <div className="space-y-1">Universal form fields for all widgets</div>
-          <div>{JSON.stringify(widget)}</div>
+          <div>{JSON.stringify(widget, null, 2)}</div>
+          <WidgetsForm widget={widget} />
         </CardContent>
-        <CardFooter>
-          <Button>Save</Button>
-        </CardFooter>
+        <CardFooter className="hidden"></CardFooter>
       </Card>
     </>
   );

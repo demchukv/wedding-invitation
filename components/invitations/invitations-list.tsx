@@ -35,7 +35,7 @@ export const InvitationsList = ({
 
   return (
     <>
-      <ul className="space-y-4">
+      <ul className="grid grid-cols-2 gap-4">
         {invitations.map(invitation => (
           <li key={invitation.id}>
             <InvitationsListItem

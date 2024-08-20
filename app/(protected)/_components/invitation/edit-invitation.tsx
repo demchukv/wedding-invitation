@@ -125,7 +125,7 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
 
     return (
       <>
-        <div className="grid w-full grid-cols-4 gap-6">
+        <div className="grid w-auto grid-cols-4 gap-6">
           <div>
             <EnabledWidgets
               onClickWidgetButton={onClickWidgetButton}
@@ -146,8 +146,9 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
         <Button
           onClick={() => updateWidgets(data.id, usedWidgets)}
           disabled={isPending}
-          variant="default"
-          className="w-full mt-6"
+          variant="one"
+          size="auto"
+          className="mt-6"
         >
           {isPending ? <BeatLoader color="white" /> : "Save your changes"}
         </Button>

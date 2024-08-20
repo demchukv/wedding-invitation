@@ -64,7 +64,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
       ) : (
         <Tabs
           defaultValue="account"
-          className="w-[600px]"
+          // className="w-[600px]"
           onValueChange={(value: string) => {
             onTabSwitch(value);
           }}

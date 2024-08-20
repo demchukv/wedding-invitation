@@ -171,7 +171,12 @@ const SettingsPage = () => {
             </div>
             <FormSuccess message={success} />
             <FormError message={error} />
-            <Button type="submit" disabled={isPending}>
+            <Button
+              type="submit"
+              variant="one"
+              size="auto"
+              disabled={isPending}
+            >
               {isPending ? <BeatLoader /> : "Save"}
             </Button>
           </form>
