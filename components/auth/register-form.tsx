@@ -51,7 +51,7 @@ export const RegisterForm = () => {
   return (
     <CardWrapper
       headerTitle="Sign Up"
-      headerLabel="Create an account"
+      headerLabel=""
       backButtonLabel="Already have an account?"
       backButtonHref="/auth/login"
       showSocial
@@ -63,13 +63,13 @@ export const RegisterForm = () => {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="relative">
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="John doe"
+                      placeholder="Olivia Smith"
                       type="text"
                     />
                   </FormControl>
@@ -87,7 +87,7 @@ export const RegisterForm = () => {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="john.doe@me.com"
+                      placeholder="olivia@mail.com"
                       type="email"
                     />
                   </FormControl>
@@ -105,7 +105,7 @@ export const RegisterForm = () => {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="******"
+                      placeholder="yT4!hj5U"
                       type="password"
                     />
                   </FormControl>
