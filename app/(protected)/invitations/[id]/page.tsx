@@ -31,16 +31,12 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
   const data = useSelector(selectInvitation);
 
   const [tab, setTab] = useState("account");
-  const [reloadData, setReloadData] = useState(false);
   const id = params.id;
   const editRef = useRef<EditRef>(null);
 
   const onTabSwitch = (value: string) => {
     if (tab === "account" && value !== "account") {
       editRef?.current?.onTabChangeSaveData();
-    }
-    if (tab !== "account" && value === "account") {
-      setReloadData(true);
     }
     setTab(value);
   };
@@ -50,12 +46,11 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
       startTransition(() => {
         getUserInvitationById(id).then(res => {
           dispatch(setInvitation(res as InvitationType));
-          setReloadData(false);
         });
       });
     };
     getInvitation(id);
-  }, [id, reloadData, dispatch]);
+  }, [id, dispatch]);
 
   return (
     <>
