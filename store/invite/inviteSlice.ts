@@ -78,7 +78,13 @@ export const inviteSlice = createSlice({
         state.invitation?.InviteWidget?.findIndex(
           widget => widget.id === action.payload.id
         );
-      console.log("widgetIndex: ", widgetIndex);
+      if (
+        state.invitation?.InviteWidget &&
+        widgetIndex !== undefined &&
+        widgetIndex !== -1
+      ) {
+        state.invitation.InviteWidget[widgetIndex] = action.payload;
+      }
     },
   },
 });

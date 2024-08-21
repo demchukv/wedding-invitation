@@ -7,7 +7,7 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { InviteWidgetType, JsonValue } from "@/types/invitation";
+import { InviteWidgetType } from "@/types/invitation";
 import { WidgetsForm } from "@/app/(protected)/_components/widgets-form";
 import { useDispatch } from "react-redux";
 import { updateWidgetData } from "@/store/invite/inviteSlice";
@@ -35,7 +35,7 @@ export const WidgetSettingsButton = ({
     <Dialog>
       <DialogTrigger asChild={asChild}>{children}</DialogTrigger>
       <DialogDescription></DialogDescription>
-      <DialogContent className="p-3 pt-10 w-auto border-none">
+      <DialogContent className="p-7 pt-6 w-auto border-none">
         <DialogTitle></DialogTitle>
         <WidgetsFormComponent widget={widget} saveWidgetData={saveWidgetData} />
       </DialogContent>

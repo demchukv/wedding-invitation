@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { InviteWidgetType, JsonValue } from "@/types/invitation";
 import { useState } from "react";
+import { HexColorPicker } from "react-colorful";
 
 interface TitleWidgetProps {
   widget: InviteWidgetType;
@@ -28,15 +30,32 @@ export const TitleWidget = ({ widget, saveWidgetData }: TitleWidgetProps) => {
     <div>
       <h1>{widget.name}</h1>
       <form onSubmit={onSubmit}>
-        <Input
-          type="text"
-          value={values.fSize}
-          onChange={evt => {
-            setValues({ ...values, fSize: evt.target.value });
-            storeChange();
-          }}
-          readOnly={false}
-        />
+        <FormItem>
+          <label htmlFor="fSize">Font Size</label>
+          <Input
+            type="text"
+            name="fSize"
+            id="fSize"
+            value={values.fSize}
+            onChange={evt => {
+              setValues({ ...values, fSize: evt.target.value });
+              storeChange();
+            }}
+          />
+        </FormItem>
+        <FormItem>
+          <label htmlFor="fColor">Font Color</label>
+          <Input
+            type="text"
+            name="fColor"
+            id="fColor"
+            value={values.fColor}
+            onChange={evt => {
+              setValues({ ...values, fColor: evt.target.value });
+              storeChange();
+            }}
+          />
+        </FormItem>
         <Button variant="two" type="submit">
           Save
         </Button>
