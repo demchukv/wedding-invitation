@@ -11,7 +11,6 @@ interface TitleWidgetProps {
 }
 export const TitleWidget = ({ widget, saveWidgetData }: TitleWidgetProps) => {
   const wdString = JSON.stringify(widget.widgetData);
-
   const [values, setValues] = useState(JSON.parse(wdString));
 
   const storeChange = () => {
@@ -38,7 +37,7 @@ export const TitleWidget = ({ widget, saveWidgetData }: TitleWidgetProps) => {
             id="fSize"
             value={values.fSize}
             onChange={evt => {
-              setValues({ ...values, fSize: evt.target.value });
+              setValues({ ...values, [evt.target.name]: evt.target.value });
               storeChange();
             }}
           />
