@@ -1,4 +1,5 @@
 import { InvitationType } from "@/types/invitation";
+import * as z from "zod";
 
 export interface TitleWidgetProps {
   data: InvitationType;
@@ -14,6 +15,13 @@ export interface TitleWidgetProps {
     bColor: string;
   };
 }
+
+export const TitleWidgetSchema = z.object({
+  nameSeparator: z.string().min(1),
+  fSize: z.string().min(3),
+  fColor: z.string().min(3),
+});
+
 export const TitleWidget = ({ data, widgetData }: TitleWidgetProps) => {
   return (
     <>
