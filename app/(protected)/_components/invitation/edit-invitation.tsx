@@ -11,90 +11,73 @@ import React, {
 import { updateInviteWidgets } from "@/actions/invitations/widgets";
 
 import { nanoid } from "nanoid";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { BeatLoader } from "react-spinners";
 
-interface EditInvitationProps {
-  data: InvitationType;
-}
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectInvitation,
+  changeOrder,
+  removeOneWidget,
+  addOneWidget,
+} from "@/store/invite/inviteSlice";
+import { toast } from "sonner";
+
+interface EditInvitationProps {}
 export type EditRef = {
   onTabChangeSaveData: () => void;
 };
 
 export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
-  ({ data }, ref) => {
+  ({}, ref) => {
     EditInvitation.displayName = "EditInvitation";
 
+    const dispatch = useDispatch();
+
+    const data = useSelector(selectInvitation);
+
     const [isPending, startTransition] = useTransition();
-    const [usedWidgets, setUsedWidgets] = useState<InviteWidgetType[]>(
-      data?.InviteWidget
-        ? data.InviteWidget.sort((a, b) => a.order - b.order)
-        : []
-    );
 
     useImperativeHandle(ref, () => ({
       onTabChangeSaveData: () => {
-        updateWidgets(data.id, usedWidgets);
-        console.log("On change tab: save invitation data");
+        if (data) {
+          updateWidgets(data.id, data?.InviteWidget || []);
+        }
       },
     }));
 
     const onClickWidgetButton = (w: InviteWidgetType) => {
-      startTransition(() => {
-        setUsedWidgets(prev => [
-          ...prev,
-          { ...w, id: nanoid(), inviteId: data.id, order: usedWidgets.length },
-        ]);
-      });
+      if (data) {
+        dispatch(
+          addOneWidget({
+            ...w,
+            id: nanoid(),
+            inviteId: data.id,
+            order: data.InviteWidget?.length || 1,
+          })
+        );
+      }
     };
 
     const removeWidget = (id: String) => {
-      startTransition(() => {
-        setUsedWidgets(prev => prev.filter(w => w.id !== id));
-      });
+      dispatch(removeOneWidget({ id }));
     };
 
     const changePosition = (id: String, direction: "up" | "down") => {
-      startTransition(() => {
-        for (let i = 0; i < usedWidgets.length; i++) {
-          if (
-            usedWidgets[i].id === id &&
-            direction === "up" &&
-            usedWidgets[i].order > 0
-          ) {
-            usedWidgets[i].order = usedWidgets[i].order - 1;
-            usedWidgets[i - 1].order = usedWidgets[i - 1].order + 1;
-          }
-          if (
-            usedWidgets[i].id === id &&
-            direction === "down" &&
-            usedWidgets[i].order < usedWidgets.length - 1
-          ) {
-            usedWidgets[i].order = usedWidgets[i].order + 1;
-            usedWidgets[i + 1].order = usedWidgets[i + 1].order - 1;
-          }
-        }
-        usedWidgets.sort((a, b) => a.order - b.order);
-        for (let i = 0; i < usedWidgets.length; i++) {
-          usedWidgets[i].order = i;
-        }
-        setUsedWidgets(usedWidgets);
-      });
+      dispatch(changeOrder({ id, direction }));
     };
 
     const updateWidgets = (
       inviteId: string,
       usedWidgets: InviteWidgetType[]
     ) => {
-      console.log(usedWidgets);
       startTransition(() => {
         updateInviteWidgets(inviteId, usedWidgets).then(res => {
           if (res?.error) {
-            console.log(res.error);
+            toast.error(res.error);
           }
           if (res?.success) {
-            console.log(res.success);
+            toast.success(res.success);
           }
         });
       });
@@ -102,15 +85,17 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
 
     if (typeof window !== "undefined") {
       window.onbeforeunload = () => {
-        updateWidgets(data.id, usedWidgets);
-        console.log("before page leave: save invitation data");
+        if (data) {
+          updateWidgets(data.id, data?.InviteWidget || []);
+        }
       };
     }
 
     useEffect(() => {
       const onLinkClick = () => {
-        updateWidgets(data.id, usedWidgets);
-        console.log("After link click: save invitation data");
+        if (data) {
+          updateWidgets(data.id, data?.InviteWidget || []);
+        }
       };
       const aList = document.querySelectorAll("a");
       aList.forEach(a => {
@@ -121,36 +106,40 @@ export const EditInvitation = forwardRef<EditRef, EditInvitationProps>(
           a.removeEventListener("click", onLinkClick);
         });
       };
-    }, [data.id, usedWidgets]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data?.id, data?.InviteWidget]);
 
     return (
       <>
-        <div className="grid w-full grid-cols-4 gap-6">
-          <div>
-            <EnabledWidgets
-              onClickWidgetButton={onClickWidgetButton}
-              isPending={isPending}
-            />
-          </div>
+        {data && (
+          <>
+            <div className="grid w-auto grid-cols-4 gap-6">
+              <div>
+                <EnabledWidgets
+                  onClickWidgetButton={onClickWidgetButton}
+                  isPending={isPending}
+                />
+              </div>
 
-          <div className="col-span-3" id="invitationArea">
-            <UsedWidget
-              data={data}
-              usedWidgets={usedWidgets}
-              removeWidget={removeWidget}
-              changePosition={changePosition}
-              isPending={isPending}
-            />
-          </div>
-        </div>
-        <Button
-          onClick={() => updateWidgets(data.id, usedWidgets)}
-          disabled={isPending}
-          variant="default"
-          className="w-full mt-6"
-        >
-          {isPending ? <BeatLoader color="white" /> : "Save your changes"}
-        </Button>
+              <div className="col-span-3" id="invitationArea">
+                <UsedWidget
+                  removeWidget={removeWidget}
+                  changePosition={changePosition}
+                  isPending={isPending}
+                />
+              </div>
+            </div>
+            <Button
+              onClick={() => updateWidgets(data.id, data?.InviteWidget || [])}
+              disabled={isPending}
+              variant="one"
+              size="auto"
+              className="mt-6"
+            >
+              {isPending ? <BeatLoader color="white" /> : "Save your changes"}
+            </Button>
+          </>
+        )}
       </>
     );
   }

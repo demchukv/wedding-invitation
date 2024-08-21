@@ -14,32 +14,42 @@ const InvitationsListItem = ({
   isPending: boolean;
 }) => {
   return (
-    <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
+    <div className="flex flex-col gap-6 items-center justify-between rounded-lg border border-solid border-mbrown p-5 shadow-md">
       <Link href={`/invitations/${invitation.id}`}>
-        <p>
+        <p className="text-2xl">
           {invitation.nameOne} + {invitation.nameTwo}
         </p>
         <p>Event date: {new Date(invitation.endDate).toLocaleDateString()}</p>
       </Link>
-      <div className="flex gap-2">
+      <div className="flex gap-4">
         <Button
-          variant="default"
+          variant="one"
           size="sm"
           title="Go to edit invitation"
           disabled={isPending}
         >
-          <Link href={`/invitations/${invitation.id}`}>
-            <CiEdit />
+          <Link
+            href={`/invitations/${invitation.id}`}
+            className="flex gap-2 items-center"
+          >
+            <CiEdit /> Edit
           </Link>
         </Button>
         <Button
-          variant="destructive"
+          variant="two"
           size="sm"
           title="Delete invitation and all related data"
           onClick={() => onDelete(invitation.id)}
           disabled={isPending}
+          className="gap-2"
         >
-          {isPending ? <PuffLoader size={18} /> : <MdDeleteOutline />}
+          {isPending ? (
+            <PuffLoader size={18} />
+          ) : (
+            <>
+              <MdDeleteOutline /> Delete
+            </>
+          )}
         </Button>
       </div>
     </div>

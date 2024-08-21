@@ -1,6 +1,6 @@
 import { InvitationType } from "@/types/invitation";
 
-interface TitleWidgetProps {
+export interface TitleWidgetProps {
   data: InvitationType;
   widgetData: {
     nameSeparator: string;
@@ -18,11 +18,17 @@ export const TitleWidget = ({ data, widgetData }: TitleWidgetProps) => {
   return (
     <>
       <div className="h-full w-full flex gap-4 justify-center items-center text-lg font-semibold bg-amber-100">
-        <div>{data.nameOne}</div>
+        <div style={{ fontSize: widgetData.fSize, color: widgetData.fColor }}>
+          {data.nameOne}
+        </div>
         {widgetData.nameSeparator !== "" && (
-          <div>{widgetData.nameSeparator}</div>
+          <div style={{ fontSize: widgetData.fSize, color: widgetData.fColor }}>
+            {widgetData.nameSeparator}
+          </div>
         )}
-        <div>{data.nameTwo}</div>
+        <div style={{ fontSize: widgetData.fSize, color: widgetData.fColor }}>
+          {data.nameTwo}
+        </div>
       </div>
     </>
   );

@@ -20,15 +20,16 @@ import {
   EditRef,
 } from "@/app/(protected)/_components/invitation/edit-invitation";
 
-// const EditInvitation = dynamic(() =>
-//   import("@/app/(protected)/_components/invitation/edit-invitation").then(
-//     mod => mod.EditInvitation
-//   )
-// );
+import { useDispatch, useSelector } from "react-redux";
+import { selectInvitation, setInvitation } from "@/store/invite/inviteSlice";
 
 const InvitePage = ({ params }: { params: { id: string } }) => {
+  const dispatch = useDispatch();
+
   const [isPending, startTransition] = useTransition();
-  const [data, setData] = useState<InvitationType | null>();
+
+  const data = useSelector(selectInvitation);
+
   const [tab, setTab] = useState("account");
   const [reloadData, setReloadData] = useState(false);
   const id = params.id;
@@ -48,14 +49,13 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
     const getInvitation = (id: string) => {
       startTransition(() => {
         getUserInvitationById(id).then(res => {
-          console.log("Load data from DB");
-          setData(res);
+          dispatch(setInvitation(res as InvitationType));
           setReloadData(false);
         });
       });
     };
     getInvitation(id);
-  }, [id, reloadData]);
+  }, [id, reloadData, dispatch]);
 
   return (
     <>
@@ -64,7 +64,6 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
       ) : (
         <Tabs
           defaultValue="account"
-          className="w-[600px]"
           onValueChange={(value: string) => {
             onTabSwitch(value);
           }}
@@ -83,9 +82,7 @@ const InvitePage = ({ params }: { params: { id: string } }) => {
               </CardHeader>
               <CardContent className="space-y-2">
                 {isPending && <BeatLoader />}
-                {!isPending && data && (
-                  <EditInvitation data={data} ref={editRef} />
-                )}
+                {!isPending && data && <EditInvitation ref={editRef} />}
               </CardContent>
             </Card>
           </TabsContent>

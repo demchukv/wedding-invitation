@@ -34,8 +34,8 @@ export const updateInviteWidgets = async (
         });
       }
     }
-    return { success: "Widgets updated!" };
+    return { success: "Invitation saved!" };
   } catch (error) {
-    return { error: "Failed to update widgets: " + error };
+    return { error: "Failed to update invitation: " + error };
   }
 };
