@@ -8,7 +8,12 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 
-export const Social = () => {
+interface SocialProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+
+export const Social = ({ children }: SocialProps) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams?.get("callbackUrl");
   const onClick = (
@@ -30,7 +35,7 @@ export const Social = () => {
           onClick("google");
         }}
       >
-        Sign in with Google
+        {children}
       </Button>
       {/* <Button
         variant="outline"

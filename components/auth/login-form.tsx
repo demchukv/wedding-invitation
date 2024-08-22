@@ -178,7 +178,7 @@ export const LoginForm = ({ title = true }: Props) => {
               )}
             </Button>
 
-            <Social />
+            <Social>Sign in with Google</Social>
           </div>
         </form>
       </Form>

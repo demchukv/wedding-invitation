@@ -18,13 +18,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import CardWrapper from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { PageTitle } from "../page-title";
+import { Social } from "./social";
+import Link from "next/link";
 
-export const RegisterForm = () => {
+interface Props {
+  title?: boolean;
+}
+
+export const RegisterForm = ({ title = true }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -49,83 +55,101 @@ export const RegisterForm = () => {
     });
   };
   return (
-    <CardWrapper
-      headerTitle="Sign Up"
-      headerLabel=""
-      backButtonLabel="Already have an account?"
-      backButtonHref="/auth/login"
-      showSocial
-    >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="relative">
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Olivia Smith"
-                      type="text"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="olivia@mail.com"
-                      type="email"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="yT4!hj5U"
-                      type="password"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <>
+      {title && <PageTitle>Sign Up</PageTitle>}
+      <div className="w-full max-w-[288px] md:max-w-[664px] lg:max-w-[924px] md:flex md:justify-between md:items-baseline mx-auto">
+        <div className="w-full md:w-[332px] lg:w-[528px]">
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-6 w-full"
+            >
+              <div className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="relative">
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="Olivia Smith"
+                          type="text"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="olivia@mail.com"
+                          type="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="yT4!hj5U"
+                          type="password"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <FormError message={error} />
+              <FormSuccess message={success} />
+              <Button
+                type="submit"
+                variant="one"
+                disabled={isPending || !isValid || !isDirty}
+                size="auto"
+                className="w-full"
+              >
+                {isPending ? <BeatLoader className="text-mbrown" /> : "Sign up"}
+              </Button>
+            </form>
+          </Form>
+        </div>
+
+        <div className="w-full md:w-[332px] md:pl-6 mt-6 md:mt-0 flex flex-col items-center justify-center">
+          <Social className="w-full mb-2">Sign up with Google</Social>
+          <div className="px-0 font-ubuntu text-mbrown text-base text-center">
+            Already signed up? Please{" "}
+            <Button
+              size="sm"
+              variant="link"
+              asChild
+              className="px-0 mt-2 font-medium text-mbrown text-base"
+            >
+              <Link href="/auth/login">Sign in</Link>
+            </Button>
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button
-            type="submit"
-            disabled={isPending || !isValid || !isDirty}
-            className="w-full"
-            variant="primary"
-          >
-            {isPending ? <BeatLoader color="white" /> : `Register`}
-          </Button>
-        </form>
-      </Form>
-    </CardWrapper>
+        </div>
+      </div>
+    </>
   );
 };
