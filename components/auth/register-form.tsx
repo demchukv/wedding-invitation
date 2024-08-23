@@ -25,6 +25,7 @@ import { FormSuccess } from "@/components/form-success";
 import { PageTitle } from "../page-title";
 import { Social } from "./social";
 import Link from "next/link";
+import { InputPassword } from "@/components/ui/inputPassword";
 
 interface Props {
   title?: boolean;
@@ -108,11 +109,10 @@ export const RegisterForm = ({ title = true }: Props) => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
+                        <InputPassword
                           {...field}
                           disabled={isPending}
                           placeholder="yT4!hj5U"
-                          type="password"
                         />
                       </FormControl>
                       <FormMessage />
@@ -136,7 +136,7 @@ export const RegisterForm = ({ title = true }: Props) => {
         </div>
 
         <div className="w-full md:w-[332px] md:pl-6 mt-6 md:mt-0 flex flex-col items-center justify-center">
-          <Social className="w-full mb-2">Sign up with Google</Social>
+          <Social className="w-full mb-2"></Social>
           <div className="px-0 font-ubuntu text-mbrown text-base text-center">
             Already signed up? Please{" "}
             <Button

@@ -35,7 +35,7 @@ export const Social = ({ children }: SocialProps) => {
           onClick("google");
         }}
       >
-        {children}
+        Sign in with Google
       </Button>
       {/* <Button
         variant="outline"

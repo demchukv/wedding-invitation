@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 
 import { Input } from "@/components/ui/input";
+import { InputPassword } from "@/components/ui/inputPassword";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
@@ -136,11 +137,10 @@ export const LoginForm = ({ title = true }: Props) => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input
+                        <InputPassword
                           {...field}
                           disabled={isPending}
-                          placeholder="******"
-                          type="password"
+                          placeholder="yT4!hj5U"
                         />
                       </FormControl>
                       <Button
