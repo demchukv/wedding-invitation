@@ -15,7 +15,6 @@ import { UserRole } from "@prisma/client";
 import Image from "next/image";
 import icon from "@/public/icons/user.svg";
 import iconArrowDown from "@/public/icons/arrow-down.svg";
-import iconArrowUp from "@/public/icons/arrow-up.svg";
 import { useState } from "react";
 
 export const UserButton = () => {
@@ -40,17 +39,17 @@ export const UserButton = () => {
         <span className="block max-w-28 truncate text-nowrap text-ellipsis text-mblack font-normal text-lg">
           {user?.name}
         </span>
-        {open ? (
-          <Image
-            priority
-            src={iconArrowDown}
-            alt="menu"
-            width={24}
-            height={24}
-          />
-        ) : (
-          <Image priority src={iconArrowUp} alt="menu" width={24} height={24} />
-        )}
+
+        <Image
+          className={`transition-transform duration-300 ${
+            open ? "-rotate-180" : "rotate-0"
+          }`}
+          priority
+          src={iconArrowDown}
+          alt="menu"
+          width={24}
+          height={24}
+        />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
