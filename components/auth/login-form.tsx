@@ -122,7 +122,7 @@ export const LoginForm = ({ title = true }: Props) => {
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="john.doe@me.com"
+                          placeholder="olivia@mail.com"
                           type="email"
                         />
                       </FormControl>
@@ -147,7 +147,7 @@ export const LoginForm = ({ title = true }: Props) => {
                         size="sm"
                         variant="link"
                         asChild
-                        className="px-0 font-medium text-mbrown text-base"
+                        className="top-[19px] px-0 font-medium text-mbrown text-base"
                       >
                         <Link href="/auth/reset">Forgot password?</Link>
                       </Button>
