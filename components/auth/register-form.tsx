@@ -26,6 +26,7 @@ import { PageTitle } from "../page-title";
 import { Social } from "./social";
 import Link from "next/link";
 import { InputPassword } from "@/components/ui/inputPassword";
+import LoginButton from "./login-button";
 
 interface Props {
   title?: boolean;
@@ -139,14 +140,15 @@ export const RegisterForm = ({ title = true }: Props) => {
           <Social className="w-full mb-2"></Social>
           <div className="px-0 font-ubuntu text-mbrown text-base text-center">
             Already signed up? Please{" "}
-            <Button
-              size="sm"
-              variant="link"
-              asChild
-              className="px-0 mt-2 font-medium text-mbrown text-base"
-            >
-              <Link href="/auth/login">Sign in</Link>
-            </Button>
+            <LoginButton mode="modal" asChild>
+              <Button
+                size="sm"
+                variant="link"
+                className="px-0 mt-2 font-medium text-mbrown text-base"
+              >
+                Sign in
+              </Button>
+            </LoginButton>
           </div>
         </div>
       </div>

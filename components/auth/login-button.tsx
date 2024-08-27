@@ -41,9 +41,9 @@ const LoginButton = ({
               "text-[28px] text-mblack font-bold text-center"
             )}
           >
-            Welcom Back
+            Welcome Back
           </DialogTitle>
-          <DialogDescription className="hidden">Welcom Back</DialogDescription>
+          <DialogDescription className="hidden">Welcome Back</DialogDescription>
           <LoginForm title={false} />
         </DialogContent>
       </Dialog>
