@@ -71,7 +71,7 @@ export const RegisterForm = ({ title = true }: Props) => {
                   control={form.control}
                   name="name"
                   render={({ field }) => (
-                    <FormItem className="relative">
+                    <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
                         <Input

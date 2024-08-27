@@ -20,14 +20,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import CardWrapper from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { PageTitle } from "../page-title";
 
-const FeedbackForm = () => {
+interface Props {
+  title?: boolean;
+}
+
+const FeedbackForm = ({ title = true }: Props) => {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -43,6 +47,7 @@ const FeedbackForm = () => {
       message: "",
     },
   });
+  const { isValid, isDirty } = form.formState;
 
   const onSubmit = (values: z.infer<typeof FeedbackSchema>) => {
     setError("");
@@ -66,16 +71,12 @@ const FeedbackForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerTitle="Send feedback"
-      headerLabel=""
-      backButtonLabel=""
-      backButtonHref=""
-    >
+    <>
+      {title && <PageTitle>Send feedback</PageTitle>}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4"
+          className="space-y-6 w-full"
         >
           <FormField
             control={form.control}
@@ -84,9 +85,14 @@ const FeedbackForm = () => {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="Name" {...field} />
+                  <Input
+                    type="text"
+                    placeholder="Olivia Smith"
+                    {...field}
+                    disabled={isPending}
+                  />
                 </FormControl>
-                <FormDescription>Your name will not be shared.</FormDescription>
+                {/* <FormDescription>Your name will not be shared.</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -98,11 +104,16 @@ const FeedbackForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Email" {...field} />
+                  <Input
+                    disabled={isPending}
+                    type="email"
+                    placeholder="olivia@mail.com"
+                    {...field}
+                  />
                 </FormControl>
-                <FormDescription>
+                {/* <FormDescription>
                   Your email will not be shared.
-                </FormDescription>
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -121,9 +132,9 @@ const FeedbackForm = () => {
                     disabled={isPending}
                   />
                 </FormControl>
-                <FormDescription>
+                {/* <FormDescription>
                   Your phone will not be shared.
-                </FormDescription>
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -137,21 +148,27 @@ const FeedbackForm = () => {
                 <FormControl>
                   <Textarea placeholder="Message" {...field} />
                 </FormControl>
-                <FormDescription>
+                {/* <FormDescription>
                   Your message will not be shared.
-                </FormDescription>
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isPending} className="w-full">
-            {isPending ? <BeatLoader size={8} color="white" /> : "Send"}
+          <Button
+            type="submit"
+            variant="one"
+            disabled={isPending || !isValid || !isDirty}
+            size="auto"
+            className="w-full"
+          >
+            {isPending ? <BeatLoader className="text-mbrown" /> : "Sign up"}
           </Button>
           <FormError message={error} />
           <FormSuccess message={success} />
         </form>
       </Form>
-    </CardWrapper>
+    </>
   );
 };
 
