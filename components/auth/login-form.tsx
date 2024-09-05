@@ -89,7 +89,7 @@ export const LoginForm = ({ title = true }: Props) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 max-w-[440px] w-full"
         >
-          <div className="space-y-4">
+          <div className="space-y-6">
             {showTowFactor && (
               <FormField
                 control={form.control}

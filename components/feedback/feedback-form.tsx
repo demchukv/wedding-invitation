@@ -162,7 +162,11 @@ const FeedbackForm = ({ title = true }: Props) => {
             size="auto"
             className="w-full"
           >
-            {isPending ? <BeatLoader className="text-mbrown" /> : "Sign up"}
+            {isPending ? (
+              <BeatLoader className="text-mbrown" />
+            ) : (
+              "Send feedback"
+            )}
           </Button>
           <FormError message={error} />
           <FormSuccess message={success} />
