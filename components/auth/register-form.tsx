@@ -66,7 +66,7 @@ export const RegisterForm = ({ title = true }: Props) => {
               onSubmit={form.handleSubmit(onSubmit)}
               className="space-y-6 w-full"
             >
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <FormField
                   control={form.control}
                   name="name"
@@ -142,7 +142,7 @@ export const RegisterForm = ({ title = true }: Props) => {
             Already signed up? Please{" "}
             <LoginButton mode="modal" asChild>
               <Button
-                size="sm"
+                // size="sm"
                 variant="link"
                 className="px-0 mt-2 font-medium text-mbrown text-base"
               >
