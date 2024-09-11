@@ -26,6 +26,9 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import StarRating from "@/components/rating/StarRating";
+import Image from "next/image";
+import star from "@/public/icons/star.svg";
 
 const ReviewForm = () => {
   const user = useCurrentUser();
@@ -43,6 +46,7 @@ const ReviewForm = () => {
       rating: 5,
     },
   });
+  const { isValid, isDirty } = form.formState;
 
   const onSubmit = (values: z.infer<typeof ReviewSchema>) => {
     setError("");
@@ -70,24 +74,57 @@ const ReviewForm = () => {
   }
 
   return (
-    <CardWrapper
-      headerTitle="Send a review"
-      headerLabel=""
-      backButtonLabel=""
-      backButtonHref=""
-    >
+    <>
+      <p>Estimate your experience (from 1 to 5)</p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-4"
+          className="space-y-6 w-full mb-[100px]"
         >
           <FormField
             control={form.control}
             name="rating"
             render={({ field }) => (
-              <FormItem className="space-y-3">
+              <FormItem>
                 <FormControl>
-                  <RadioGroup
+                  <div className="flex flex-row">
+                    <Image
+                      priority
+                      src={star}
+                      alt={"star"}
+                      width={16}
+                      height={16}
+                    />
+                    <Image
+                      priority
+                      src={star}
+                      alt={"star"}
+                      width={16}
+                      height={16}
+                    />
+                    <Image
+                      priority
+                      src={star}
+                      alt={"star"}
+                      width={16}
+                      height={16}
+                    />
+                    <Image
+                      priority
+                      src={star}
+                      alt={"star"}
+                      width={16}
+                      height={16}
+                    />
+                    <Image
+                      priority
+                      src={star}
+                      alt={"star"}
+                      width={16}
+                      height={16}
+                    />
+                  </div>
+                  {/* <RadioGroup
                     defaultValue={String(field.value)}
                     onValueChange={value => field.onChange(Number(value))}
                     className="flex flex-row space-y-1"
@@ -122,11 +159,11 @@ const ReviewForm = () => {
                       </FormControl>
                       <FormLabel className="font-normal">5</FormLabel>
                     </FormItem>
-                  </RadioGroup>
+                  </RadioGroup> */}
                 </FormControl>
-                <FormDescription>
+                {/* <FormDescription>
                   Your message will be publish after being checked by the admin.
-                </FormDescription>
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -136,28 +173,31 @@ const ReviewForm = () => {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Message</FormLabel>
+                <FormLabel>Comment*</FormLabel>
                 <FormControl>
-                  <Textarea
-                    placeholder="Write a few words about us"
-                    {...field}
-                  />
+                  <Textarea placeholder="Write your review here" {...field} />
                 </FormControl>
-                <FormDescription>
+                {/* <FormDescription>
                   Your message will be publish after being checked by the admin.
-                </FormDescription>
+                </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isPending} className="w-full">
-            {isPending ? <BeatLoader size={8} color="white" /> : "Send"}
+          <Button
+            type="submit"
+            variant="one"
+            disabled={isPending || !isValid || !isDirty}
+            size="auto"
+            className="w-full"
+          >
+            {isPending ? <BeatLoader size={8} color="white" /> : "Publish"}
           </Button>
           <FormError message={error} />
           <FormSuccess message={success} />
         </form>
       </Form>
-    </CardWrapper>
+    </>
   );
 };
 
