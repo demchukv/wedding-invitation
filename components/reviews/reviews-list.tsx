@@ -24,9 +24,9 @@ export const ReviewsList = async ({ take }: ReviewInput) => {
 
   return (
     <>
-      <div className="w-full my-6 rounded-lg border p-4">
+      <div>
         <ul
-          className={`grid grid-cols-1 gap-4 sm:grid-cols-2  md:grid-cols-${mdItems}  lg:grid-cols-${lgItems}`}
+          className={`w-full mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2  md:grid-cols-${mdItems}  lg:grid-cols-${lgItems}`}
         >
           {reviews.data.map(review => (
             <ReviewsListItem key={review.id} review={review} />

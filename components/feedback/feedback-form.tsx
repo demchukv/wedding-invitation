@@ -25,7 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { PageTitle } from "../page-title";
+import { PageTitle } from "@/components/page-title";
 
 interface Props {
   title?: boolean;
