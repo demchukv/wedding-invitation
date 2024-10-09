@@ -19,8 +19,8 @@ export const ReviewsList = async ({ take }: ReviewInput) => {
   }
 
   const items = reviews.data.length;
-  const mdItems = items < 4 ? items : 4;
-  const lgItems = items < 6 ? items : 6;
+  const mdItems = items < 3 ? items : 3;
+  const lgItems = items < 3 ? items : 3;
 
   return (
     <>

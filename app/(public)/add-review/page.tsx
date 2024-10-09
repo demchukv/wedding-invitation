@@ -8,10 +8,20 @@ const ReviewsPage = () => {
   return (
     <>
       <PageTitle>Reviews</PageTitle>
-      <h3 className="text-mdarkbrown text-[32px] leading-[32px] text-start">
+      <h2
+        className={cn(
+          cormorant.className,
+          "text-m-black text-[32px] font-bold leading-[32px] text-start mb-[32px]"
+        )}
+      >
         Your review
-      </h3>
-      <p>
+      </h2>
+      <p
+        className={cn(
+          ubuntu.className,
+          "text-m-black text-lg leading-[23.4px] text-start mb-[24px]"
+        )}
+      >
         You can share your experience of using our service with other users
         here, if you want.
       </p>

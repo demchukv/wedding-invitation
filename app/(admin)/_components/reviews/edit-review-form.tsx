@@ -123,7 +123,7 @@ export const EditReviewForm = ({ review }: { review: ReviewType }) => {
                   <FormControl>
                     <StarRating
                       totalStars={5}
-                      size={32}
+                      size={24}
                       rating={field.value}
                       handleClick={field.onChange}
                     />

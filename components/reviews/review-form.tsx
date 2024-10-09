@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 
 import CardWrapper from "@/components/auth/card-wrapper";
-import { Textarea } from "@/components/ui/textarea";
+import { TextareaReview } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FormError } from "@/components/form-error";
@@ -29,6 +29,8 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import StarRating from "@/components/rating/StarRating";
 import Image from "next/image";
 import star from "@/public/icons/star.svg";
+import { cn } from "@/lib/utils";
+import { cormorant, ubuntu } from "@/styles/fonts";
 
 const ReviewForm = () => {
   const user = useCurrentUser();
@@ -75,7 +77,14 @@ const ReviewForm = () => {
 
   return (
     <>
-      <p>Estimate your experience (from 1 to 5)</p>
+      <p
+        className={cn(
+          ubuntu.className,
+          "text-m-black text-lg font-normal leading-[23.4px] text-start"
+        )}
+      >
+        Estimate your experience (from 1 to 5)
+      </p>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -87,79 +96,12 @@ const ReviewForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="flex flex-row">
-                    <Image
-                      priority
-                      src={star}
-                      alt={"star"}
-                      width={16}
-                      height={16}
-                    />
-                    <Image
-                      priority
-                      src={star}
-                      alt={"star"}
-                      width={16}
-                      height={16}
-                    />
-                    <Image
-                      priority
-                      src={star}
-                      alt={"star"}
-                      width={16}
-                      height={16}
-                    />
-                    <Image
-                      priority
-                      src={star}
-                      alt={"star"}
-                      width={16}
-                      height={16}
-                    />
-                    <Image
-                      priority
-                      src={star}
-                      alt={"star"}
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                  {/* <RadioGroup
-                    defaultValue={String(field.value)}
-                    onValueChange={value => field.onChange(Number(value))}
-                    className="flex flex-row space-y-1"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="1" />
-                      </FormControl>
-                      <FormLabel className="font-normal">1</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="2" />
-                      </FormControl>
-                      <FormLabel className="font-normal">2</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="3" />
-                      </FormControl>
-                      <FormLabel className="font-normal">3</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="4" />
-                      </FormControl>
-                      <FormLabel className="font-normal">4</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="5" />
-                      </FormControl>
-                      <FormLabel className="font-normal">5</FormLabel>
-                    </FormItem>
-                  </RadioGroup> */}
+                  <StarRating
+                    totalStars={5}
+                    size={32}
+                    rating={field.value}
+                    handleClick={field.onChange}
+                  />
                 </FormControl>
                 {/* <FormDescription>
                   Your message will be publish after being checked by the admin.
@@ -173,9 +115,15 @@ const ReviewForm = () => {
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Comment*</FormLabel>
+                <FormLabel>
+                  Comment<span className="text-red-500">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Write your review here" {...field} />
+                  <TextareaReview
+                    placeholder="Write your review here"
+                    {...field}
+                    className="w-full"
+                  />
                 </FormControl>
                 {/* <FormDescription>
                   Your message will be publish after being checked by the admin.
