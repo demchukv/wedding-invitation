@@ -6,7 +6,7 @@ import { cormorant, ubuntu } from "@/styles/fonts";
 
 const ReviewsPage = () => {
   return (
-    <>
+    <div className="w-full self-start">
       <PageTitle>Reviews</PageTitle>
       <h2
         className={cn(
@@ -37,7 +37,7 @@ const ReviewsPage = () => {
         Reviews of other users
       </p>
       <ReviewsList />
-    </>
+    </div>
   );
 };
 

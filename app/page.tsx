@@ -17,34 +17,6 @@ export default async function Home() {
         <div className="space-y-6 text-center">
           <PageTitle>Wedding Invitations</PageTitle>
 
-          <div className="grid grid-cols-2 gap-4 py-4">
-            <Button variant="one" type="button" size="auto">
-              variant=&quot;one&quot;
-            </Button>
-
-            <Button
-              size="auto"
-              variant="one"
-              type="button"
-              className="btnOne"
-              disabled={true}
-            >
-              variant=&quot;one&quot;
-            </Button>
-
-            <Button variant="two" type="button" className="btnTwo" size="auto">
-              variant=&quot;two&quot;
-            </Button>
-            <Button
-              size="auto"
-              variant="two"
-              type="button"
-              className="btnTwo"
-              disabled={true}
-            >
-              variant=&quot;two&quot;
-            </Button>
-          </div>
           <div className="">
             <div className="flex justify-between items-center">
               <p

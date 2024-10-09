@@ -88,7 +88,7 @@ const ReviewForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 w-full mb-[100px]"
+          className="space-y-6 w-full mb-[100px] sm:max-w-[70%]"
         >
           <FormField
             control={form.control}
@@ -137,7 +137,7 @@ const ReviewForm = () => {
             variant="one"
             disabled={isPending || !isValid || !isDirty}
             size="auto"
-            className="w-full"
+            className="w-full sm:w-auto"
           >
             {isPending ? <BeatLoader size={8} color="white" /> : "Publish"}
           </Button>
