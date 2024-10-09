@@ -88,7 +88,7 @@ const ReviewForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 w-full mb-[100px] sm:max-w-[70%]"
+          className="space-y-6 w-full mb-[100px] md:max-w-[70%]"
         >
           <FormField
             control={form.control}
